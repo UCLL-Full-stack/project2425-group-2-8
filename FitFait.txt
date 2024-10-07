@@ -1,0 +1,117 @@
+Title: FitFait
+
+Description: With the FitFait app, 
+we want users to be able to track their weight, PR's, how often they workout, 
+and schedule their workouts. We also want to give diet advices. 
+users can schedule workouts, ask for meal.
+The first day of each month we ask their weight and PR again. That way we can update their profile and we can give an overview of their progress.
+
+
+Register user
+Story 1: As a user, 
+I'm able to create an account with my email and a password.
+So that I can keep my account secure. 
+
+Acceptance criteria
+- If there is an empty field, an error is raised: "... can not be empty"
+- Name and first name must only contain letters, otherwise an error is raised: "Name and first name can only contain letters."
+- Email must be valid, otherwise an error is raised: "Given email is invalid."
+- Day of birth can not be in the future, otherwise an error is raised: "Day of birth can not be in the future"
+- If there is already an existing account for the given email, an error is raised: "There is already an existing account for this email"
+- If the password does not match the given criteria, an erros is raised: "The password contain at least 8 characters, 1 capital letter and 1 number."
+
+
+Enter progress stats
+Story 2: As a user, 
+I'm able to enter my weight/length/pr.
+So that the app can show my BMI and tell me if I'm strong.
+
+Acceptance criteria
+- If there is an empty field, an error is raised: "... can not be empty"
+- Length and weigth can not be 0 or lower, otherwise an error is raised: "Length and weigth can not be 0 or lower."
+- PR weigth can not be 0 or lower, otherwise an error is raised: "PR weigth can not be 0 or lower."
+- The new entered data should not replace the "old" data but kept in an array with all the previous data so we can easily keep track of the progress. 
+
+
+
+Login user
+Story 3: As a user, 
+I'm able to log in if I already have an existing account.
+So that I can keep my progress.
+
+Acceptance criteria
+- The password must be replaced by asterix's
+- If the email and password do not match an account, the error is raised "email and password combination is not valid"
+
+
+
+Schedule workouts
+Story 4: As a user, 
+I'm able to schedule an re schedule my workouts.
+So that I can keep track of how much I work out.
+
+Acceptance criteria
+- A subject and date is required when scheduling a workout, otherwise an error is raised: "Subject and date can not be empty."
+- A date of the workout can not be in the past, otherwise an error is raised: "Workout can not be planned in the past."
+- You can not reschedule a workout from the past. (eg. If you didn't finish your workout yesterday, you can not reschedule it to tomorrow)
+
+
+
+Generate diet plan
+Story 5: As a user, 
+I'm able to generate a diet plan.
+So that I can lose/gain weight.
+
+Acceptance criteria 
+- Ask the user if the current data (weight, length …) are still correct, the user can change them if needed.s 
+- The user has to choose between gaining or losing weight before the diet plan shows up.
+
+
+Update stats
+Story 6: As a user,
+I'm able to update my weight/pr/length. 
+So that the app can track my progress
+
+Acceptance criteria
+- When a user clicks the "Update stats" button, the user can change it's stats from the window of "enter progress stats"
+
+
+
+Stats overview
+Story 7: As a user, 
+I'm able to ask an overview of my stats.
+So that I can look at my progress.
+
+Acceptance criteria
+- When a user clicks the "Track progress" button, the user gets an overview of his stats since the use of the app.
+- The user must be able to see his total workouts, average ammount of workouts per week/month, weight gain/lose, bmi change, PR evolution. 
+
+
+
+Feedback
+Story 8: As a user, 
+I'm able to give feedback of the app.
+So that I can help the app improve.
+
+Acceptance criteria
+- When the users clicks the "Give feedback" form, he must be able to send us a message where he can give as much feedback as he wants.
+
+
+
+Story 9: As an admin, 
+I'm able to log in if I already have an existing account. 
+So that I can execute my role as an admin.
+
+Acceptance criteria 
+- if the given credentials ar not from an adim, an error is thrown : 'Given credentials dont belong to an admin'
+- all fields must be filled or, otherwise an error is thrown: 'no empty fields allowed'
+
+
+
+Story 10: As an admin,
+I'm able to disable accounts of customers who are not giving constructive feedback.
+So that the they can't keep our support staff busy with nonsense. 
+
+Acceptence criteria:
+- as an admin you can't delete other admins
+
