@@ -30,7 +30,7 @@ export class Stats {
     }
 
     getLenght(): number {
-        return this.weight;
+        return this.lenght;
     }
 
     getPr(): number {
