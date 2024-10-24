@@ -1,6 +1,6 @@
 type StatsInput = {
     id?: number;
-    weight: number;
+    weigth: number;
     length: number;
     pr: number;
     date: Date;
