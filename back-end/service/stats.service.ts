@@ -3,14 +3,14 @@ import statsDb from '../repository/stats.db';
 import { StatsInput } from '../types';
 
 const addStats = async (statsInput: StatsInput): Promise<Stats> => {
-    const { weight, length, pr, date} = statsInput;
+    const { weigth, length, pr, date} = statsInput;
 
-    if (!weight || !length || !pr || !date) {
+    if (!weigth || !length || !pr || !date) {
         throw new Error('All fields are required');
     }
 
     const newStats = new Stats({
-        weight, 
+        weigth, 
         length,
         pr,
         date
