@@ -3,20 +3,20 @@
 export class Stats {
     private id? : number;
     private weight : number;
-    private lenght : number;
+    private length : number;
     private pr: number
     private date : Date;
 
     constructor(stats: {
         id?: number;
         weight: number;
-        lenght: number;
+        length: number;
         pr: number;
         date: Date;
     }) {
         this.id = stats.id;
         this.weight = stats.weight;
-        this.lenght = stats.lenght;
+        this.length = stats.length;
         this.pr = stats.pr;
         this.date = stats.date;
     }
@@ -29,8 +29,8 @@ export class Stats {
         return this.weight;
     }
 
-    getLenght(): number {
-        return this.lenght;
+    getLength(): number {
+        return this.length;
     }
 
     getPr(): number {
@@ -44,7 +44,7 @@ export class Stats {
     equals(stats: Stats): boolean {
         return (
             this.weight === stats.getWeight() &&
-            this.lenght === stats.getLenght() &&
+            this.length === stats.getLength() &&
             this.pr === stats.getPr() &&
             this.date === stats.getDate()
         );
