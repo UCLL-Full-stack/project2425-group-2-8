@@ -2,27 +2,23 @@
  * @swagger
  *   components:
  *    schemas:
- *      Schedule:
+ *      User:
  *          type: object
  *          properties:
  *            id:
  *              type: number
  *              format: int64
- *            start:
+ *            email:
  *              type: string
- *              format: date-time
- *            end:
+ *            password:
  *              type: string
- *              format: date-time
- *            User:
- *              $ref: '#/components/schemas/User'
- *            Profile:
+ *            profile:
  *              $ref: '#/components/schemas/Profile'
- *            Stats:
+ *            stats:
  *              type: array
  *              items:
  *                  $ref: '#/components/schemas/Stats'
- *            Workout:
+ *            workout:
  *              type: array
  *              items: 
  *                  $ref: '#/components/schemas/Workout'
@@ -39,7 +35,12 @@
  *                  id:
  *                      type: number
  *                      format: int64
-
+ *            workouts: 
+ *              type: array
+ *              properties: 
+ *                  id:
+ *                      type: number
+ *                      format: int64
  */
 import express, {Request, Response } from 'express';
 import userService from '../service/user.service';
@@ -47,6 +48,23 @@ import { UserInput } from '../types';
 import { User } from '../model/User';
 
 const userRouter = express.Router();
+
+/**
+ * @swagger
+ * /user:
+ *      post: 
+ *          summary: Register a new user
+ *          requestBody: 
+ *              required: true
+ *              content: 
+ *                  application/json: 
+ *                      schema: 
+ *                          $ref: '#/components/schemas/UserInput'
+ *          responses: 
+ *              200: 
+ *                  description: Message to let the front end know that the user is succesfully created.
+ *                  content: "User is succesfully registered."
+ */
 
 userRouter.post('/', (err: Error, req: Request, res: Response) => {
     try {
