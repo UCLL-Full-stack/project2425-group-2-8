@@ -2,9 +2,9 @@ import { User } from "./User";
 
 
 export class Workout {
-    private id? : number;
-    private subject : string;
-    private date : Date;
+    private id?: number;
+    private subject: string;
+    private date: Date;
     private user: User;
 
     constructor(workout: { id?: number; subject: string; date: Date; user: User}) {

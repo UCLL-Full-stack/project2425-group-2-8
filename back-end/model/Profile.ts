@@ -2,13 +2,13 @@ import { User } from "./User";
 
 
 export class Profile {
-    private id? : number;
-    private firstName : string;
+    private id?: number;
+    private firstName: string;
     private name: string;
     private dateOfBirth: Date;
     private user: User;
 
-    constructor(profile: { id?: number; firstName : string; name : string; dateOfBirth : Date; user: User; }) {
+    constructor(profile: { id?: number; firstName: string; name: string; dateOfBirth: Date; user: User; }) {
         this.validate(profile);
 
         this.id = profile.id;

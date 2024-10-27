@@ -1,4 +1,3 @@
-import { error } from "console";
 import { Profile } from "./Profile";
 import { Workout } from "./Workout";
 
@@ -18,15 +17,7 @@ export class User {
         this.workouts = [];
     }
 
-    // constructor(user: { id?: number; email: string; password: string; profile: Profile; workouts: Array<Workout>; }) {
-    //     this.validate(user);
-
-    //     this.id = user.id;
-    //     this.email = user.email;
-    //     this.password = user.password;
-    //     this.profile = user.profile;
-    //     this.workouts = user.workouts;
-    // }
+    
 
     validate(user: { email: string; password: string; }) {
         if (!user.email) {
@@ -51,10 +42,8 @@ export class User {
         return this.password;
     }
 
-    getProfile(): Profile | void {
-        if (!this.profile) {
-            return this.profile;
-        }
+    getProfile(): Profile | undefined {
+        return this.profile;
     }
 
     setProfile(profile: Profile): void {
