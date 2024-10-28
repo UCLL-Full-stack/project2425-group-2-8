@@ -1,19 +1,22 @@
 import { Stats } from '../model/Stats';
 import statsDb from '../repository/stats.db';
 import { StatsInput } from '../types';
+import userService from './user.service';
 
 const addStats = async (statsInput: StatsInput): Promise<Stats> => {
-    const { weigth, length, pr, date} = statsInput;
+    const { weigth, length, pr, date, userInput} = statsInput;
 
     if (!weigth || !length || !pr || !date) {
         throw new Error('All fields are required');
     }
+    const user = userService.getUserByEmail(userInput.email);
 
     const newStats = new Stats({
         weigth, 
         length,
         pr,
-        date
+        date,
+        user
     });
 
     return statsDb.addStats(newStats);

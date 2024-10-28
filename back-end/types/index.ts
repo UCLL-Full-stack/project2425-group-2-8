@@ -1,11 +1,3 @@
-type StatsInput = {
-    id?: number;
-    weigth: number;
-    length: number;
-    pr: number;
-    date: Date;
-}
-
 type ProfileInput = {
     id?: number; 
     firstName: string; 
@@ -27,7 +19,18 @@ type UserInput = {
     workouts: WorkoutInput;
 }
 
+type StatsInput = {
+    id?: number;
+    weigth: number;
+    length: number;
+    pr: number;
+    date: Date;
+    userInput: UserInput;
+}
+
 export {
-    StatsInput,
     UserInput,
+    ProfileInput,
+    WorkoutInput,
+    StatsInput
 };

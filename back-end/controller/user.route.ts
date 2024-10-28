@@ -62,8 +62,12 @@ const userRouter = express.Router();
  *                          $ref: '#/components/schemas/UserInput'
  *          responses: 
  *              200: 
- *                  description: Message to let the front end know that the user is succesfully created.
- *                  content: "User is succesfully registered."
+ *                  description: The created user.
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/User'
+ *                            
  */
 
 userRouter.post('/', (err: Error, req: Request, res: Response) => {

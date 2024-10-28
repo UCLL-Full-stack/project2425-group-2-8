@@ -1,3 +1,4 @@
+import { emit } from "process";
 import { User } from "../model/User";
 import userDb from "../repository/user.db";
 import { UserInput } from "../types";
@@ -17,6 +18,11 @@ const registerUser = async (userInput: UserInput): Promise<User> => {
     return userDb.registerUser(newUser);
 }
 
+const getUserByEmail = (email: string): User => {
+    return userDb.getUserByEmail(email);
+}
+
 export default {
-    registerUser
+    registerUser,
+    getUserByEmail
 }
