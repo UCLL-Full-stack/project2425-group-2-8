@@ -7,12 +7,8 @@ const registerUser = (user: User): User => {
     return user;
 }
 
-const getUserByEmail = (email: string): User => {
-    const result = allUsers.find(user => user.getEmail() === email); 
-    if (!result) {
-        throw new Error("User is not found by this email.")
-    }
-    return result;
+const getUserByEmail = (email: string): User | undefined => {
+    return allUsers.find(user => user.getEmail() === email);
 }
 
 export default {

@@ -11,6 +11,10 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
     }
     const user = userService.getUserByEmail(userInput.email);
 
+    if (!user) {
+        throw new Error("User not found with the provided email.");
+    }
+
     const newStats = new Stats({
         weigth, 
         length,

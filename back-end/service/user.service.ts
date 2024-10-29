@@ -24,7 +24,7 @@ const registerUser = async (userInput: UserInput): Promise<User> => {
     return userDb.registerUser(newUser);
 }
 
-const getUserByEmail = (email: string): User => {
+const getUserByEmail = (email: string): User | undefined => {
     return userDb.getUserByEmail(email);
 }
 
