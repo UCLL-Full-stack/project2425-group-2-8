@@ -48,13 +48,13 @@ const userRouter = express.Router();
  *                            
  */
 
-userRouter.post('/', (err: Error, req: Request, res: Response) => {
+userRouter.post('/', async (req: Request, res: Response) => {
     try {
         const user = <UserInput>req.body;
-        const result = userService.registerUser(user);
+        const result = await userService.registerUser(user);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: err.message });
+        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
     }
 });
 

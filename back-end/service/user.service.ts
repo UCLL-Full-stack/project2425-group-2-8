@@ -4,11 +4,16 @@ import userDb from "../repository/user.db";
 import { UserInput } from "../types";
 
 const registerUser = async (userInput: UserInput): Promise<User> => {
-    console.log("debug");
+    
     const { email, password } = userInput;
 
     if (!email || !password) {
         throw new Error("Email and password can not be empty!")
+    }
+
+    const existingUser = userDb.getUserByEmail(email);
+    if (existingUser) {
+        throw new Error("A user with this email already exists.");
     }
 
     const newUser = new User({
