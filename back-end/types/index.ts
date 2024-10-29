@@ -15,8 +15,6 @@ type UserInput = {
     id?: number; 
     email: string;
     password: string;
-    profile: ProfileInput;
-    workouts: WorkoutInput;
 }
 
 type StatsInput = {

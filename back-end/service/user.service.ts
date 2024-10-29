@@ -4,6 +4,7 @@ import userDb from "../repository/user.db";
 import { UserInput } from "../types";
 
 const registerUser = async (userInput: UserInput): Promise<User> => {
+    console.log("debug");
     const { email, password } = userInput;
 
     if (!email || !password) {
@@ -25,4 +26,4 @@ const getUserByEmail = (email: string): User => {
 export default {
     registerUser,
     getUserByEmail
-}
+} 

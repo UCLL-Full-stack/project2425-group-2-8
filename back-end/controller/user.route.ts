@@ -12,16 +12,6 @@
  *              type: string
  *            password:
  *              type: string
- *            profile:
- *              $ref: '#/components/schemas/Profile'
- *            stats:
- *              type: array
- *              items:
- *                  $ref: '#/components/schemas/Stats'
- *            workout:
- *              type: array
- *              items: 
- *                  $ref: '#/components/schemas/Workout'
  *      UserInput:
  *          type: object
  *          properties:
@@ -29,65 +19,6 @@
  *              type: string
  *            password:
  *              type: string
- *            profile:
- *              type: object
- *              properties:
- *                  id:
- *                      type: number
- *                      format: int64
- *            workouts: 
- *              type: array
- *              properties: 
- *                  id:
- *                      type: number
- *                      format: int64
- * 
- * 
- *      Profile:
- *          type: object
- *          properties:
- *              id: 
- *                  type: number
- *                  format: int64
- *              firstName: 
- *                  type: string
- *              name: 
- *                  type: string
- *              dateOfBirth:
- *                  type: string
- *                  format: date
- *              
- * 
- * 
- *      Stats:
- *          type: object
- *          properties:
- *              id:
- *                  type: number
- *                  format: int64
- *              weigth:
- *                  type: number
- *              length:
- *                  type: number
- *              pr:
- *                  type: number
- *              date:
- *                  type: string
- *                  format: date-time
- *              
- * 
- *      Workout:
- *          type: object
- *          properties:
- *              id:
- *                  type: number
- *                  format: int64
- *              subject:
- *                  type: string
- *              date:
- *                  type: string
- *                  format: date-time
- *              
  */
 import express, {Request, Response } from 'express';
 import userService from '../service/user.service';
