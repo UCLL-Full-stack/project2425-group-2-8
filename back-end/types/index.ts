@@ -19,11 +19,11 @@ type UserInput = {
 
 type StatsInput = {
     id?: number;
-    weigth: number;
+    weight: number;
     length: number;
     pr: number;
     date: Date;
-    userInput: UserInput;
+    userId: number;
 }
 
 export {

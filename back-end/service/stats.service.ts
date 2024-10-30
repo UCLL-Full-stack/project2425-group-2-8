@@ -4,26 +4,27 @@ import { StatsInput } from '../types';
 import userService from './user.service';
 
 const addStats = async (statsInput: StatsInput): Promise<Stats> => {
-    const { weigth, length, pr, date, userInput} = statsInput;
-
-    if (!weigth || !length || !pr || !date) {
+    const { weight, length, pr, date, userId} = statsInput;
+    
+    if (!weight || !length || !pr || !date) {
         throw new Error('All fields are required');
     }
-    const user = userService.getUserByEmail(userInput.email);
+    const user = userService.getUserById(userId);
 
     if (!user) {
-        throw new Error("User not found with the provided email.");
+        throw new Error("User not found with the provided id.");
     }
 
     const newStats = new Stats({
-        weigth, 
+        weight, 
         length,
         pr,
         date,
         user
     });
 
-    return statsDb.addStats(newStats);
+    statsDb.addStats(newStats);
+    return newStats  
 }
 
 export default {

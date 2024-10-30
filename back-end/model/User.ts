@@ -1,6 +1,8 @@
 import { Profile } from "./Profile";
 import { Workout } from "./Workout";
 
+let idCounter = 0;
+
 export class User {
     private id? : number;
     private email : string;
@@ -8,10 +10,10 @@ export class User {
     private profile?: Profile;
     private workouts: Workout[];
 
-    constructor(user: { id?: number; email: string; password: string;}) {
+    constructor(user: { email: string; password: string;}) {
         this.validate(user);
 
-        this.id = user.id;
+        this.id = idCounter++;
         this.email = user.email;
         this.password = user.password;
         this.workouts = [];

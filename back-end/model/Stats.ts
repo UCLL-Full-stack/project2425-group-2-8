@@ -3,26 +3,26 @@ import { User } from "./User";
 
 export class Stats {
     private id? : number;
-    private weigth : number;
+    private weight : number;
     private length : number;
     private pr: number
     private date: Date;
     private user: User;
 
-    constructor(stats: { id?: number; weigth: number; length: number; pr: number; date: Date; user: User }) {
+    constructor(stats: { id?: number; weight: number; length: number; pr: number; date: Date; user: User }) {
         this.validate(stats);
 
 
         this.id = stats.id;
-        this.weigth = stats.weigth;
+        this.weight = stats.weight;
         this.length = stats.length;
         this.pr = stats.pr;
         this.date = stats.date;
         this.user = stats.user;
     }
 
-    validate(stats: { weigth: number; length: number; pr: number; date: Date; user: User }) {
-        if (!stats.weigth) {
+    validate(stats: { weight: number; length: number; pr: number; date: Date; user: User }) {
+        if (!stats.weight) {
             throw new Error('Weigth is required!')
         }
 
@@ -47,8 +47,8 @@ export class Stats {
         return this.id;
     }
 
-    getWeigth(): number {
-        return this.weigth;
+    getWeight(): number {
+        return this.weight;
     }
 
     getLength(): number {
@@ -69,7 +69,7 @@ export class Stats {
 
     equals(stats: Stats): boolean {
         return (
-            this.weigth === stats.getWeigth() &&
+            this.weight === stats.getWeight() &&
             this.length === stats.getLength() &&
             this.pr === stats.getPr() &&
             this.date === stats.getDate() &&

@@ -3,6 +3,10 @@ import { User } from "../model/User";
 import userDb from "../repository/user.db";
 import { UserInput } from "../types";
 
+const getAllUsers = (): User[] => {
+    return userDb.getAllUsers();
+} 
+
 const registerUser = async (userInput: UserInput): Promise<User> => {
     
     const { email, password } = userInput;
@@ -24,11 +28,12 @@ const registerUser = async (userInput: UserInput): Promise<User> => {
     return userDb.registerUser(newUser);
 }
 
-const getUserByEmail = (email: string): User | undefined => {
-    return userDb.getUserByEmail(email);
+const getUserById = (id: number): User | undefined => {
+    return userDb.getUserById(id);
 }
 
 export default {
+    getAllUsers,
     registerUser,
-    getUserByEmail
+    getUserById
 } 
