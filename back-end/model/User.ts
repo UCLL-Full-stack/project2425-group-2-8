@@ -1,5 +1,6 @@
 import { Profile } from "./Profile";
 import { Workout } from "./Workout";
+import { Stats } from "./Stats";
 
 let idCounter = 0;
 
@@ -9,6 +10,7 @@ export class User {
     private password : string;
     private profile?: Profile;
     private workouts: Workout[];
+    // private stats: Stats[];
 
     constructor(user: { email: string; password: string;}) {
         this.validate(user);
@@ -17,6 +19,7 @@ export class User {
         this.email = user.email;
         this.password = user.password;
         this.workouts = [];
+        // this.stats = [];
     }
 
     
@@ -59,6 +62,16 @@ export class User {
     addWorkout(workout: Workout): void {
         this.workouts.push(workout);
     }
+
+    // addStats(stat: Stats): void { 
+    //     this.stats.push(stat);
+    // }
+
+    // getStats(): Stats[] { 
+    //     return this.stats;
+    // }
+
+   
 
     equals(user: User): boolean {
         return (

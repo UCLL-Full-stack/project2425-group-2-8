@@ -7,7 +7,7 @@ test('given: Valid values for Stats, when: stats are created, then: stats are cr
 
     const statsData = {
         id: 1,
-        weigth: 60,
+        weight: 60,
         length: 180,
         pr: 85,
         date: new Date('2024-10-21'),
@@ -17,7 +17,7 @@ test('given: Valid values for Stats, when: stats are created, then: stats are cr
     const stats = new Stats(statsData);
 
     expect(stats.getId()).toBe(1);
-    expect(stats.getWeigth()).toBe(60);
+    expect(stats.getWeight()).toBe(60);
     expect(stats.getLength()).toBe(180);
     expect(stats.getPr()).toBe(85);
     expect(stats.getDate()).toEqual(new Date('2024-10-21'));
@@ -28,7 +28,7 @@ test('given: weigth is empty, when: creating stats, then: error is thrown', () =
 
     const statsData = {
         id: 1,
-        weigth: NaN,
+        weight: NaN,
         length: 180,
         pr: 85,
         date: new Date('2024-10-21'),
@@ -46,7 +46,7 @@ test('given: length is empty, when: creating stats, then: error is thrown', () =
 
     const statsData = {
         id: 1,
-        weigth: 90,
+        weight: 90,
         length: NaN,
         pr: 85,
         date: new Date('2024-10-21'),
@@ -64,7 +64,7 @@ test('given: pr is empty, when: creating stats, then: error is thrown', () => {
 
     const statsData = {
         id: 1,
-        weigth: 90,
+        weight: 90,
         length: 180,
         pr: NaN,
         date: new Date('2024-10-21'),
@@ -82,7 +82,7 @@ test('given: date is empty, when: creating stats, then: error is thrown', () => 
 
     const statsData: any = {
         id: 1,
-        weigth: 90,
+        weight: 90,
         length: 180,
         pr: 85,
         date: undefined,
@@ -100,7 +100,7 @@ test('given: user is empty, when: creating stats, then: error is thrown', () => 
 
     const statsData: any = {
         id: 1,
-        weigth: 90,
+        weight: 90,
         length: 180,
         pr: 85,
         date: new Date('2024-10-21'),

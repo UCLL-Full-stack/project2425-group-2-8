@@ -9,7 +9,7 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
     if (!weight || !length || !pr || !date) {
         throw new Error('All fields are required');
     }
-    const user = userService.getUserById(userId);
+    const user = await userService.getUserById(userId);
 
     if (!user) {
         throw new Error("User not found with the provided id.");
@@ -24,6 +24,7 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
     });
 
     statsDb.addStats(newStats);
+    // user.addStats(newStats);
     return newStats  
 }
 

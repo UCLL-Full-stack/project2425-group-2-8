@@ -35,7 +35,7 @@
  *              date:
  *                  type: string
  *                  format: date-time
- *              UserId: 
+ *              userId: 
  *                  type: number
  *                  format: int64
  */
@@ -65,10 +65,10 @@ const statsRouter = express.Router();
  *                              $ref: '#components/schemas/Stats'
  */
 
-statsRouter.post('/', (req: Request, res: Response) => {
+statsRouter.post('/', async (req: Request, res: Response) => {
     try {
         const stats = <StatsInput>req.body;
-        const result = statsService.addStats(stats);
+        const result = await statsService.addStats(stats);
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ status: "error", errorMessage: (error as Error).message });

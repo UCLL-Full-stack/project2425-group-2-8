@@ -2,10 +2,13 @@ import { emit } from "process";
 import { User } from "../model/User";
 import userDb from "../repository/user.db";
 import { UserInput } from "../types";
+import statsDb from "../repository/stats.db";
 
 const getAllUsers = (): User[] => {
     return userDb.getAllUsers();
 } 
+
+
 
 const registerUser = async (userInput: UserInput): Promise<User> => {
     
@@ -28,8 +31,14 @@ const registerUser = async (userInput: UserInput): Promise<User> => {
     return userDb.registerUser(newUser);
 }
 
-const getUserById = (id: number): User | undefined => {
-    return userDb.getUserById(id);
+
+const getUserById = (id: number): User => {
+    const user = userDb.getUserById(id);
+    if (!user) {
+        throw new Error(`User with ID ${id} does not exist.`);
+    }
+
+    return user;
 }
 
 export default {

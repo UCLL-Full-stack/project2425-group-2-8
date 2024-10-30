@@ -12,6 +12,9 @@
  *              type: string
  *            password:
  *              type: string
+ *            
+ *            
+ *            
  *      UserInput:
  *          type: object
  *          properties:
@@ -83,5 +86,39 @@ userRouter.get('/', async (req: Request, res: Response) => {
         res.status(400).json({ status: "error", errorMessage: (error as Error).message });
     }
 });
+
+/**
+ * @swagger
+ * /user/{id}:
+ *      get:
+ *          summary: Get a user by ID
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                required: true
+ *                schema:
+ *                  type: integer
+ *                description: The ID of the user to retrieve
+ *          responses:
+ *              200:
+ *                  description: The user object
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/User'
+ *             
+ */
+
+userRouter.get('/:id', async (req: Request, res: Response) => {
+    try {
+        const id = parseInt(req.params.id);
+        const result = await userService.getUserById(id);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+    }
+});
+
+
 
 export { userRouter };
