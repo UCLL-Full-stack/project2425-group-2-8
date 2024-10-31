@@ -26,7 +26,7 @@ export class Workout {
             throw new Error ('Date is required')
         }
 
-        if (!workout.userId) {
+        if (workout.userId === undefined || workout.userId === null) {
             throw new Error('User is required')
         }
 
