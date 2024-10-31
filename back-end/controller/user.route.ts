@@ -13,8 +13,6 @@
  *            password:
  *              type: string
  *            
- *            
- *            
  *      UserInput:
  *          type: object
  *          properties:

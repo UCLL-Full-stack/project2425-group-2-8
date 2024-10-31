@@ -23,13 +23,16 @@ export class Workout {
         }
 
         if (!workout.date) {
-            throw new Error ('Date is required')
+            throw new Error('Date is required')
+        }
+
+        if (workout.date < new Date()) {
+            throw new Error('Date can not be in the past')
         }
 
         if (workout.userId === undefined || workout.userId === null) {
             throw new Error('User is required')
         }
-
     }
 
     getId(): number | undefined {

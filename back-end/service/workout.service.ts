@@ -22,7 +22,6 @@ const addWorkout = async (workoutInput: WorkoutInput): Promise<Workout> => {
     });
 
     workoutDb.addWorkout(newWorkout);
-    user.addWorkout(newWorkout);
     return newWorkout
 }
 

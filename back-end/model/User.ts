@@ -9,8 +9,7 @@ export class User {
     private email : string;
     private password : string;
     private profile?: Profile;
-    private workouts: Workout[];
-    private stats: Stats[];
+    private stats?: Stats;
 
     constructor(user: { email: string; password: string;}) {
         this.validate(user);
@@ -18,11 +17,7 @@ export class User {
         this.id = idCounter++;
         this.email = user.email;
         this.password = user.password;
-        this.workouts = [];
-        this.stats = [];
     }
-
-    
 
     validate(user: { email: string; password: string; }) {
         if (!user.email) {
@@ -55,30 +50,19 @@ export class User {
         this.profile = profile;
     }
 
-    getWorkout(): Array<Workout> {
-        return this.workouts;
+    setStats(stats: Stats): void { 
+        this.stats = stats;
     }
 
-    addWorkout(workout: Workout): void {
-        this.workouts.push(workout);
-    }
-
-    addStats(stat: Stats): void { 
-        this.stats.push(stat);
-    }
-
-    getStats(): Stats[] { 
+    getStats(): Stats | undefined{ 
         return this.stats;
     }
-
-   
 
     equals(user: User): boolean {
         return (
             this.email === user.getEmail() &&
             this.password === user.getPassword() &&
-            this.profile === user.getProfile() &&
-            this.workouts === user.getWorkout()
+            this.profile === user.getProfile()
         );
     }
 }
