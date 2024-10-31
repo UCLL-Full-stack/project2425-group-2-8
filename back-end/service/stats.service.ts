@@ -27,6 +27,17 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
     return newStats  
 }
 
+const getStatsByUserId = async (userId: number): Promise<Stats[]> => {
+
+    const userStats = await statsDb.getStatsByUserId(userId);
+
+    if (!userStats || userStats.length === 0) {
+        throw new Error("No stats found for this user.");
+    }
+    return userStats;
+};
+
 export default {
-    addStats
+    addStats,
+    getStatsByUserId
 }

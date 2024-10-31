@@ -72,4 +72,40 @@ statsRouter.post('/', async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * @swagger
+ * /stats/{id}:
+ *      get:
+ *          summary: Get all stats of a user over time
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              schema:
+ *                type: number
+ *              description: The ID of the user whose stats you want to see
+ *          responses:
+ *              200:
+ *                  description: An array of all stats for the specified user.
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#components/schemas/Stats'
+ */
+
+
+
+statsRouter.get('/:id', async (req: Request, res: Response) => {
+    try {
+        const userId = parseInt(req.params.id);
+        const allStats = await statsService.getStatsByUserId(userId);
+        res.status(200).json(allStats);
+    } catch(error) {
+        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+    }
+});
+
+
 export { statsRouter };

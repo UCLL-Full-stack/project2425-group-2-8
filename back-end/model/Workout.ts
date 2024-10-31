@@ -5,7 +5,7 @@ export class Workout {
     private id?: number;
     private subject: string;
     private date: Date;
-    private userId: number;
+    public userId: number;
 
     constructor(workout: { id?: number; subject: string; date: Date; userId: number}) {
         this.validate(workout);
@@ -26,10 +26,7 @@ export class Workout {
             throw new Error('Date is required')
         }
 
-        if (workout.date < new Date()) {
-            throw new Error('Date can not be in the past')
-        }
-
+        
         if (workout.userId === undefined || workout.userId === null) {
             throw new Error('User is required')
         }

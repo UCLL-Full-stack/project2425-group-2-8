@@ -10,7 +10,6 @@ test('given: Valid values for Stats, when: stats are created, then: stats are cr
         weight: 60,
         length: 180,
         pr: 85,
-        date: new Date('2024-10-21'),
         userId: 1
     };
 
@@ -20,7 +19,7 @@ test('given: Valid values for Stats, when: stats are created, then: stats are cr
     expect(stats.getWeight()).toBe(60);
     expect(stats.getLength()).toBe(180);
     expect(stats.getPr()).toBe(85);
-    expect(stats.getDate()).toEqual(new Date('2024-10-21'));
+    
 });
 
 test('given: weigth is empty, when: creating stats, then: error is thrown', () => {
@@ -31,7 +30,6 @@ test('given: weigth is empty, when: creating stats, then: error is thrown', () =
         weight: NaN,
         length: 180,
         pr: 85,
-        date: new Date('2024-10-21'),
         userId: 1
     };
 
@@ -49,7 +47,6 @@ test('given: length is empty, when: creating stats, then: error is thrown', () =
         weight: 90,
         length: NaN,
         pr: 85,
-        date: new Date('2024-10-21'),
         userId: 1
     };
 
@@ -67,7 +64,6 @@ test('given: pr is empty, when: creating stats, then: error is thrown', () => {
         weight: 90,
         length: 180,
         pr: NaN,
-        date: new Date('2024-10-21'),
         userId: 1
     };
 
@@ -77,23 +73,7 @@ test('given: pr is empty, when: creating stats, then: error is thrown', () => {
 
 });
 
-test('given: date is empty, when: creating stats, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
 
-    const statsData: any = {
-        id: 1,
-        weight: 90,
-        length: 180,
-        pr: 85,
-        date: undefined,
-        userId: 1
-    };
-
-    
-
-    expect(() => new Stats(statsData)).toThrow('Date is required');
-
-});
 
 test('given: user is empty, when: creating stats, then: error is thrown', () => {
     const user = new User({ email: "gertje@email.com", password: "gertje1234" });
@@ -103,7 +83,6 @@ test('given: user is empty, when: creating stats, then: error is thrown', () => 
         weight: 90,
         length: 180,
         pr: 85,
-        date: new Date('2024-10-21'),
         userId: undefined
     };
 

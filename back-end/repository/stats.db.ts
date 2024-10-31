@@ -20,6 +20,11 @@ const addStats = (stats: Stats): Stats => {
     return stats;
 }
 
+const getStatsByUserId = (userId: number): Stats[] => {
+    return allStats.filter(stat => stat.userId === userId);
+};
+
 export default {
-    addStats
+    addStats,
+    getStatsByUserId
 }

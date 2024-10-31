@@ -25,6 +25,18 @@ const addWorkout = async (workoutInput: WorkoutInput): Promise<Workout> => {
     return newWorkout
 }
 
+const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
+    
+    const workouts = workoutDb.getWorkoutsByUserId(userId);
+
+    if (!workouts || workouts.length === 0) {
+        throw new Error("No workouts found for this user.");
+    }
+
+    return workouts;
+};
+
 export default {
-    addWorkout
+    addWorkout,
+    getWorkoutsByUserId
 }

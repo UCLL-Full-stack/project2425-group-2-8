@@ -7,7 +7,7 @@ export class Stats {
     private length : number;
     private pr: number
     private date: Date;
-    private userId: number;
+    public userId: number;
 
     constructor(stats: { id?: number; weight: number; length: number; pr: number; userId: number }) {
         this.validate(stats);

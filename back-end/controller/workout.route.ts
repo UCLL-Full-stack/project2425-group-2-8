@@ -63,4 +63,36 @@ workoutRouter.post('/', async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * @swagger
+ * /workout/{id}:
+ *      get:
+ *          summary: Get all workouts added by a user
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              schema:
+ *                type: number
+ *              description: The ID of the user whose workouts you want to see
+ *          responses:
+ *              200:
+ *                  description: An array of all workouts for the specified user.
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              type: array
+ *                              items:
+ *                                  $ref: '#components/schemas/Workout'
+ */
+workoutRouter.get('/:id', async (req: Request, res: Response) => {
+    try {
+        const userId = parseInt(req.params.id);
+        const workouts = await workoutService.getWorkoutsByUserId(userId);
+        res.status(200).json(workouts);
+    } catch (error) {
+        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+    }
+});
+
 export { workoutRouter };
