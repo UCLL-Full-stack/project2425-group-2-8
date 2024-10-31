@@ -6,6 +6,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { userRouter } from './controller/user.route';
 import { statsRouter } from './controller/stats.route';
+import { workoutRouter } from './controller/workout.route';
 
 const app = express();
 dotenv.config();
@@ -37,3 +38,4 @@ app.listen(port || 3000, () => {
 
 app.use('/user', userRouter);
 app.use('/stats', statsRouter);
+app.use('/workout', workoutRouter);

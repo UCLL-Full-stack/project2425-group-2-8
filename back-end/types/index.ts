@@ -9,6 +9,7 @@ type WorkoutInput = {
     id?: number;
     subject: string;
     date: Date;
+    userId: number
 }
 
 type UserInput = {

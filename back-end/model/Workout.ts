@@ -5,19 +5,19 @@ export class Workout {
     private id?: number;
     private subject: string;
     private date: Date;
-    private user: User;
+    private userId: number;
 
-    constructor(workout: { id?: number; subject: string; date: Date; user: User}) {
+    constructor(workout: { id?: number; subject: string; date: Date; userId: number}) {
         this.validate(workout);
 
 
         this.id = workout.id;
         this.subject = workout.subject;
         this.date = workout.date;
-        this.user = workout.user;
+        this.userId = workout.userId;
     }
 
-    validate(workout: { subject: string; date: Date; user: User }) {
+    validate(workout: { subject: string; date: Date; userId: number }) {
         if (!workout.subject) {
             throw new Error('Subject is required')
         }
@@ -26,7 +26,7 @@ export class Workout {
             throw new Error ('Date is required')
         }
 
-        if (!workout.user) {
+        if (!workout.userId) {
             throw new Error('User is required')
         }
 
@@ -44,15 +44,15 @@ export class Workout {
         return this.date;
     }
 
-    getUser(): User {
-        return this.user;
+    getUser(): number {
+        return this.userId;
     }
 
     equals(workout: Workout): boolean {
         return (
             this.subject === workout.getSubject() &&
             this.date === workout.getDate() &&
-            this.user === workout.getUser()
+            this.userId === workout.getUser()
         );
     }
 }

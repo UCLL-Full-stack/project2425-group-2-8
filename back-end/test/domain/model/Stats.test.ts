@@ -11,7 +11,7 @@ test('given: Valid values for Stats, when: stats are created, then: stats are cr
         length: 180,
         pr: 85,
         date: new Date('2024-10-21'),
-        user: user
+        userId: 1
     };
 
     const stats = new Stats(statsData);
@@ -32,7 +32,7 @@ test('given: weigth is empty, when: creating stats, then: error is thrown', () =
         length: 180,
         pr: 85,
         date: new Date('2024-10-21'),
-        user: user
+        userId: 1
     };
 
     
@@ -50,7 +50,7 @@ test('given: length is empty, when: creating stats, then: error is thrown', () =
         length: NaN,
         pr: 85,
         date: new Date('2024-10-21'),
-        user: user
+        userId: 1
     };
 
     
@@ -68,7 +68,7 @@ test('given: pr is empty, when: creating stats, then: error is thrown', () => {
         length: 180,
         pr: NaN,
         date: new Date('2024-10-21'),
-        user: user
+        userId: 1
     };
 
     
@@ -86,7 +86,7 @@ test('given: date is empty, when: creating stats, then: error is thrown', () => 
         length: 180,
         pr: 85,
         date: undefined,
-        user: user
+        userId: 1
     };
 
     
@@ -104,7 +104,7 @@ test('given: user is empty, when: creating stats, then: error is thrown', () => 
         length: 180,
         pr: 85,
         date: new Date('2024-10-21'),
-        user: undefined
+        userId: undefined
     };
 
     

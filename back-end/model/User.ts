@@ -10,7 +10,7 @@ export class User {
     private password : string;
     private profile?: Profile;
     private workouts: Workout[];
-    // private stats: Stats[];
+    private stats: Stats[];
 
     constructor(user: { email: string; password: string;}) {
         this.validate(user);
@@ -19,7 +19,7 @@ export class User {
         this.email = user.email;
         this.password = user.password;
         this.workouts = [];
-        // this.stats = [];
+        this.stats = [];
     }
 
     
@@ -63,13 +63,13 @@ export class User {
         this.workouts.push(workout);
     }
 
-    // addStats(stat: Stats): void { 
-    //     this.stats.push(stat);
-    // }
+    addStats(stat: Stats): void { 
+        this.stats.push(stat);
+    }
 
-    // getStats(): Stats[] { 
-    //     return this.stats;
-    // }
+    getStats(): Stats[] { 
+        return this.stats;
+    }
 
    
 

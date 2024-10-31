@@ -37,7 +37,7 @@ const getUserById = (id: number): User => {
     if (!user) {
         throw new Error(`User with ID ${id} does not exist.`);
     }
-
+    
     return user;
 }
 

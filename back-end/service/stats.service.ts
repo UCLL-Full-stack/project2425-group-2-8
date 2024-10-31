@@ -20,11 +20,11 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
         length,
         pr,
         date,
-        user
+        userId
     });
 
     statsDb.addStats(newStats);
-    // user.addStats(newStats);
+    user.addStats(newStats);
     return newStats  
 }
 

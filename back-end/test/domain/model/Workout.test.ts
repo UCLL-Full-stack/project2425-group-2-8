@@ -10,7 +10,7 @@ test('given: valid values for workout, when: creating workout, then: workout is 
         id: 1,
         subject: "chestday",
         date: new Date('2024-10-21'),
-        user: user
+        userId: 1
     }
 
     const workout = new Workout(workoutData);
@@ -29,7 +29,7 @@ test('given: empty subject, when: creating workout, then: error is throw', () =>
         id: 1,
         subject: "",
         date: new Date('2024-10-21'),
-        user: user
+        userId: 1
     }
     expect(() => new Workout(workoutData)).toThrow('Subject is required');
 
@@ -43,7 +43,7 @@ test('given: empty date, when: creating workout, then: error is throw', () => {
         id: 1,
         subject: "chestday",
         date: undefined,
-        user: user
+        userId: 1
     }
     expect(() => new Workout(workoutData)).toThrow('Date is required');
 
@@ -57,7 +57,7 @@ test('given: empty user, when: creating workout, then: error is throw', () => {
         id: 1,
         subject: "chestday",
         date: new Date('2024-10-21'),
-        user: undefined
+        userId: undefined
     }
     expect(() => new Workout(workoutData)).toThrow('User is required');
 
