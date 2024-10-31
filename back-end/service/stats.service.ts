@@ -4,9 +4,9 @@ import { StatsInput } from '../types';
 import userService from './user.service';
 
 const addStats = async (statsInput: StatsInput): Promise<Stats> => {
-    const { weight, length, pr, date, userId} = statsInput;
+    const { weight, length, pr, userId} = statsInput;
     
-    if (!weight || !length || !pr || !date) {
+    if (!weight || !length || !pr) {
         throw new Error('All fields are required');
     }
     const user = await userService.getUserById(userId);
@@ -19,7 +19,6 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
         weight, 
         length,
         pr,
-        date,
         userId
     });
 

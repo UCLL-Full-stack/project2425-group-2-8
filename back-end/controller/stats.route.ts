@@ -32,9 +32,6 @@
  *              pr:
  *                  type: number
  *                  format: int64
- *              date:
- *                  type: string
- *                  format: date-time
  *              userId: 
  *                  type: number
  *                  format: int64
@@ -75,4 +72,4 @@ statsRouter.post('/', async (req: Request, res: Response) => {
     }
 });
 
-export { statsRouter }; 
+export { statsRouter };

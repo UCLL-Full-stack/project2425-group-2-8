@@ -101,7 +101,7 @@ userRouter.get('/', async (req: Request, res: Response) => {
  *                description: The ID of the user to retrieve
  *          responses:
  *              200:
- *                  description: The user object
+ *                  description: The user object, with his latest stats
  *                  content:
  *                      application/json:
  *                          schema:

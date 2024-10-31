@@ -9,7 +9,7 @@ export class Stats {
     private date: Date;
     private userId: number;
 
-    constructor(stats: { id?: number; weight: number; length: number; pr: number; date: Date; userId: number }) {
+    constructor(stats: { id?: number; weight: number; length: number; pr: number; userId: number }) {
         this.validate(stats);
 
 
@@ -17,13 +17,13 @@ export class Stats {
         this.weight = stats.weight;
         this.length = stats.length;
         this.pr = stats.pr;
-        this.date = stats.date;
+        this.date = new Date();
         this.userId = stats.userId;
     }
 
    
 
-    validate(stats: { weight: number; length: number; pr: number; date: Date; userId: number }) {
+    validate(stats: { weight: number; length: number; pr: number; userId: number }) {
         if (!stats.weight) {
             throw new Error('Weigth is required!')
         }
@@ -34,10 +34,6 @@ export class Stats {
 
         if (!stats.pr) {
             throw new Error('Pr is required!')
-        }
-
-        if(!stats.date) {
-            throw new Error('Date is required')
         }
 
         if(stats.userId === undefined || stats.userId === null) {
