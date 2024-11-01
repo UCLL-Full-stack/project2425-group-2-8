@@ -13,6 +13,9 @@
  *              date:
  *                  type: string
  *                  format: date-time
+ *              userId: 
+ *                  type: number
+ *                  format: int64
  *      WorkoutInput:
  *          type: object
  *          properties:
