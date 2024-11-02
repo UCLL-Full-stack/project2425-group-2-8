@@ -1,45 +1,70 @@
-import { useState } from "react";
-import { Stats } from "@/types";
+import React, { useState } from "react";
 
 type StatsFormProps = {
-    onSubmit: (stats: Omit<Stats, 'id' | 'date'>) => void;
-    onClose: () => void;
-    userId: number;
+    onConfirm: (data: { weight: number; length: number; pr: number }) => void;
+    onCancel: () => void;
+    errorMessage: string | null;
+    successMessage: string | null;
 };
 
-const StatsForm: React.FC<StatsFormProps> = ({ onSubmit, onClose, userId }) => {
-    const [weight, setWeight] = useState<number>(0);
-    const [length, setLength] = useState<number>(0);
-    const [pr, setPr] = useState<number>(0);
+const StatsForm: React.FC<StatsFormProps> = ({ onConfirm, onCancel, errorMessage, successMessage }) => {
+    const [formData, setFormData] = useState({
+        weight: "",
+        length: "",
+        pr: "",
+    });
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        onSubmit({ weight, length, pr, userId });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = () => {
+        onConfirm({
+            weight: parseFloat(formData.weight),
+            length: parseFloat(formData.length),
+            pr: parseFloat(formData.pr),
+        });
     };
 
     return (
-        <form onSubmit={handleSubmit} className="stats-form">
-            <div>
-                <label>Weight:</label>
-                <input type="number" value={weight} onChange={(e) => setWeight(Number(e.target.value))} required />
-            </div>
-            <div>
-                <label>Length:</label>
-                <input type="number" value={length} onChange={(e) => setLength(Number(e.target.value))} required />
-            </div>
-            <div>
-                <label>Personal Record (PR):</label>
-                <input type="number" value={pr} onChange={(e) => setPr(Number(e.target.value))} required />
-            </div>
-            <div className="form-buttons">
-                <button type="button" onClick={onClose} className="btn btn-secondary">
-                    Exit
-                </button>
-                <button type="submit" className="btn btn-success">
-                    Confirm
-                </button>
-            </div>
-        </form>
+        <div className="stats-form">
+            {successMessage && <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>}
+            {errorMessage && <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>}
+            <input
+                type="number"
+                name="weight"
+                value={formData.weight}
+                onChange={handleChange}
+                placeholder="Weight"
+                className="form-control mb-2"
+            />
+            <input
+                type="number"
+                name="length"
+                value={formData.length}
+                onChange={handleChange}
+                placeholder="Length"
+                className="form-control mb-2"
+            />
+            <input
+                type="number"
+                name="pr"
+                value={formData.pr}
+                onChange={handleChange}
+                placeholder="PR"
+                className="form-control mb-2"
+            />
+            <button className="btn btn-secondary me-2" onClick={onCancel}>
+                Exit
+            </button>
+            <button className="btn btn-primary" onClick={handleSubmit}>
+                Confirm
+            </button>
+        </div>
     );
 };
 

@@ -1,23 +1,23 @@
 import { User } from "../model/User";
 import { Stats } from "../model/Stats";
 
-const oussama = new User({
-    email: 'oussama@gmail.com',
-    password: 'fietsendief015'
-});
-oussama.setStats(new Stats({
-        weight: 65,
-        length: 180,
-        pr: 65,
-        userId: 0
-}))
+// const oussama = new User({
+//     email: 'oussama@gmail.com',
+//     password: 'fietsendief015'
+// });
+// oussama.setStats(new Stats({
+//         weight: 65,
+//         length: 180,
+//         pr: 65,
+//         userId: 0
+// }))
 
 const gertje = new User({
     email: 'gertje@gmail.com', 
     password: 'fietsgestolenLBozo1'
 });
 
-const allUsers = [ oussama, gertje ];
+const allUsers = [ gertje ];
 
 const getAllUsers = (): User[] => {
     return allUsers;

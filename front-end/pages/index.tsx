@@ -15,7 +15,7 @@ const Home: React.FC = () => {
       <Header />
       <main className={styles.main}>
         <span>
-          <h1>Welcome Lbozo</h1>
+          <h1>Welcome</h1>
         </span>
 
         <div className={styles.description}>

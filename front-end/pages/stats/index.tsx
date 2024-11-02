@@ -27,7 +27,7 @@ const Stats: React.FC = () => {
         <>
             <Header></Header>
             <main className="d-flex flex-column justify-content-center align-items-center">
-                <h2>Hier komen stats ofzo</h2>
+                <h2>Hier komen stats van de user</h2>
                 <section>
                     <h2>User overview</h2>
                     {users && (
