@@ -11,15 +11,18 @@ import { User } from '../../model/User';
 let mockStatsDbAddStats: jest.Mock;
 let mockUserServiceGetUserById: jest.Mock;
 let mockStatsDbGetStatsByUserId: jest.Mock;
+let mockUserServiceRegisterUser: jest.Mock;
 
 beforeEach(() => {
     mockStatsDbAddStats = jest.fn();
     mockUserServiceGetUserById = jest.fn();
     mockStatsDbGetStatsByUserId = jest.fn();
+    mockUserServiceRegisterUser = jest.fn();
 
     statsDb.addStats = mockStatsDbAddStats;
     statsDb.getStatsByUserId = mockStatsDbGetStatsByUserId;
     userService.getUserById = mockUserServiceGetUserById;
+    userService.registerUser = mockUserServiceRegisterUser;
     
 });
 
@@ -28,12 +31,14 @@ afterEach(() => {
 });
 
 test('given valid stats input, when addStats is called, then stats are added and returned', async () => {
-    // Arrange
+    const user = { id: 1, email: 'oussie@email.com', password: 'oussie123456' };
+    mockUserServiceRegisterUser(user);
+    
     const statsInput: StatsInput = {
         weight: 70,
         length: 175,
         pr: 100,
-        userId: 0
+        userId: 1
     };
 
     const newStats = new Stats({
@@ -43,20 +48,22 @@ test('given valid stats input, when addStats is called, then stats are added and
         userId: statsInput.userId,
     });
 
-    // Mock the function calls
-    mockStatsDbAddStats.mockReturnValue(newStats); // Mocked return of adding stats
 
-    // Act
+    
+    mockStatsDbAddStats.mockReturnValue(newStats); 
+
+    
     const result = await statsService.addStats(statsInput);
 
-    // Assert
+
     expect(mockStatsDbAddStats).toHaveBeenCalledWith(expect.objectContaining({
         weight: statsInput.weight,
         length: statsInput.length,
         pr: statsInput.pr,
         userId: statsInput.userId,
-        // Do not check 'date' here
     }));
+
+    expect(result).toEqual(newStats);
     
 });
 
