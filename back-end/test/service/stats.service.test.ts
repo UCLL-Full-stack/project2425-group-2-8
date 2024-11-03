@@ -27,38 +27,38 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
-// test('given valid stats input, when addStats is called, then stats are added and returned', async () => {
-//     // Arrange
-//     const statsInput: StatsInput = {
-//         weight: 70,
-//         length: 175,
-//         pr: 100,
-//         userId: 0
-//     };
+test('given valid stats input, when addStats is called, then stats are added and returned', async () => {
+    // Arrange
+    const statsInput: StatsInput = {
+        weight: 70,
+        length: 175,
+        pr: 100,
+        userId: 0
+    };
 
-//     const newStats = new Stats({
-//         weight: statsInput.weight,
-//         length: statsInput.length,
-//         pr: statsInput.pr,
-//         userId: statsInput.userId,
-//     });
+    const newStats = new Stats({
+        weight: statsInput.weight,
+        length: statsInput.length,
+        pr: statsInput.pr,
+        userId: statsInput.userId,
+    });
 
-//     // Mock the function calls
-//     mockStatsDbAddStats.mockReturnValue(newStats); // Mocked return of adding stats
+    // Mock the function calls
+    mockStatsDbAddStats.mockReturnValue(newStats); // Mocked return of adding stats
 
-//     // Act
-//     const result = await statsService.addStats(statsInput);
+    // Act
+    const result = await statsService.addStats(statsInput);
 
-//     // Assert
-//     expect(mockStatsDbAddStats).toHaveBeenCalledWith(expect.objectContaining({
-//         weight: statsInput.weight,
-//         length: statsInput.length,
-//         pr: statsInput.pr,
-//         userId: statsInput.userId,
-//         // Do not check 'date' here
-//     }));
+    // Assert
+    expect(mockStatsDbAddStats).toHaveBeenCalledWith(expect.objectContaining({
+        weight: statsInput.weight,
+        length: statsInput.length,
+        pr: statsInput.pr,
+        userId: statsInput.userId,
+        // Do not check 'date' here
+    }));
     
-// });
+});
 
 test('given missing required stats fields, when addStats is called, then it throws an error', async () => {
     
