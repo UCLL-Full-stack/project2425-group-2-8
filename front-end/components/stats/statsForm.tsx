@@ -1,3 +1,4 @@
+import { parse } from "path";
 import React, { useState } from "react";
 
 type StatsFormProps = {
@@ -19,6 +20,7 @@ const StatsForm: React.FC<StatsFormProps> = ({
   const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValidationError("");
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -30,6 +32,12 @@ const StatsForm: React.FC<StatsFormProps> = ({
     const { weight, length, pr } = formData;
     if (!weight || !length || !pr) {
       return "Please enter a value in all fields";
+    } else if (
+      parseFloat(weight) <= 0 ||
+      parseFloat(length) <= 0 ||
+      parseFloat(pr) <= 0
+    ) {
+      return "All fields must contain postive numbers";
     }
     return null;
   };
@@ -39,7 +47,6 @@ const StatsForm: React.FC<StatsFormProps> = ({
     if (error) {
       setValidationError(error);
     } else {
-      setValidationError(null);
       onConfirm({
         weight: parseFloat(formData.weight),
         length: parseFloat(formData.length),
