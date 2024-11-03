@@ -18,9 +18,11 @@ const StatsForm: React.FC<StatsFormProps> = ({
     pr: "",
   });
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [localSuccessMessage, setLocalSuccessMessage] = useState(successMessage);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValidationError("");
+    setValidationError(null);
+    setLocalSuccessMessage(null);
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -57,12 +59,11 @@ const StatsForm: React.FC<StatsFormProps> = ({
 
   return (
     <div className="stats-form">
-      {successMessage && (
-        <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
-      )}
-      {validationError && (
+      {validationError ? (
         <p style={{ color: "red", fontWeight: "bold" }}>{validationError}</p>
-      )}
+      ) : successMessage ? (
+        <p style={{ color: "green", fontWeight: "bold" }}>{successMessage}</p>
+      ) : null}
       <input
         type="number"
         name="weight"

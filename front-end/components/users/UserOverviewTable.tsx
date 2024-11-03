@@ -51,6 +51,8 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
                 setSuccessMessage("Stats added successfully!");
                 setErrorMessage(null);
                 fetchUserStats(user.id);
+
+                setTimeout(() => setSuccessMessage(null), 3000);
             } catch (error) {
                 setErrorMessage("Failed to add stats. Please try again.");
                 setSuccessMessage(null);
@@ -114,7 +116,6 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
                                             <StatsForm
                                                 onConfirm={(data) => handleConfirm(user.email, data)}
                                                 onCancel={handleExit}
-                                                errorMessage={errorMessage}
                                                 successMessage={successMessage}
                                             />
                                         </td>
