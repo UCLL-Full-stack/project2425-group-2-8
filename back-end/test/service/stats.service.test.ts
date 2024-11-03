@@ -32,15 +32,14 @@ afterEach(() => {
 
 test('given valid stats input, when addStats is called, then stats are added and returned', async () => {
     const user = { id: 1, email: 'oussie@email.com', password: 'oussie123456' };
-    mockUserServiceRegisterUser(user);
-    
+    mockUserServiceGetUserById.mockReturnValue(user);
+
     const statsInput: StatsInput = {
         weight: 70,
         length: 175,
         pr: 100,
         userId: 1
     };
-
     const newStats = new Stats({
         weight: statsInput.weight,
         length: statsInput.length,
@@ -48,13 +47,10 @@ test('given valid stats input, when addStats is called, then stats are added and
         userId: statsInput.userId,
     });
 
-
-    
     mockStatsDbAddStats.mockReturnValue(newStats); 
-
-    
     const result = await statsService.addStats(statsInput);
 
+    expect(mockUserServiceGetUserById).toHaveBeenCalledWith(statsInput.userId);
 
     expect(mockStatsDbAddStats).toHaveBeenCalledWith(expect.objectContaining({
         weight: statsInput.weight,
@@ -64,7 +60,6 @@ test('given valid stats input, when addStats is called, then stats are added and
     }));
 
     expect(result).toEqual(newStats);
-    
 });
 
 test('given missing required stats fields, when addStats is called, then it throws an error', async () => {

@@ -1,5 +1,5 @@
 import { User } from "./User";
-
+const now = new Date();
 
 export class Stats {
     private id? : number;
@@ -17,7 +17,7 @@ export class Stats {
         this.weight = stats.weight;
         this.length = stats.length;
         this.pr = stats.pr;
-        this.date = new Date();
+        this.date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         this.userId = stats.userId;
     }
 

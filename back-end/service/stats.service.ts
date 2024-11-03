@@ -23,7 +23,6 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
     });
 
     statsDb.addStats(newStats);
-    user.setStats(newStats);
     return newStats  
 }
 
