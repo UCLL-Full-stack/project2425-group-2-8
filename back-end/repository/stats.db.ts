@@ -1,4 +1,5 @@
 import { Stats } from "../model/Stats";
+import database from '././database';
 
 const allStats = [
     new Stats({
@@ -20,8 +21,11 @@ const addStats = (stats: Stats): Stats => {
     return stats;
 }
 
-const getStatsByUserId = (userId: number): Stats[] => {
+const getStatsByUserId = async (userId: number): Promise<Stats[]> => {
     return allStats.filter(stat => stat.userId === userId);
+    try {
+        const statsPrisma = await database
+    }
 };
 
 export default {
