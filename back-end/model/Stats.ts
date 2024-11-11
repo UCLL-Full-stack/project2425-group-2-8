@@ -1,4 +1,5 @@
-import { User } from "./User";
+import { User as UserPrisma, Stats as StatsPrisma } from '@prisma/client';
+import { User } from './User';
 const now = new Date();
 
 export class Stats {
@@ -8,6 +9,24 @@ export class Stats {
     private pr: number
     private date: Date;
     public userId: number;
+
+    static from ({ 
+        id,
+        weight,
+        length,
+        pr,
+        date,
+        userId,
+    }: StatsPrisma & { user: UserPrisma; }) {
+        return new Stats({
+            id,
+            weight,
+            length,
+            pr,
+            date,
+            // userId: User.from(user),   ni zeker van
+        });
+    } 
 
     constructor(stats: { id?: number; weight: number; length: number; pr: number; userId: number }) {
         this.validate(stats);

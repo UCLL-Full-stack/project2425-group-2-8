@@ -1,4 +1,5 @@
 import { User } from "./User";
+import { User as UserPrisma, Profile as ProfilePrisma, Stats as StatsPrisma } from '@prisma/client';
 
 
 export class Profile {
@@ -7,6 +8,22 @@ export class Profile {
     private name: string;
     private dateOfBirth: Date;
     private user: User;
+
+    static from ({
+        id, 
+        firstName,
+        name,
+        dateOfBirth,
+        user,
+    }: ProfilePrisma & { user: UserPrisma }) {
+        return new Profile({
+            id,
+            firstName,
+            name,
+            dateOfBirth,
+            // user: User.from(user) ni zeker van
+        })
+    }
 
     constructor(profile: { id?: number; firstName: string; name: string; dateOfBirth: Date; user: User; }) {
         this.validate(profile);

@@ -1,3 +1,6 @@
+import { User as UserPrisma, Profile as ProfilePrisma, Stats as StatsPrisma } from '@prisma/client';
+
+
 import { Profile } from "./Profile";
 import { Workout } from "./Workout";
 import { Stats } from "./Stats";
@@ -10,6 +13,22 @@ export class User {
     private password : string;
     private profile?: Profile;
     private stats?: Stats;
+
+    static from ({ 
+        id, 
+        email, 
+        password, 
+        profile, 
+        stats 
+    }: UserPrisma & { profile: ProfilePrisma; stats: StatsPrisma; }) {
+        return new User ({
+            id,
+            email,
+            password,
+            // profile: Profile.from(profile),    ni zeker van dees twee
+            // stats: Stats.from(stats),
+        });
+    }
 
     constructor(user: { email: string; password: string;}) {
         this.validate(user);
