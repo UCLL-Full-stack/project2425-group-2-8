@@ -155,3 +155,10 @@ button {
     font-weight: bold;
 }
 
+.text-red-800 {
+  color: #9b2c2c; 
+}
+
+.text-green-800 {
+  color: #2f855a; 
+}
