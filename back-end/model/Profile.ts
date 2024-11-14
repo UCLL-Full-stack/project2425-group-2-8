@@ -21,7 +21,7 @@ export class Profile {
             firstName,
             name,
             dateOfBirth,
-            // user: User.from(user) ni zeker van
+            user: User.from(user) ni zeker van
         })
     }
 
