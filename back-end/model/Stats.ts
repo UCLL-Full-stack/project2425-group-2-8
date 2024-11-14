@@ -29,16 +29,13 @@ export class Stats {
     constructor(stats: { id?: number; weight: number; length: number; pr: number; userId: number }) {
         this.validate(stats);
 
-
         this.id = stats.id;
         this.weight = stats.weight;
         this.length = stats.length;
         this.pr = stats.pr;
         this.date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         this.userId = stats.userId;
-    }
-
-   
+    }   
 
     validate(stats: { weight: number; length: number; pr: number; userId: number }) {
         if (!stats.weight) {
