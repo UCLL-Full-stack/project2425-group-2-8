@@ -20,22 +20,30 @@ export class User {
         password, 
         profile, 
         stats 
-    }: UserPrisma & { profile: ProfilePrisma; stats: StatsPrisma; }) {
+    }: UserPrisma & { profile: ProfilePrisma; stats: StatsPrisma; }): User {
         return new User ({
             id,
             email,
             password,
-            // profile: Profile.from(profile),    ni zeker van dees twee
-            // stats: Stats.from(stats),
+            profile: Profile.from(profile),
+            stats: Stats.from(stats),
         });
     }
 
-    constructor(user: { email: string; password: string;}) {
+    constructor(user: { id?: number; email: string; password: string; profile?: Profile; stats?: Stats}) {
         this.validate(user);
 
-        this.id = idCounter++;
+        this.id = user.id;
         this.email = user.email;
         this.password = user.password;
+
+        if (user.profile) {
+            this.setProfile(user.profile);
+        }
+
+        if (user.stats) {
+            this.setStats(user.stats);
+        }
     }
 
     validate(user: { email: string; password: string; }) {
