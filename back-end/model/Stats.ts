@@ -15,16 +15,14 @@ export class Stats {
         weight,
         length,
         pr,
-        date,
         userId,
-    }: StatsPrisma & { user: UserPrisma; }) {
+    }: StatsPrisma & {}): Stats {
         return new Stats({
             id,
             weight,
             length,
             pr,
-            date,
-            // userId: User.from(user),   ni zeker van
+            userId
         });
     } 
 
