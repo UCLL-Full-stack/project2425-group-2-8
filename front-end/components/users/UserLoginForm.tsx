@@ -16,7 +16,7 @@ const UserLoginForm: React.FC = () => {
     };
 
     const validate = (): boolean => {
-        let result = false;
+        let result = true;
 
         if (!name && name.trim() === "") {
             setNameError("Name is required");
@@ -31,7 +31,7 @@ const UserLoginForm: React.FC = () => {
 
         clearErrors();
 
-        if(!validate) {
+        if(!validate()) {
             return;
         }
 
