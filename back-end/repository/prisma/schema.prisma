@@ -21,7 +21,7 @@ model Stats {
   weight       Float
   length       Float
   pr           Float
-  date         DateTime
+  date         DateTime @default(now())
   user         User      @relation(fields: [userId], references: [id])
   userId       Int
 }
