@@ -1,25 +1,31 @@
 import { Stats } from "../model/Stats";
 import database from '././database';
 
-import { PrismaClient } from '@prisma/client';
+const allStats = [
+    new Stats({
+        weight: 60,
+        length: 180,
+        pr: 60,
+        userId: 0
+    }), 
+    new Stats({
+        weight: 65,
+        length: 180,
+        pr: 65,
+        userId: 0
+    })
+];
 
-const prisma = new PrismaClient();
-
-
-const addStats = async (statsData: { weight: number, length: number, pr: number, userId: number }): Promise<Stats> => {
-    const createdStats = await prisma.stats.create({
-        data: statsData,
-    });
-    return Stats.from(createdStats);  
-};
+const addStats = (stats: Stats): Stats => {
+    allStats.push(stats);
+    return stats;
+}
 
 const getStatsByUserId = async (userId: number): Promise<Stats[]> => {
-    const userStats = await prisma.stats.findMany({
-        where: {
-            userId,
-        },
-    });
-    return userStats.map(Stats.from); 
+    return allStats.filter(stat => stat.userId === userId);
+    try {
+        const statsPrisma = await database
+    }
 };
 
 export default {

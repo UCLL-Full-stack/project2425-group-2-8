@@ -1,23 +1,26 @@
 import { Workout } from "../model/Workout";
 
-import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
+const allWorkouts = [
+    new Workout({
+        subject: "chestday",
+        date: new Date("2024-10-31"),
+        userId: 1
+    }),
+    new Workout({
+        subject: "backday",
+        date: new Date("2025-10-10"),
+        userId: 1
+    })
+];
 
+const addWorkout = (workouts: Workout): Workout => {
+    allWorkouts.push(workouts);
+    return workouts
+}
 
-
-const addWorkout = async (workoutData: { subject: string, date: Date, userId: number }) => {
-    return await prisma.workout.create({
-        data: workoutData,
-    });
-};
-
-const getWorkoutsByUserId = async (userId: number) => {
-    return await prisma.workout.findMany({
-        where: {
-            userId,
-        },
-    });
+const getWorkoutsByUserId = (userId: number): Workout[] => {
+    return allWorkouts.filter(workout => workout.userId === userId);
 };
 
 

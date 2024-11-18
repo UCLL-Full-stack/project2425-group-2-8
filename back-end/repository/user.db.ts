@@ -1,36 +1,40 @@
 import { User } from "../model/User";
 import { Stats } from "../model/Stats";
-import { PrismaClient } from '@prisma/client';
 
+// const oussama = new User({
+//     email: 'oussama@gmail.com',
+//     password: 'fietsendief015'
+// });
+// oussama.setStats(new Stats({
+//         weight: 65,
+//         length: 180,
+//         pr: 65,
+//         userId: 0
+// }))
 
-const prisma = new PrismaClient();
+const gertje = new User({
+    email: 'gertje@gmail.com', 
+    password: 'fietsgestolenLBozo1'
+});
 
+const allUsers = [ gertje ];
 
-const getAllUsers = async () => {
-    return await prisma.user.findMany();
-};
+const getAllUsers = (): User[] => {
+    return allUsers;
+}
 
-const registerUser = async (userData: { email: string, password: string }) => {
-    return await prisma.user.create({
-        data: userData
-    });
-};
+const registerUser = (user: User): User => {
+    allUsers.push(user);
+    return user;
+}
 
-const getUserById = async (id: number) => {
-    return await prisma.user.findUnique({
-        where: {
-            id,
-        },
-    });
-};
+const getUserById = (id: number): User | undefined => {
+    return allUsers.find(user => user.getId() == id);
+}
 
-const getUserByEmail = async (email: string) => {
-    return await prisma.user.findUnique({
-        where: {
-            email,
-        },
-    });
-};
+const getUserByEmail = (email: string): User | undefined => {
+    return allUsers.find(user => user.getEmail() === email);
+}
 
 export default {
     getAllUsers,
