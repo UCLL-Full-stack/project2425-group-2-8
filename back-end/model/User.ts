@@ -20,13 +20,13 @@ export class User {
         password, 
         profile, 
         stats 
-    }: UserPrisma & { profile: ProfilePrisma; stats: StatsPrisma; }): User {
+    }: UserPrisma & { profile?: ProfilePrisma; stats?: StatsPrisma; }): User {
         return new User ({
             id,
             email,
             password,
-            profile: Profile.from(profile),
-            stats: Stats.from(stats),
+            profile: profile ? Profile.from(profile) : undefined, 
+            stats: stats ? Stats.from(stats) : undefined, 
         });
     }
 
