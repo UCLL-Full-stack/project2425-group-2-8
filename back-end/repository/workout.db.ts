@@ -1,4 +1,5 @@
 import { Workout } from "../model/Workout";
+import database from './database';
 
 
 const allWorkouts = [

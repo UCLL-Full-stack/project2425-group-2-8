@@ -1,5 +1,6 @@
 import { User } from "../model/User";
 import { Stats } from "../model/Stats";
+import database from './database';
 
 // const oussama = new User({
 //     email: 'oussama@gmail.com',
