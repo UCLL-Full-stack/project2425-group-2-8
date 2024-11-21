@@ -4,9 +4,9 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const main = async () => {
-    await prisma.user.deleteMany();
     await prisma.stats.deleteMany();
     await prisma.workout.deleteMany();
+    await prisma.user.deleteMany();
 
     const gertje = await prisma.user.create({
         data: {
@@ -22,12 +22,14 @@ const main = async () => {
                 length: 180,
                 pr: 60,
                 userId: gertje.id,  
+                date: new Date("2024-01-15"),
             },
             {
                 weight: 65,
                 length: 180,
                 pr: 65,
-                userId: gertje.id,  
+                userId: gertje.id, 
+                date: new Date("2024-02-15"),  
             },
         ],
     });

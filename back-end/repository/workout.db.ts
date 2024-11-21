@@ -2,26 +2,32 @@ import { Workout } from "../model/Workout";
 import database from './database';
 
 
-const allWorkouts = [
-    new Workout({
-        subject: "chestday",
-        date: new Date("2024-10-31"),
-        userId: 1
-    }),
-    new Workout({
-        subject: "backday",
-        date: new Date("2025-10-10"),
-        userId: 1
-    })
-];
+const addWorkout = async (workout: Workout): Promise<Workout> => {
+    try {
+        const createdWorkout = await database.workout.create({
+            data: {
+                subject: workout.getSubject(),
+                date: workout.getDate(),
+                userId: workout.getUser()
+            }
+        });
+        return Workout.from(createdWorkout);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details');
+    }
+};
 
-const addWorkout = (workouts: Workout): Workout => {
-    allWorkouts.push(workouts);
-    return workouts
-}
-
-const getWorkoutsByUserId = (userId: number): Workout[] => {
-    return allWorkouts.filter(workout => workout.userId === userId);
+const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
+    try {
+        const workoutsPrisma = await database.workout.findMany({
+            where: { userId }
+        });
+        return workoutsPrisma.map(workout => Workout.from(workout));
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details');
+    }
 };
 
 

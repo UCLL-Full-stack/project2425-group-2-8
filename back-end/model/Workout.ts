@@ -12,12 +12,12 @@ export class Workout {
         subject,
         date,
         userId,
-    }: WorkoutPrisma & { user: UserPrisma; }) {
+    }: WorkoutPrisma & {}) {
         return new Workout({
             id,
             subject,
             date,
-            // userId: User.from(user),   ni zeker van
+            userId
         });
     } 
 

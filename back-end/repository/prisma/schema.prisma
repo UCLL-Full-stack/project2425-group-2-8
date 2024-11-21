@@ -7,13 +7,13 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Profile {
+model User {
   id           Int       @id @default(autoincrement())
-  firstName    String
-  name         String
-  dateOfBirth  DateTime
-  user         User      @relation(fields: [userId], references: [id])
-  userId       Int       @unique
+  email        String    @unique
+  password     String
+  profile      Profile?  @relation
+  stats        Stats[]
+  workouts     Workout[] @relation("UserWorkouts")
 }
 
 model Stats {
@@ -26,20 +26,20 @@ model Stats {
   userId       Int
 }
 
-model User {
-  id           Int       @id @default(autoincrement())
-  email        String    @unique
-  password     String
-  profile      Profile?  @relation
-  stats        Stats[]
-  workouts     Workout[] @relation("UserWorkouts")
-}
-
 model Workout {
   id           Int       @id @default(autoincrement())
   subject      String
   date         DateTime
   user         User      @relation(fields: [userId], references: [id], name: "UserWorkouts")
   userId       Int
+}
+
+model Profile {
+  id           Int       @id @default(autoincrement())
+  firstName    String
+  name         String
+  dateOfBirth  DateTime
+  user         User      @relation(fields: [userId], references: [id])
+  userId       Int       @unique
 }
 

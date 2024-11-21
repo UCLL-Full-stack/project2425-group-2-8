@@ -12,7 +12,7 @@ export class User {
     private email : string;
     private password : string;
     private profile?: Profile;
-    private stats?: Stats;
+    private stats?: Stats[];
 
     static from ({ 
         id, 
@@ -20,17 +20,17 @@ export class User {
         password, 
         profile, 
         stats 
-    }: UserPrisma & { profile: ProfilePrisma; stats: StatsPrisma; }): User {
+    }: UserPrisma & { profile?: ProfilePrisma | null; stats?: StatsPrisma[]; }): User {
         return new User ({
             id,
             email,
             password,
-            profile: Profile.from(profile),
-            stats: Stats.from(stats),
+            profile: profile ? Profile.from(profile) : undefined,
+            stats: stats && stats.length > 0 ? stats.map(stat => Stats.from(stat)) : undefined
         });
     }
 
-    constructor(user: { id?: number; email: string; password: string; profile?: Profile; stats?: Stats}) {
+    constructor(user: { id?: number; email: string; password: string; profile?: Profile; stats?: Stats[]}) {
         this.validate(user);
 
         this.id = user.id;
@@ -77,11 +77,11 @@ export class User {
         this.profile = profile;
     }
 
-    setStats(stats: Stats): void { 
+    setStats(stats: Stats[]): void {
         this.stats = stats;
     }
 
-    getStats(): Stats | undefined{ 
+    getStats(): Stats[] | undefined {
         return this.stats;
     }
 

@@ -1,30 +1,34 @@
 import { Stats } from "../model/Stats";
 import database from '././database';
 
-const allStats = [
-    new Stats({
-        weight: 60,
-        length: 180,
-        pr: 60,
-        userId: 0
-    }), 
-    new Stats({
-        weight: 65,
-        length: 180,
-        pr: 65,
-        userId: 0
-    })
-];
 
-const addStats = (stats: Stats): Stats => {
-    allStats.push(stats);
-    return stats;
-}
+
+const addStats = async (stats: Stats): Promise<Stats> => {
+    try {
+        const createdStats = await database.stats.create({
+            data: {
+                weight: stats.getWeight(),
+                length: stats.getLength(),
+                pr: stats.getPr(),
+                userId: stats.getUserId()
+            }
+        });
+        return Stats.from(createdStats);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details');
+    }
+};
 
 const getStatsByUserId = async (userId: number): Promise<Stats[]> => {
-    return allStats.filter(stat => stat.userId === userId);
     try {
-        const statsPrisma = await database
+        const statsPrisma = await database.stats.findMany({
+            where: { userId }
+        });
+        return statsPrisma.map(stat => Stats.from(stat));
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details');
     }
 };
 

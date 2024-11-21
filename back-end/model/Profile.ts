@@ -13,13 +13,13 @@ export class Profile {
         firstName,
         name,
         dateOfBirth
-    }: ProfilePrisma & {}): Profile {
+    }: ProfilePrisma & { userId?:number }): Profile {
         return new Profile({
             id,
             firstName,
             name,
             dateOfBirth
-        })
+        });
     }
 
     constructor(profile: { id?: number; firstName: string; name: string; dateOfBirth: Date;}) {
