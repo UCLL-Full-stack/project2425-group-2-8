@@ -15,7 +15,7 @@ const addStats = async (stats: Stats): Promise<Stats> => {
         });
         return Stats.from(createdStats);
     } catch (error) {
-        console.error(error);
+        console.error('Error during stats creation:', error); 
         throw new Error('Database error. See server log for details');
     }
 };
