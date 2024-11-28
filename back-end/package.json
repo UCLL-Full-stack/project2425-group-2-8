@@ -2,7 +2,7 @@
     "name": "courses_api",
     "version": "1.0.0",
     "description": "Courses API",
-    "author": "johanpck",
+    "author": "RuneStruyven",
     "license": "ISC",
     "main": "app.ts",
     "prisma": {

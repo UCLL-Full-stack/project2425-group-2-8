@@ -1,16 +1,17 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
   id           Int       @id @default(autoincrement())
   email        String    @unique
   password     String
+  role         String
   profile      Profile?  @relation
   stats        Stats[]
   workouts     Workout[] @relation("UserWorkouts")

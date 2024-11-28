@@ -21,7 +21,7 @@
  *            password:
  *              type: string
  */
-import express, {Request, Response } from 'express';
+import express, {NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';
 import { UserInput } from '../types';
 import { User } from '../model/User';
@@ -117,6 +117,65 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * @swagger
+ * /users/signup:
+ *   post:
+ *     summary: Create a user
+ *     requestBody:
+ *      required: true
+ *      content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/UserInput'
+ *     
+ *     responses:
+ *       200:
+ *         description: The created user object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/User'
+ */
 
+userRouter.post('/signup', async (req: Request, res: Response, next: NextFunction ) => {
+    try {
+        const UserInput = <UserInput>req.body;
+        const user = await userService.registerUser(UserInput);
+        res.status(200).json(user);
+    } catch(error) {
+        next(error);
+    }
+});
+
+/**
+ * @swagger
+ * /users/login:
+ *   post:
+ *     summary: Login using email/password. Returns an object with JWT token and user name when successful.
+ *     requestBody:
+ *      required: true
+ *      content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/AuthenticationRequest'
+ *     
+ *     responses:
+ *       200:
+ *         description: The created user object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/AuthenticationResponse'
+ */
+userRouter.post('/login', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userInput = <UserInput>req.body;
+        const response = await userService.authenticate(userInput);
+        res.status(200).json({ message: 'Authentication successful', ...response});
+    } catch (error) {
+        next(error);
+    }
+});
 
 export { userRouter };

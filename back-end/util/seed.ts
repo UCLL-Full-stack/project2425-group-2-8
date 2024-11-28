@@ -12,6 +12,7 @@ const main = async () => {
         data: {
             email: "gertje@email.com",
             password: "fietsgestolenLBozo1",
+            role: "guest",
         },
     });
 
