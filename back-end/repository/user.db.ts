@@ -19,7 +19,8 @@ const registerUser = async (user: User): Promise<User> => {
         const createdUser = await database.user.create({
             data: {
                 email: user.getEmail(),
-                password: user.getPassword()
+                password: user.getPassword(),
+                role: user.getRole(),
             }
         });
         return User.from(createdUser);

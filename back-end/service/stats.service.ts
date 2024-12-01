@@ -9,6 +9,9 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
     if (!weight || !length || !pr) {
         throw new Error('All fields are required');
     }
+    if (!userId) {
+        throw new Error('A user must be given when entering stats')
+    }
     const user = await userService.getUserById(userId);
 
     if (!user) {

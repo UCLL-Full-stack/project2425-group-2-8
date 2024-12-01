@@ -16,7 +16,7 @@ const getAllUsers = async (): Promise<User[]> => {
 
 
 const registerUser = async (userInput: UserInput): Promise<User> => {
-    const { email, password, role } = userInput;
+    const { email, password, role = "student" } = userInput;
     
     if (!email || !password) {
         throw new Error("Email and password can not be empty!")

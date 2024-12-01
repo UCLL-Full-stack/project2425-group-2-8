@@ -9,6 +9,11 @@ const addWorkout = async (workoutInput: WorkoutInput): Promise<Workout> => {
     if (!subject || !date) {
         throw new Error('All field are required');
     }
+    
+    if (!userId) {
+        throw new Error('A user must be given when entering stats')
+    }
+
     const user = await userService.getUserById(userId);
     
     if (!user) {
