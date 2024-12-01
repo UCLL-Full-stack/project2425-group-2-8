@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 import { userRouter } from './controller/user.route';
 import { statsRouter } from './controller/stats.route';
 import { workoutRouter } from './controller/workout.route';
+import { expressjwt } from 'express-jwt';
 
 const app = express();
 dotenv.config();
@@ -18,6 +19,15 @@ app.use(bodyParser.json());
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });
 });
+
+app.use(
+    expressjwt({
+        secret: process.env.JWT_SECRET || 'default_secret',
+        algorithms: ['HS256']
+    }).unless({
+        path: ['/apid/doxs', /^\/apid-docs\/.*/, '/users/login', '/users/signup', '/status'],
+    })
+)
 
 const swaggerOpts = {
     definition: {
