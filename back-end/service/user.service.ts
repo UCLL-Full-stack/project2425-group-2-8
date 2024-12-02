@@ -27,12 +27,14 @@ const registerUser = async (userInput: UserInput): Promise<User> => {
     if (existingUser) {
         throw new Error("A user with this email already exists.");
     }
-    const userRole = role || 'guest';
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({
         email,
         password,
-        role: userRole
+        role
     });
+
 
     return await userDb.registerUser(newUser);
 }

@@ -1,7 +1,32 @@
+
 /**
  * @swagger
  *   components:
  *    schemas:
+ *      AuthenticationResponse:
+ *          type: object
+ *          properties:
+ *            message:
+ *              type: string
+ *              description: Authentication response.
+ *            token:
+ *              type: string
+ *              description: JWT access token.
+ *            email:
+ *              type: string
+ *              description: email user.
+ *            fullname:
+ *             type: string
+ *             description: Full name.
+ *      AuthenticationRequest:
+ *          type: object
+ *          properties:
+ *            email:
+ *              type: string
+ *              description: Email user.
+ *            password:
+ *              type: string
+ *              description: User password.
  *      User:
  *          type: object
  *          properties:
@@ -20,6 +45,7 @@
  *              type: string
  *            password:
  *              type: string
+ *            
  */
 import express, {NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';
@@ -33,7 +59,9 @@ const userRouter = express.Router();
 /**
  * @swagger
  * /user:
- *      post: 
+ *      post:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Register a new user
  *          requestBody: 
  *              required: true
@@ -65,6 +93,8 @@ userRouter.post('/', async (req: Request, res: Response) => {
  * @swagger
  * /user:
  *      get:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Get a list of all users
  *          responses:
  *              200:
@@ -89,6 +119,8 @@ userRouter.get('/', async (req: Request, res: Response) => {
  * @swagger
  * /user/{id}:
  *      get:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Get a user by ID
  *          parameters:
  *              - in: path
@@ -119,7 +151,7 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /users/signup:
+ * /user/signup:
  *   post:
  *     summary: Create a user
  *     requestBody:
@@ -150,7 +182,7 @@ userRouter.post('/signup', async (req: Request, res: Response, next: NextFunctio
 
 /**
  * @swagger
- * /users/login:
+ * /user/login:
  *   post:
  *     summary: Login using email/password. Returns an object with JWT token and user name when successful.
  *     requestBody:

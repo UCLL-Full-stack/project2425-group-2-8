@@ -1,6 +1,12 @@
+
 /**
  * @swagger
  *   components:
+ *    securitySchemes:
+ *     bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
  *    schemas:
  *      Stats:
  *          type: object
@@ -46,6 +52,8 @@ const statsRouter = express.Router();
  * @swagger
  * /stats: 
  *      post:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Add new stats to a user
  *          requestBody: 
  *              required: true
@@ -76,6 +84,8 @@ statsRouter.post('/', async (req: Request, res: Response) => {
  * @swagger
  * /stats/{id}:
  *      get:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Get all stats of a user over time
  *          parameters:
  *            - in: path

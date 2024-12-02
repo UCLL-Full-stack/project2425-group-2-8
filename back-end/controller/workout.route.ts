@@ -1,6 +1,12 @@
+
 /**
  * @swagger
  *   components:
+ *    securitySchemes:
+ *     bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
  *    schemas:
  *      Workout:
  *          type: object
@@ -40,6 +46,8 @@ const workoutRouter = express.Router();
  * @swagger
  * /workout:
  *      post:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Add new workout to a user
  *          requestBody:
  *              required: true
@@ -70,6 +78,8 @@ workoutRouter.post('/', async (req: Request, res: Response) => {
  * @swagger
  * /workout/{id}:
  *      get:
+ *          security:
+ *              - bearerAuth: []
  *          summary: Get all workouts added by a user
  *          parameters:
  *            - in: path
@@ -99,3 +109,4 @@ workoutRouter.get('/:id', async (req: Request, res: Response) => {
 });
 
 export { workoutRouter };
+
