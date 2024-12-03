@@ -30,7 +30,7 @@ export class User {
             email,
             password,
             role: role as Role,
-            profile: profile ? Profile.from(profile) : undefined,
+            // profile: profile ? Profile.from(profile) : undefined,
             stats: stats && stats.length > 0 ? stats.map(stat => Stats.from(stat)) : undefined
         });
     }

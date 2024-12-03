@@ -21,6 +21,7 @@ const registerUser = async (user: User): Promise<User> => {
                 email: user.getEmail(),
                 password: user.getPassword(),
                 role: user.getRole(),
+                 
             }
         });
         return User.from(createdUser);
