@@ -1,0 +1,13 @@
+{
+  "app-title": "FitFait",
+  "header": {
+    "nav": {
+      "home": "Home",
+      "stats": "Stats",
+      "login": "Login",
+      "language": "Language"
+    }
+  },
+  "welcome": "Welcome",
+  "explanation": "Explanation about FitFait"
+}
