@@ -4,10 +4,13 @@ import UserOverviewTable from "@/components/users/UserOverviewTable";
 import UserService from "@/services/UserService";
 import { User } from "@/types";
 import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Stats: React.FC = () => {
   const [users, setUsers] = useState<Array<User>>();
+
+  const { t } = useTranslation();
 
   const getUsers = async () => {
     const response = await UserService.getAllUsers();
@@ -23,9 +26,8 @@ const Stats: React.FC = () => {
     <>
       <Header></Header>
       <main className="d-flex flex-column justify-content-center align-items-center">
-        <h2>Hier komen stats van de user</h2>
         <section>
-          <h2>User overview</h2>
+          <h2>{t("stats.overview")}</h2>
           {users && <UserOverviewTable users={users} />}
         </section>
       </main>

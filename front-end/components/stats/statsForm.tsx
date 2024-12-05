@@ -1,5 +1,6 @@
 import { parse } from "path";
 import React, { useState } from "react";
+import { useTranslation } from "next-i18next";
 
 type StatsFormProps = {
   onConfirm: (data: { weight: number; length: number; pr: number }) => void;
@@ -20,6 +21,8 @@ const StatsForm: React.FC<StatsFormProps> = ({
   const [validationError, setValidationError] = useState<string | null>(null);
   const [localSuccessMessage, setLocalSuccessMessage] = useState(successMessage);
 
+  const { t } = useTranslation();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValidationError(null);
     setLocalSuccessMessage(null);
@@ -33,13 +36,13 @@ const StatsForm: React.FC<StatsFormProps> = ({
   const validateForm = () => {
     const { weight, length, pr } = formData;
     if (!weight || !length || !pr) {
-      return "Please enter a value in all fields";
+      return t("stats.messages.allrequired");
     } else if (
       parseFloat(weight) <= 0 ||
       parseFloat(length) <= 0 ||
       parseFloat(pr) <= 0
     ) {
-      return "All fields must contain postive numbers";
+      return t("stats.messages.allpositive");
     }
     return null;
   };
@@ -89,10 +92,10 @@ const StatsForm: React.FC<StatsFormProps> = ({
         className="form-control mb-2"
       />
       <button className="btn btn-secondary me-2" onClick={onCancel}>
-        Exit
+        {t("stats.exit")}
       </button>
       <button className="btn btn-primary" onClick={handleSubmit}>
-        Confirm
+        {t("stats.confirm")}
       </button>
     </div>
   );

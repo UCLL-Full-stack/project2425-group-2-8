@@ -16,6 +16,16 @@
     "succesmessage": "Login successful. Redirecting to homepage...",
     "namevalidation": "Name is required!"
   },
+  "stats": {
+    "addstats": "Add stats",
+    "overview": "Overview of the user's stats",
+    "exit": "Exit",
+    "confirm": "Confirm",
+    "messages": {
+      "allrequired": "Please enter a value in all fields",
+      "allpositive": "All fields must contain postive numbers"
+    }
+  },
   "welcome": "Welcome",
   "explanation": "Explanation about FitFait",
   "error": "An error occured"

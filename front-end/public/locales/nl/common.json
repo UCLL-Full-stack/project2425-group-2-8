@@ -16,6 +16,16 @@
     "succesmessage": "Inloggen succesvol, u gaat nu terug naar de startpagina...",
     "namevalidation": "Naam is verplicht!"
   },
+  "stats": {
+    "addstats": "Voeg statistieken toe",
+    "overview": "Overzicht van de statistieken",
+    "exit": "Verlaten",
+    "confirm": "Bevestigen",
+    "messages": {
+      "allrequired": "Vul alle velden in",
+      "allpositive": "Alle velden moeten positieve getallen bevatten"
+    }
+  },
   "welcome": "Welkom",
   "explanation": "Uitleg over FitFait",
   "error": "Er deed zich een error voor."
