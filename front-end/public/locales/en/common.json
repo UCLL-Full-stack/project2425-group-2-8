@@ -8,7 +8,15 @@
       "logout": "Logout",
       "language": "Language"
     }
+  },  
+  "login": {
+    "title": "login",
+    "username": "Username",
+    "button": "Login",
+    "succesmessage": "Login successful. Redirecting to homepage...",
+    "namevalidation": "Name is required!"
   },
   "welcome": "Welcome",
-  "explanation": "Explanation about FitFait"
+  "explanation": "Explanation about FitFait",
+  "error": "An error occured"
 }

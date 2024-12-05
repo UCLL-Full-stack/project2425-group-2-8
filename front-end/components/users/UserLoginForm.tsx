@@ -2,97 +2,96 @@ import { StatusMessage } from "@/types";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-
+import { useTranslation } from "next-i18next";
 
 const UserLoginForm: React.FC = () => {
-    const [ name, setName ] = useState("");
-    const [nameError, setNameError] = useState<String | null>(null);
-    const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
-    const router = useRouter();
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState<String | null>(null);
+  const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
+  const router = useRouter();
 
-    const clearErrors = () => {
-        setNameError(null);
-        setStatusMessages([]);
-    };
+  const { t } = useTranslation();
 
-    const validate = (): boolean => {
-        let result = true;
+  const clearErrors = () => {
+    setNameError(null);
+    setStatusMessages([]);
+  };
 
-        if (!name && name.trim() === "") {
-            setNameError("Name is required");
-            result = false;
-        }
+  const validate = (): boolean => {
+    let result = true;
 
-        return result;
-    };
+    if (!name && name.trim() === "") {
+      setNameError(t("login.namevalidation"));
+      result = false;
+    }
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    return result;
+  };
 
-        clearErrors();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-        if(!validate()) {
-            return;
-        }
+    clearErrors();
 
-        setStatusMessages([
-            { message: `Login successful. Redirecting to homepage...`, type: "success"}
-        ]);
+    if (!validate()) {
+      return;
+    }
 
-        sessionStorage.setItem("loggedInUser", name);
+    setStatusMessages([
+      {
+        message: t("login.succesmessage"),
+        type: "success",
+      },
+    ]);
 
-        setTimeout(() => {
-            router.push("/");
-        }, 3000);
-    };
+    sessionStorage.setItem("loggedInUser", name);
 
-    return (
-        <>
-            <h3 className="px-0">Login</h3>
-            {statusMessages && (
-                <div className="row">
-                    <ul className="list-none mb-3 mx-auto">
-                        {statusMessages.map(({ message, type}, index) => (
-                            <li 
-                                key={index}
-                                className={classNames({
-                                    "text-red-800": type === "error",
-                                    "text-green-800": type === "success",
-                                })}>
-                                {message}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-            <form onSubmit={handleSubmit}>
-                <label 
-                    htmlFor="nameInput"
-                    className="block mb-2 text-sm font-medium">
-                    Username:
-                </label>
-                <div className="block mb-2 text-sm font-medium">
-                    <input
-                        id="nameInput" 
-                        type="text"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        className="form-control mb-2" 
-                    />
-                    {nameError && (
-                        <div className="text-red-800">{nameError}</div>
-                    )}
-                </div>
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
+  };
 
-                <button
-                    className="btn btn-primary"
-                    type="submit">
-                    Login
-                </button>
-            </form>
-        
-        </>
-    );
+  return (
+    <>
+      <h3 className="px-0">{t("login.title")}</h3>
+      {statusMessages && (
+        <div className="row">
+          <ul className="list-none mb-3 mx-auto">
+            {statusMessages.map(({ message, type }, index) => (
+              <li
+                key={index}
+                className={classNames({
+                  "text-red-800": type === "error",
+                  "text-green-800": type === "success",
+                })}
+              >
+                {message}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="nameInput" className="block mb-2 text-sm font-medium">
+          {t("login.username")}
+        </label>
+        <div className="block mb-2 text-sm font-medium">
+          <input
+            id="nameInput"
+            type="text"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            className="form-control mb-2"
+          />
+          {nameError && <div className="text-red-800">{nameError}</div>}
+        </div>
+
+        <button className="btn btn-primary" type="submit">
+          {t("login.button")}
+        </button>
+      </form>
+    </>
+  );
 };
 
 export default UserLoginForm;
