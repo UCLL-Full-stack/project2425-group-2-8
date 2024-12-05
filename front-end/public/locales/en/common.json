@@ -5,6 +5,7 @@
       "home": "Home",
       "stats": "Stats",
       "login": "Login",
+      "logout": "Logout",
       "language": "Language"
     }
   },

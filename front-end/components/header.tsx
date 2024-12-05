@@ -2,8 +2,11 @@ import { link } from 'fs';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Language from './language/Language';
+import { useTranslation } from "next-i18next";
+
 
 const Header: React.FC = () => {
+  const { t } = useTranslation();
 
   const [loggedInUser, setLoggedInUser] = useState<String | null>(null);
 
@@ -16,26 +19,23 @@ const Header: React.FC = () => {
     setLoggedInUser(null);
   }
 
-
-
-
   return (
     <header className="p-3 mb-3 border-bottom bg-dark bg-gradient">
       <a className="fs-2 d-flex justify-content-center mb-2 mb-lg-0 text-white-50 text-decoration-none">
         {' '}
-        FitFait
+        {t("app.title")}
       </a>
       <nav className="nav justify-content-center">
         <Link href="/" className="nav-link px-4 fs-5 text-white">
-          Home
+          {t("header.nav.home")}
         </Link>
         <Link href="/stats" className="nav-link px-4 fs-5 text-white">
-          Stats
+          {t("header.nav.stats")}
         </Link>
 
         {!loggedInUser && (
           <Link href="/login" className="nav-link px-4 fs-5 text-white">
-            Login
+            {t("header.nav.login")}
           </Link>
         )}
 
@@ -44,13 +44,13 @@ const Header: React.FC = () => {
             href="#"
             className="nav-link px-4 fs-5 text-white"
             onClick={handleClick}>
-            Logout
+            {t("header.nav.logout")}
           </a>
         )}
 
         {loggedInUser && (
           <div className='text-white ms-5 mt-2 md:mt-0 pt-1 md:pt-0 grow'>
-            Welcome, {loggedInUser}
+            {t("welcome")}, {loggedInUser}
           </div>
         )}
         <Language />
