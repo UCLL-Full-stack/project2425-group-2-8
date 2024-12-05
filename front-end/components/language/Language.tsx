@@ -16,7 +16,7 @@ const Language: React.FC = () => {
   return (
     <div className="ml-6">
       <label htmlFor="language" className="text-white">
-        {t("language")}
+        {t("header.nav.language")}
       </label>
       <select
         id="language"
