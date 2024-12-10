@@ -3,25 +3,36 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useTranslation } from "next-i18next";
+import UserService from "@/services/UserService";
 
 const UserLoginForm: React.FC = () => {
-  const [name, setName] = useState("");
-  const [nameError, setNameError] = useState<String | null>(null);
+  // const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  // const [nameError, setNameError] = useState<String | null>(null);
+  const [emailError, setEmailError] = useState<String | null>(null);
   const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
   const router = useRouter();
 
   const { t } = useTranslation();
 
   const clearErrors = () => {
-    setNameError(null);
+    setEmailError(null);
+    setPasswordError(null);
     setStatusMessages([]);
   };
 
   const validate = (): boolean => {
     let result = true;
 
-    if (!name && name.trim() === "") {
-      setNameError(t("login.namevalidation"));
+    if (!email && email.trim() === "") {
+      setEmailError(t("login.namevalidation"));
+      result = false;
+    }
+
+    if (!password && password.trim() === "") {
+      setPasswordError(t("login.passwordvalidation"));
       result = false;
     }
 
@@ -37,18 +48,30 @@ const UserLoginForm: React.FC = () => {
       return;
     }
 
-    setStatusMessages([
-      {
-        message: t("login.succesmessage"),
-        type: "success",
-      },
-    ]);
+    const user = { email: email, password };
+    const response = await UserService.loginUser(user);
 
-    sessionStorage.setItem("loggedInUser", name);
+    if (response.status === 200) {
+      setStatusMessages([{ message: t("login.succesmessage"), type: "success" }]);
 
-    setTimeout(() => {
-      router.push("/");
-    }, 3000);
+      const user = await response.json();
+
+      localStorage.setItem(
+        'loggedInUser', 
+        JSON.stringify({
+          token: user.token, 
+          fullname: user.fullname, 
+          email: user.email, 
+          role: user.role
+        })
+      )
+
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    
+
+    };
   };
 
   return (
@@ -79,11 +102,33 @@ const UserLoginForm: React.FC = () => {
           <input
             id="nameInput"
             type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             className="form-control mb-2"
           />
-          {nameError && <div className="text-red-800">{nameError}</div>}
+          {emailError && <div className="text-red-800">{emailError}</div>}
+        </div>
+        <div className="mt-2">
+          <div>
+            <label
+              htmlFor="passwordInput"
+              className="block mb-2 text-sm font-medium"
+            >
+              {t("login.password")}
+            </label>
+          </div>
+          <div className="block mb-2 text-sm font-medium">
+            <input
+              id="passwordInput"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue:500 block w-full p-2.5"
+            />
+            {passwordError && (
+              <div className=" text-red-800">{passwordError}</div>
+            )}
+          </div>
         </div>
 
         <button className="btn btn-primary" type="submit">
