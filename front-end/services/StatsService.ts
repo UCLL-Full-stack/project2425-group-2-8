@@ -3,6 +3,7 @@ const addStats = async (data: { weight: number; length: number; pr: number; user
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(data),
     });
@@ -13,6 +14,7 @@ const getStatsByUserId = async (userId: number) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
         },
     });
 };

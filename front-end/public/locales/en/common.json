@@ -5,22 +5,41 @@
       "home": "Home",
       "stats": "Stats",
       "login": "Login",
+      "register": "Register",
       "logout": "Logout",
       "language": "Language"
     }
   },
   "login": {
     "title": "login",
-    "username": "Username",
+    "username": "Email",
+    "password": "Password",
     "button": "Login",
     "succesmessage": "Login successful. Redirecting to homepage...",
-    "namevalidation": "Name is required!"
+    "namevalidation": "Email is required!",
+    "passwordvalidation": "Password is required!"
   },
+  "register": {
+    "title": "Register",
+    "email": "Email",
+    "password": "Password",
+    "button": "Register",
+    "successMessage": "Registration successful, redirecting to login page...",
+    "errorMessage": "Something went wrong. Please try again."
+  },
+
+
+
+
+
+
   "stats": {
     "addstats": "Add stats",
     "overview": "Overview of the user's stats",
     "exit": "Exit",
     "confirm": "Confirm",
+    "overviewMessage": "Overview stats of",
+    "overviewTitle": "Overview of your stats",
     "messages": {
       "allrequired": "Please enter a value in all fields",
       "allpositive": "All fields must contain postive numbers"

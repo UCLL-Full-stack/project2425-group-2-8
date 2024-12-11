@@ -27,7 +27,6 @@ const Stats: React.FC = () => {
       <Header></Header>
       <main className="d-flex flex-column justify-content-center align-items-center">
         <section>
-          <h2>{t("stats.overview")}</h2>
           {users && <UserOverviewTable users={users} />}
         </section>
       </main>

@@ -5,17 +5,32 @@
       "home": "Start",
       "stats": "Statistieken",
       "login": "Inloggen",
+      "register": "Registreren",
       "logout": "Uitloggen",
       "language": "Taal"
     }
   },
   "login": {
     "title": "Inloggen",
-    "username": "Gebruikersnaam",
+    "username": "Email",
+    "password": "Wachtwoord",
     "button": "Inloggen",
     "succesmessage": "Inloggen succesvol, u gaat nu terug naar de startpagina...",
-    "namevalidation": "Naam is verplicht!"
+    "namevalidation": "Email is verplicht!",
+    "passwordvalidation": "Wachtwoord is verplicht!"
   },
+  "register": {
+    "title": "Registreer",
+    "email": "Email",
+    "password": "Wachtwoord",
+    "button": "Registreer",
+    "successMessage": "Registreren gelukt, navigeren naar de inlog pagina ...",
+    "errorMessage": "Er is iets fout gegaan, probeer opnieuw"
+  },
+
+
+
+
   "stats": {
     "addstats": "Voeg statistieken toe",
     "overview": "Overzicht van de statistieken",
