@@ -24,7 +24,7 @@
     "email": "Email",
     "password": "Wachtwoord",
     "button": "Registreer",
-    "successMessage": "Registreren gelukt, navigeren naar de inlog pagina ...",
+    "successMessage": "Registreren gelukt, navigeren naar de startpagina ...",
     "errorMessage": "Er is iets fout gegaan, probeer opnieuw"
   },
   "stats": {

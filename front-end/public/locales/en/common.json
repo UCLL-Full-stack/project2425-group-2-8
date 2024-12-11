@@ -24,7 +24,7 @@
     "email": "Email",
     "password": "Password",
     "button": "Register",
-    "successMessage": "Registration successful, redirecting to login page...",
+    "successMessage": "Registration successful, redirecting to homepage...",
     "errorMessage": "Something went wrong. Please try again."
   },
   "stats": {

@@ -24,9 +24,27 @@ const RegisterForm: React.FC = () => {
 
       if (response.ok) {
         setStatusMessage(t("register.successMessage"));
-        setTimeout(() => {
-          router.push("/login");
-        }, 2000); 
+
+        const loginResponse = await UserService.loginUser(user);
+
+        if (loginResponse.ok) {
+          const user = await loginResponse.json();
+          
+          localStorage.setItem(
+            'loggedInUser', 
+            JSON.stringify({
+              token: user.token, 
+              fullname: user.fullname, 
+              email: user.email, 
+              role: user.role
+            })
+          )
+    
+
+          setTimeout(() => {
+            router.push("/");
+          }, 2000); 
+        } 
       } else {
         const errorData = await response.json();
         setError(errorData.message || t("register.errorMessage"));
