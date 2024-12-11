@@ -26,6 +26,18 @@
       "allpositive": "Alle velden moeten positieve getallen bevatten"
     }
   },
+  "users": {
+    "loaderror": "De gebruiker's statistieken konden niet geladen worden",
+    "statssucces": "Statistieken succesvol toegevoegd!",
+    "statserror": "De statistieken konden niet toegevoegd worden. Probier opnieuw alstublieft.",
+    "statsoverview": "Overzicht van jouw statistieken",
+    "date": "Datum",
+    "weight": "Gewicht",
+    "length": "Lengte",
+    "pr": "PR",
+    "bmi": "BMI",
+    "nostats": "Geen statistieken om weer te geven voor jou, voeg statiestieken toe"
+  },
   "welcome": "Welkom",
   "explanation": "Uitleg over FitFait",
   "error": "Er deed zich een error voor."

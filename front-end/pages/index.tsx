@@ -4,6 +4,7 @@ import Header from '@/components/header';
 import styles from '@/styles/Home.module.css';
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import UserOverviewTable from '@/components/users/UserOverviewTable';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ const Home: React.FC = () => {
             {t("explanation")}
           </p>
         </div>
+        {/* <UserOverviewTable /> */}
       </main>
     </>
   );

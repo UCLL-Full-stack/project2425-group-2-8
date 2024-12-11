@@ -8,7 +8,7 @@
       "logout": "Logout",
       "language": "Language"
     }
-  },  
+  },
   "login": {
     "title": "login",
     "username": "Username",
@@ -25,6 +25,18 @@
       "allrequired": "Please enter a value in all fields",
       "allpositive": "All fields must contain postive numbers"
     }
+  },
+  "users": {
+    "loaderror": "Failed to load user stats.",
+    "statssucces": "Stats added successfully!",
+    "statserror": "Failed to add stats. Please try again.",
+    "statsoverview": "Overview of your stats",
+    "date": "Date",
+    "weight": "Weight",
+    "length": "Length",
+    "pr": "PR",
+    "bmi": "BMI",
+    "nostats": "No stats to show for you, add some stats to show them here."
   },
   "welcome": "Welcome",
   "explanation": "Explanation about FitFait",
