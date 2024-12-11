@@ -27,10 +27,6 @@
     "successMessage": "Registreren gelukt, navigeren naar de inlog pagina ...",
     "errorMessage": "Er is iets fout gegaan, probeer opnieuw"
   },
-
-
-
-
   "stats": {
     "addstats": "Voeg statistieken toe",
     "overview": "Overzicht van de statistieken",

@@ -15,6 +15,7 @@ const Stats: React.FC = () => {
   const getUsers = async () => {
     const response = await UserService.getAllUsers();
     const userss = await response.json();
+    console.log(userss)
     setUsers(userss);
   };
 
@@ -27,6 +28,7 @@ const Stats: React.FC = () => {
       <Header></Header>
       <main className="d-flex flex-column justify-content-center align-items-center">
         <section>
+          test
           {users && <UserOverviewTable users={users} />}
         </section>
       </main>

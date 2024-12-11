@@ -1,37 +1,38 @@
-
 import React, { useEffect, useState } from "react";
 import { Stats, User } from "@/types";
 import AddStatsButton from "../stats/addStats";
 import StatsForm from "../stats/statsForm";
 import StatsService from "@/services/StatsService";
-import {jwtDecode} from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
 import { useTranslation } from "next-i18next";
 
 type Props = {
   users: Array<User>;
 };
 
-
 const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
   const [visibleFormEmail, setVisibleFormEmail] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [userStats, setUserStats] = useState<Stats[] | null>(null);
-  const [loggedInUserEmail, setLoggedInUserEmail] = useState<string>("");
+  const [loggedInUser, setLoggedInUser] = useState<{
+    token: string;
+    email: string;
+    fullname: string;
+  } | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const decodedToken: { email: string } = jwtDecode(token);
-      setLoggedInUserEmail(decodedToken.email);
+    const user = localStorage.getItem("loggedInUser");
+    if (user) {
+      setLoggedInUser(JSON.parse(user));
     }
   }, []);
 
   useEffect(() => {
-    if (loggedInUserEmail) {
-      fetchUserStatsByEmail(loggedInUserEmail);
+    if (loggedInUser?.email) {
+      fetchUserStatsByEmail(loggedInUser.email);
     }
-  }, [loggedInUserEmail]);
+  }, [loggedInUser]);
 
   const fetchUserStatsByEmail = async (email: string) => {
     const user = users.find((user) => user.email === email);
@@ -47,20 +48,26 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
   };
 
   const handleAddStats = () => {
-    setVisibleFormEmail(loggedInUserEmail);
-    setErrorMessage(null);
-    setSuccessMessage(null);
+    if (loggedInUser?.email) {
+      setVisibleFormEmail(loggedInUser.email);
+      setErrorMessage(null);
+      setSuccessMessage(null);
+    }
   };
 
-  const handleConfirm = async (statsData: { weight: number; length: number; pr: number }) => {
-    const user = users.find((user) => user.email === loggedInUserEmail);
+  const handleConfirm = async (statsData: {
+    weight: number;
+    length: number;
+    pr: number;
+  }) => {
+    const user = users.find((user) => user.email === loggedInUser?.email);
 
     if (user && user.id !== undefined) {
       try {
         await StatsService.addStats({ ...statsData, userId: user.id });
         setSuccessMessage("Stats added successfully!");
         setErrorMessage(null);
-        fetchUserStatsByEmail(loggedInUserEmail);
+        if (loggedInUser?.email) fetchUserStatsByEmail(loggedInUser.email);
 
         setTimeout(() => setSuccessMessage(null), 3000);
       } catch (error) {
@@ -84,9 +91,9 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
 
   return (
     <>
-      {loggedInUserEmail && (
+      {loggedInUser && (
         <div className="user-overview">
-          <h3>Overzicht van statistieken voor {loggedInUserEmail}</h3>
+          <h3>Overzicht van statistieken voor {loggedInUser?.email}</h3>
           <div className="stats-overview mt-4">
             <h4>Overview of your stats</h4>
             {userStats && userStats.length > 0 ? (
@@ -113,11 +120,13 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
                 </tbody>
               </table>
             ) : (
-              <p className="text-muted">No stats to show for you, add some stats to show them here.</p>
+              <p className="text-muted">
+                No stats to show for you, add some stats to show them here.
+              </p>
             )}
           </div>
           <AddStatsButton onClick={handleAddStats} />
-          {visibleFormEmail === loggedInUserEmail && (
+          {visibleFormEmail === loggedInUser.email && (
             <StatsForm
               onConfirm={(data) => handleConfirm(data)}
               onCancel={handleExit}

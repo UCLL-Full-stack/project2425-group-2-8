@@ -27,12 +27,6 @@
     "successMessage": "Registration successful, redirecting to login page...",
     "errorMessage": "Something went wrong. Please try again."
   },
-
-
-
-
-
-
   "stats": {
     "addstats": "Add stats",
     "overview": "Overview of the user's stats",
