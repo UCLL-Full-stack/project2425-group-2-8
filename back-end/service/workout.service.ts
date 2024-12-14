@@ -1,3 +1,4 @@
+import { User } from "../model/User";
 import { Workout } from "../model/Workout"
 import workoutDb from "../repository/workout.db";
 import { WorkoutInput } from "../types"
@@ -14,17 +15,20 @@ const addWorkout = async (workoutInput: WorkoutInput): Promise<Workout> => {
         throw new Error('A user must be given when entering stats')
     }
 
+    
+    const users = [];
     for (const userId of userIds) {
         const user = await userService.getUserById(userId);
         if (!user) {
             throw new Error(`User with id ${userId} not found`);
         }
+        users.push(user);  // Add full user object to the array
     }
 
     const newWorkout = new Workout({
         subject,
         date,
-        userIds
+        users
     });
 
     workoutDb.addWorkout(newWorkout);

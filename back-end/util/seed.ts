@@ -40,12 +40,12 @@ const main = async () => {
             {
                 subject: "chestday",
                 date: new Date("2024-10-31"),
-                userId: gertje.id,  
+                users: gertje.id,  
             },
             {
                 subject: "backday",
                 date: new Date("2025-10-10"),
-                userId: gertje.id,  
+                users: gertje.id,  
             },
         ],
     });

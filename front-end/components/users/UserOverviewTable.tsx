@@ -93,7 +93,7 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
     <>
       {loggedInUser && (
         <div className="user-overview">
-          <h3>Overzicht van statistieken voor {loggedInUser?.email}</h3>
+          <h3>Overzicht van statistieken voor {loggedInUser?.fullname}</h3>
           <div className="stats-overview mt-4">
             <h4>Overview of your stats</h4>
             {userStats && userStats.length > 0 ? (

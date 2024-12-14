@@ -31,8 +31,10 @@
  *                  type: string
  *                  format: date-time
  *              userId:
- *                  type: number
- *                  format: int64
+ *                  type: array
+ *                  items: 
+ *                      type: number
+ *                      format: int64
  */
 
 

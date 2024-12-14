@@ -9,7 +9,8 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
                 subject: workout.getSubject(),
                 date: workout.getDate(),
                 users : {
-                    connect: users.map((user) => ({ id: user.getId() })),
+                    // connect: users.map((user) => ({ id: user.getId() })),
+                    connect: workout.getUsers().map(user => ({ id: user.getId() })),
                 },
             },
             include: { users: true },
@@ -29,7 +30,12 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
 const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
     try {
         const workoutsPrisma = await database.workout.findMany({
-            where: { userId }
+            where: {
+                users: {
+                    some: { id: userId } 
+                }
+            },
+            include: { users: true },
         });
         return workoutsPrisma.map(workout => Workout.from(workout));
     } catch (error) {

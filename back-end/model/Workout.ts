@@ -12,12 +12,19 @@ export class Workout {
         subject,
         date,
         users,
-    }: WorkoutPrisma & { users: { id: number }[] }) {
+    }: WorkoutPrisma & { users: UserPrisma[] }) {
         return new Workout({
             id,
             subject,
             date,
-            users: users.map((user) => User.from(user))
+            users: users.map((user) => User.from({
+                id: user.id,
+                email: user.email,
+                password: user.password,
+                role: user.role,
+                profile: null,
+                stats: []
+            }))
         });
     } 
 
