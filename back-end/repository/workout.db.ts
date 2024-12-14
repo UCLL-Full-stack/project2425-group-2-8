@@ -8,17 +8,22 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
             data: {
                 subject: workout.getSubject(),
                 date: workout.getDate(),
-                userIds: {
-                    connect: workout.getUsers().map(userId => ({ id: userId })),
+                users : {
+                    connect: users.map((user) => ({ id: user.getId() })),
                 },
-            }
+            },
+            include: { users: true },
         });
+
         return Workout.from(createdWorkout);
     } catch (error) {
         console.error(error);
         throw new Error('Database error. See server log for details');
     }
 };
+
+
+
 
 
 const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {

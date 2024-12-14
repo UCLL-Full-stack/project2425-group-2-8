@@ -50,8 +50,6 @@ export class User {
         if (user.stats) {
             this.setStats(user.stats);
         }
-
-        
     }
 
     validate(user: { email: string; password: string; }) {
