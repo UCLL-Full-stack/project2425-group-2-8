@@ -46,6 +46,9 @@ const Header: React.FC = () => {
         <Link href="/stats" className="nav-link px-4 fs-5 text-white">
           {t("header.nav.stats")}
         </Link>
+        <Link href="/schedule" className="nav-link px-4 fs-5 text-white">
+          {t("header.nav.schedule")}
+        </Link>
 
         {!loggedInUser && (
           <>

@@ -32,7 +32,7 @@ model Workout {
   subject      String
   date         DateTime
   user         User      @relation(fields: [userId], references: [id], name: "UserWorkouts")
-  userId       Int
+  userId       Int[]
 }
 
 model Profile {

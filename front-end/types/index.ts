@@ -22,6 +22,13 @@ export type Profile = {
     dateOfBirth: string;
 };
 
+export type Workout = {
+    id?: number;
+    subject: string;
+    date: string;
+    userIds: Array<number>
+}
+
 export type StatusMessage = {
     message: string;
     type: "error" | "success";

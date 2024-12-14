@@ -5,7 +5,7 @@ export class Workout {
     private id?: number;
     private subject: string;
     private date: Date;
-    public userId: number;
+    public userIds: Array<number>;
 
     static from ({ 
         id,
@@ -17,21 +17,21 @@ export class Workout {
             id,
             subject,
             date,
-            userId
+            userIds
         });
     } 
 
-    constructor(workout: { id?: number; subject: string; date: Date; userId: number}) {
+    constructor(workout: { id?: number; subject: string; date: Date; userIds: Array<number>}) {
         this.validate(workout);
 
 
         this.id = workout.id;
         this.subject = workout.subject;
         this.date = workout.date;
-        this.userId = workout.userId;
+        this.userIds = workout.userIds;
     }
 
-    validate(workout: { subject: string; date: Date; userId: number }) {
+    validate(workout: { subject: string; date: Date; userIds: Array<number> }) {
         if (!workout.subject) {
             throw new Error('Subject is required')
         }
@@ -41,7 +41,7 @@ export class Workout {
         }
 
         
-        if (workout.userId === undefined || workout.userId === null) {
+        if (workout.userIds === undefined || workout.userIds === null || workout.userIds.length() == 0) {
             throw new Error('User is required')
         }
     }
