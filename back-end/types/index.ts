@@ -19,6 +19,7 @@ type UserInput = {
     email?: string;
     password?: string;
     role?: Role;
+    profile?: ProfileInput;
 }
 
 type StatsInput = {

@@ -24,13 +24,13 @@ export class User {
         role,
         profile, 
         stats 
-    }: UserPrisma & { profile?: ProfilePrisma | null; stats?: StatsPrisma[]; }): User {
+    }: UserPrisma & { profile: ProfilePrisma | null; stats?: StatsPrisma[]; }): User {
         return new User ({
             id,
             email,
             password,
             role: role as Role,
-            // profile: profile ? Profile.from(profile) : undefined,
+            profile: profile ? Profile.from(profile) : Profile.default(),
             stats: stats && stats.length > 0 ? stats.map(stat => Stats.from(stat)) : undefined
         });
     }

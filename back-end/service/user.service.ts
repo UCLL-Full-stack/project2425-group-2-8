@@ -7,6 +7,7 @@ import { AuthenticationResponse } from '../types';
 import { generateJwtToken } from '../util/jwt';
 import bcrypt from 'bcrypt';
 import { Profile } from "../model/Profile";
+import profileService from "../service/profile.service"
 
 
 const getAllUsers = async (): Promise<User[]> => {
@@ -16,28 +17,47 @@ const getAllUsers = async (): Promise<User[]> => {
 
 
 const registerUser = async (userInput: UserInput): Promise<User> => {
-    const { email, password, role = "student" } = userInput;
-    
+    const { email, password, role = "student", profile } = userInput;
+
     if (!email || !password) {
-        throw new Error("Email and password can not be empty!")
+        throw new Error("Email and password cannot be empty!");
     }
 
     const existingUser = await userDb.getUserByEmail(email);
-    
     if (existingUser) {
         throw new Error("A user with this email already exists.");
     }
+
+    if (!profile) {
+        throw new Error("Profile is required for user registration.");
+    }
+    // const { firstName, name, dateOfBirth } = profile;
     
+    // if (!firstName || !name || !dateOfBirth) {
+        //     throw new Error("Profile fields 'firstName', 'name', and 'dateOfBirth' are required.");
+        // }
+        
+        // const newProfile = new Profile({
+            //     firstName,
+            //     name,
+            //     dateOfBirth
+            // });
     const hashedPassword = await bcrypt.hash(password, 12);
+    
     const newUser = new User({
         email,
         password: hashedPassword,
         role
     });
-
-
-    return await userDb.registerUser(newUser);
-}
+    
+    const user = await userDb.registerUser(newUser);
+    const userId = user.getId();
+    if (userId) {
+        const newProfile = await profileService.createProfile(profile, userId);
+        user.setProfile(newProfile);
+    }
+    return user
+};
 
 
 const getUserById = async (id: number): Promise<User> => {

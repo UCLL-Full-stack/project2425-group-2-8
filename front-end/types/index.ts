@@ -19,9 +19,7 @@ export type Profile = {
     id?: number;
     firstName: string;
     name: string;
-    dateOfBirth: Date;
-    user: User;
-
+    dateOfBirth: string;
 };
 
 export type StatusMessage = {

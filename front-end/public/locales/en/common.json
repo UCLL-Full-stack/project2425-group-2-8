@@ -23,6 +23,9 @@
     "title": "Register",
     "email": "Email",
     "password": "Password",
+    "name": "Name", 
+    "firstname": "Firstname",
+    "dateofbirth": "Date of birth",
     "button": "Register",
     "successMessage": "Registration successful, redirecting to homepage...",
     "errorMessage": "Something went wrong. Please try again."

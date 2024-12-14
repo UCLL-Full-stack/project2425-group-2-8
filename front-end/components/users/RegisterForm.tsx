@@ -9,6 +9,9 @@ const RegisterForm: React.FC = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,7 +20,15 @@ const RegisterForm: React.FC = () => {
     setStatusMessage(null);
     setError(null);
 
-    const user = { email, password };
+    const user = {
+      email,
+      password,
+      profile: {
+        firstName: firstname,
+        name,
+        dateOfBirth: new Date(dateOfBirth).toISOString(),
+      },
+    };
 
     try {
       const response = await UserService.registerUser(user);
@@ -29,22 +40,21 @@ const RegisterForm: React.FC = () => {
 
         if (loginResponse.ok) {
           const user = await loginResponse.json();
-          
+
           localStorage.setItem(
-            'loggedInUser', 
+            "loggedInUser",
             JSON.stringify({
-              token: user.token, 
-              fullname: user.fullname, 
-              email: user.email, 
-              role: user.role
+              token: user.token,
+              fullname: user.fullname,
+              email: user.email,
+              role: user.role,
             })
-          )
-    
+          );
 
           setTimeout(() => {
             router.push("/");
-          }, 2000); 
-        } 
+          }, 2000);
+        }
       } else {
         const errorData = await response.json();
         setError(errorData.message || t("register.errorMessage"));
@@ -57,12 +67,8 @@ const RegisterForm: React.FC = () => {
   return (
     <div>
       <h3>{t("register.title")}</h3>
-      {statusMessage && (
-        <div className="text-green-800">{statusMessage}</div> 
-      )}
-      {error && (
-        <div className="text-red-800">{error}</div> 
-      )}
+      {statusMessage && <div className="text-green-800">{statusMessage}</div>}
+      {error && <div className="text-red-800">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">{t("register.email")}</label>
@@ -86,6 +92,40 @@ const RegisterForm: React.FC = () => {
             className="form-control"
           />
         </div>
+        <div>
+          <label htmlFor="name">{t("register.name")}</label>
+          <input
+            type="name"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="form-control"
+          />
+        </div>
+        <div>
+          <label htmlFor="firstname">{t("register.firstname")}</label>
+          <input
+            type="firstname"
+            id="firstname"
+            value={firstname}
+            onChange={(e) => setFirstname(e.target.value)}
+            required
+            className="form-control"
+          />
+        </div>
+        <div>
+          <label htmlFor="dateOfBirth">{t("register.dateofbirth")}</label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            required
+            className="form-control"
+          />
+        </div>
+
         <button type="submit" className="btn btn-primary mt-3">
           {t("register.button")}
         </button>

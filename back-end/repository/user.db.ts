@@ -9,7 +9,7 @@ const getAllUsers = async (): Promise<User[]> => {
         });
         return usersPrisma.map(user => User.from(user));
     } catch (error) {
-        console.error(error);
+        console.error(error); 
         throw new Error('Database error. See server log for details');
     }
 };
@@ -21,8 +21,11 @@ const registerUser = async (user: User): Promise<User> => {
                 email: user.getEmail(),
                 password: user.getPassword(),
                 role: user.getRole(),
-                 
-            }
+            },
+            include: {
+                profile: true,
+                stats: true,
+            },
         });
         return User.from(createdUser);
     } catch (error) {

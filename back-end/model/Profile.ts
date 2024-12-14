@@ -8,12 +8,21 @@ export class Profile {
     private name: string;
     private dateOfBirth: Date;
 
+    static default(): Profile {
+        return new Profile ({
+            id: 0,
+            firstName: "Unknown",
+            name: "Unknown",
+            dateOfBirth: new Date()
+        })
+    }
+
     static from ({
         id, 
         firstName,
         name,
         dateOfBirth
-    }: ProfilePrisma & { userId?:number }): Profile | null {
+    }: ProfilePrisma & { userId?:number }): Profile{
         return new Profile({
             id,
             firstName: firstName || '',

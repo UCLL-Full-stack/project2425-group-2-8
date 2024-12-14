@@ -27,6 +27,29 @@
  *            password:
  *              type: string
  *              description: User password.
+ *      Profile:
+ *          type: object
+ *          properties: 
+ *            id:
+ *              type: number
+ *              format: int64
+ *            firstName:
+ *              type: string
+ *            name:
+ *              type: string
+ *            dateOfBirth:
+ *              type: string
+ *              format: date-time
+ *      ProfileInput:
+ *          type: object
+ *          properties:
+ *            firstName:
+ *              type: string
+ *            name:
+ *              type: string
+ *            dateOfBirth:
+ *              type: string
+ *              format: date-time
  *      User:
  *          type: object
  *          properties:
@@ -37,7 +60,8 @@
  *              type: string
  *            password:
  *              type: string
- *            
+ *            profile:
+ *              $ref: '#/components/schemas/ProfileInput'
  *      UserInput:
  *          type: object
  *          properties:
@@ -45,7 +69,8 @@
  *              type: string
  *            password:
  *              type: string
- *            
+ *            profile:
+ *              $ref: '#/components/schemas/ProfileInput'          
  */
 import express, {NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';

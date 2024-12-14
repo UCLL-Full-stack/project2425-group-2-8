@@ -23,6 +23,9 @@
     "title": "Registreer",
     "email": "Email",
     "password": "Wachtwoord",
+    "name": "Naam", 
+    "firstname": "Voornaam",
+    "dateofbirth": "Geboortedatum",
     "button": "Registreer",
     "successMessage": "Registreren gelukt, navigeren naar de startpagina ...",
     "errorMessage": "Er is iets fout gegaan, probeer opnieuw"
