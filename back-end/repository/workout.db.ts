@@ -8,7 +8,9 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
             data: {
                 subject: workout.getSubject(),
                 date: workout.getDate(),
-                userId: workout.getUser()
+                userIds: {
+                    connect: workout.getUsers().map(userId => ({ id: userId })),
+                },
             }
         });
         return Workout.from(createdWorkout);
@@ -17,6 +19,7 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
         throw new Error('Database error. See server log for details');
     }
 };
+
 
 const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
     try {

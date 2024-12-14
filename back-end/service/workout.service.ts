@@ -4,26 +4,27 @@ import { WorkoutInput } from "../types"
 import userService from "./user.service";
 
 const addWorkout = async (workoutInput: WorkoutInput): Promise<Workout> => {
-    const { subject, date, userId } = workoutInput;
+    const { subject, date, userIds } = workoutInput;
 
     if (!subject || !date) {
         throw new Error('All field are required');
     }
     
-    if (!userId) {
+    if (!userIds) {
         throw new Error('A user must be given when entering stats')
     }
 
-    const user = await userService.getUserById(userId);
-    
-    if (!user) {
-        throw new Error('User not found with the provided id');
+    for (const userId of userIds) {
+        const user = await userService.getUserById(userId);
+        if (!user) {
+            throw new Error(`User with id ${userId} not found`);
+        }
     }
 
     const newWorkout = new Workout({
         subject,
         date,
-        userId
+        userIds
     });
 
     workoutDb.addWorkout(newWorkout);

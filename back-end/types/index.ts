@@ -11,7 +11,7 @@ type WorkoutInput = {
     id?: number;
     subject?: string;
     date?: Date;
-    userId?: number
+    userIds?: Array<number>
 }
 
 type UserInput = {

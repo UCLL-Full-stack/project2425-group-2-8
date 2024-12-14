@@ -11,8 +11,10 @@ export class Workout {
         id,
         subject,
         date,
-        userId,
-    }: WorkoutPrisma & {}) {
+        users,
+    }: WorkoutPrisma & { users: { id: number }[] }) {
+        const userIds = users.map(user => user.id);
+
         return new Workout({
             id,
             subject,
@@ -41,7 +43,7 @@ export class Workout {
         }
 
         
-        if (workout.userIds === undefined || workout.userIds === null || workout.userIds.length() == 0) {
+        if (workout.userIds === undefined || workout.userIds === null || workout.userIds.length == 0) {
             throw new Error('User is required')
         }
     }
@@ -58,15 +60,15 @@ export class Workout {
         return this.date;
     }
 
-    getUser(): number {
-        return this.userId;
+    getUsers(): Array<number> {
+        return this.userIds;
     }
 
     equals(workout: Workout): boolean {
         return (
             this.subject === workout.getSubject() &&
             this.date === workout.getDate() &&
-            this.userId === workout.getUser()
+            this.userIds === workout.getUsers()
         );
     }
 }
