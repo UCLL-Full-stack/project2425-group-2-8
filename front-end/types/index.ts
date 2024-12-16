@@ -26,7 +26,7 @@ export type Workout = {
     id?: number;
     subject: string;
     date: string;
-    userIds: Array<number>
+    users: Array<User>
 }
 
 export type StatusMessage = {

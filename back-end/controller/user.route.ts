@@ -61,7 +61,7 @@
  *            password:
  *              type: string
  *            profile:
- *              $ref: '#/components/schemas/ProfileInput'
+ *              $ref: '#/components/schemas/Profile'
  *      UserInput:
  *          type: object
  *          properties:

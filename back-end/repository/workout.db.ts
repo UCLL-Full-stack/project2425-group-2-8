@@ -1,6 +1,5 @@
-import { Workout } from "../model/Workout";
+import { Workout } from '../model/Workout';
 import database from './database';
-
 
 const addWorkout = async (workout: Workout): Promise<Workout> => {
     try {
@@ -8,14 +7,13 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
             data: {
                 subject: workout.getSubject(),
                 date: workout.getDate(),
-                users : {
+                users: {
                     // connect: users.map((user) => ({ id: user.getId() })),
-                    connect: workout.getUsers().map(user => ({ id: user.getId() })),
+                    connect: workout.getUsers().map((user) => ({ id: user.getId() })),
                 },
             },
-            include: { users: true },
+            include: { users: { include: { profile: true } } },
         });
-
         return Workout.from(createdWorkout);
     } catch (error) {
         console.error(error);
@@ -23,30 +21,28 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
     }
 };
 
-
-
-
-
 const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
     try {
         const workoutsPrisma = await database.workout.findMany({
             where: {
                 users: {
-                    some: { id: userId } 
-                }
+                    some: { id: userId },
+                },
             },
-            include: { users: true },
+            include: {
+                users: {
+                    include: { profile: true },
+                },
+            },
         });
-        return workoutsPrisma.map(workout => Workout.from(workout));
+        return workoutsPrisma.map((workout) => Workout.from(workout));
     } catch (error) {
         console.error(error);
         throw new Error('Database error. See server log for details');
     }
 };
 
-
-
 export default {
     addWorkout,
-    getWorkoutsByUserId
-}
+    getWorkoutsByUserId,
+};

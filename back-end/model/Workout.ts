@@ -22,7 +22,7 @@ export class Workout {
                 email: user.email,
                 password: user.password,
                 role: user.role,
-                profile: null,
+                profile: (user as any).profile,
                 stats: []
             }))
         });

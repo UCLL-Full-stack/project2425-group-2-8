@@ -8,6 +8,31 @@
  *      scheme: bearer
  *      bearerFormat: JWT
  *    schemas:
+ *      Profile:
+ *          type: object
+ *          properties: 
+ *            id:
+ *              type: number
+ *              format: int64
+ *            firstName:
+ *              type: string
+ *            name:
+ *              type: string
+ *            dateOfBirth:
+ *              type: string
+ *              format: date-time
+ *      User:
+ *          type: object
+ *          properties:
+ *            id:
+ *              type: number
+ *              format: int64
+ *            email:
+ *              type: string
+ *            password:
+ *              type: string
+ *            profile:
+ *              $ref: '#/components/schemas/Profile'
  *      Workout:
  *          type: object
  *          properties:
@@ -19,9 +44,10 @@
  *              date:
  *                  type: string
  *                  format: date-time
- *              userId: 
- *                  type: number
- *                  format: int64
+ *              users: 
+ *                  type: array
+ *                  items: 
+ *                      $ref: '#/components/schemas/User'
  *      WorkoutInput:
  *          type: object
  *          properties:
@@ -30,7 +56,7 @@
  *              date:
  *                  type: string
  *                  format: date-time
- *              userId:
+ *              userIds:
  *                  type: array
  *                  items: 
  *                      type: number

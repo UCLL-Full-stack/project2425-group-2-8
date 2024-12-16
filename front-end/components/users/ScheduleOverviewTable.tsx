@@ -1,12 +1,18 @@
-import { User } from "@/types";
+import { User, Workout } from "@/types";
 import { useEffect, useState } from "react";
+import WorkoutService from "@/services/WorkoutService";
+import WorkoutForm from "../workouts/workoutForm";
+import AddWorkoutsButton from "../workouts/addWorkout";
 
 type Props = {
   users: Array<User>;
 };
 
 const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
-    const [userWorkouts, setUserWorkouts] = useState<Workouts[] | null>(null);
+  const [visibleFormEmail, setVisibleFormEmail] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [userWorkouts, setUserWorkouts] = useState<Workout[] | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [loggedInUser, setLoggedInUser] = useState<{
     token: string;
     email: string;
@@ -30,18 +36,97 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     const user = users.find((user) => user.email === email);
     if (user && user.id !== undefined) {
       try {
-        const response = await WorkoutService.getWorkoutsByUserIc(user.id);
+        const response = await WorkoutService.getWorkoutsByUserId(user.id);
         const workouts = await response.json();
+        console.log(workouts);
         setUserWorkouts(workouts.length > 0 ? workouts : []);
       } catch (error) {
-        setErrorMessage("Failed to load user stats.");
+        setErrorMessage("Failed to load user workouts.");
       }
     }
   };
 
+  const handleAddWorkout = () => {
+    if (loggedInUser?.email) {
+      setVisibleFormEmail(loggedInUser.email);
+      setErrorMessage(null);
+      setSuccessMessage(null);
+    }
+  };
+
+  const handleConfirm = async (workoutData: {
+    subject: string;
+    date: string;
+    userIds: Array<number>;
+  }) => {
+    try {
+      await WorkoutService.addWorkout({ ...workoutData });
+      setSuccessMessage("Workout added successfully!");
+      setErrorMessage(null);
+      if (loggedInUser?.email) fetchUserWorkoutsByEmail(loggedInUser.email);
+      setTimeout(() => setSuccessMessage(null), 3000);
+    } catch (error) {
+      setErrorMessage("Failed to add stats. Please try again.");
+      setSuccessMessage(null);
+    }
+  };
+
+  const handleExit = () => {
+    setVisibleFormEmail(null);
+    setErrorMessage(null);
+    setSuccessMessage(null);
+  };
+
   return (
     <>
-      <h3>Workouts voor </h3>
+      {loggedInUser && (
+        <div className="user-overview">
+          <h3>Overzicht van workouts voor {loggedInUser?.fullname}</h3>
+          <div className="stats-overview mt-4">
+            <h4>Workouts</h4>
+            {userWorkouts && userWorkouts.length > 0 ? (
+              <table className="table mt-3">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Users</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userWorkouts.map((workout, index) => (
+                    <tr key={index}>
+                      <td>{workout.subject}</td>
+                      <td>{new Date(workout.date).toLocaleDateString()}</td>
+                      <td>
+                        {workout.users
+                          .map((user) =>
+                            `${user.profile?.firstName || ""} ${
+                              user.profile?.name || ""
+                            }`.trim()
+                          )
+                          .join(", ")}{" "}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className="text-muted">
+                No workouts to show for you, add some stats to show them here.
+              </p>
+            )}
+          </div>
+          <AddWorkoutsButton onClick={handleAddWorkout} />
+          {visibleFormEmail === loggedInUser.email && (
+            <WorkoutForm
+              onConfirm={(data) => handleConfirm(data)}
+              onCancel={handleExit}
+              successMessage={successMessage}
+            />
+          )}
+        </div>
+      )}
     </>
   );
 };

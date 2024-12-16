@@ -11,18 +11,15 @@ const addWorkout = async (workoutInput: WorkoutInput): Promise<Workout> => {
         throw new Error('All field are required');
     }
     
-    if (!userIds) {
-        throw new Error('A user must be given when entering stats')
+    if (!userIds || userIds.length == 0) {
+        throw new Error('At least one user must be given when entering stats')
     }
 
     
     const users = [];
     for (const userId of userIds) {
         const user = await userService.getUserById(userId);
-        if (!user) {
-            throw new Error(`User with id ${userId} not found`);
-        }
-        users.push(user);  // Add full user object to the array
+        users.push(user);
     }
 
     const newWorkout = new Workout({
