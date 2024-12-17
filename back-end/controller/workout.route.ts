@@ -88,7 +88,7 @@ const workoutRouter = express.Router();
  *                  description: The new workout of the user
  *                  content:
  *                      application/json:
- *                          schemas:
+ *                          schema:
  *                              $ref: '#components/schemas/Workout'
  */
 
@@ -135,6 +135,39 @@ workoutRouter.get('/:id', async (req: Request, res: Response) => {
         res.status(400).json({ status: "error", errorMessage: (error as Error).message });
     }
 });
+
+
+/**
+ * @swagger
+ * /workout/{id}:
+ *      delete:
+ *          security:
+ *              - bearerAuth: []
+ *          summary: Delete a workout from the given id
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              schema:
+ *                  type: number
+ *              description: The ID of the workout that has to be deleted
+ *          responses:
+ *              200:
+ *                  description: A success message saying that the workout has been correctly deleted
+ *                  content:
+ *                      application/json: 
+ *                          schema:
+ *                              type: string
+ */
+workoutRouter.delete('/:id', async (req: Request, res: Response) => {
+    try {
+        const workoutId = parseInt(req.params.id);
+        const message = await workoutService.deleteWorkoutById(workoutId);
+        res.status(200).json(message);
+    } catch (error) {
+        res.status(400).json({ status: "error", errorMessage: (error as Error).message})
+    }
+})
 
 export { workoutRouter };
 

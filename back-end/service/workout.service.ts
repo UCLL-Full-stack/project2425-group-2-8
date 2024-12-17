@@ -42,7 +42,13 @@ const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
     return workouts;
 };
 
+const deleteWorkoutById = async (workoutId: number): Promise<string> => {
+    const workout = await workoutDb.getWorkoutById(workoutId);
+    return await workoutDb.deleteWorkout(workout);
+}
+
 export default {
     addWorkout,
-    getWorkoutsByUserId
+    getWorkoutsByUserId,
+    deleteWorkoutById
 }
