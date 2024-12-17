@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import WorkoutService from "@/services/WorkoutService";
 import WorkoutForm from "../workouts/workoutForm";
 import AddWorkoutsButton from "../workouts/addWorkout";
+import DeleteButton from "../workouts/deleteButton";
 
 type Props = {
   users: Array<User>;
@@ -91,6 +92,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
                     <th>Subject</th>
                     <th>Date</th>
                     <th>Users</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -106,6 +108,9 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
                             }`.trim()
                           )
                           .join(", ")}{" "}
+                      </td>
+                      <td>
+                        <DeleteButton></DeleteButton>
                       </td>
                     </tr>
                   ))}
