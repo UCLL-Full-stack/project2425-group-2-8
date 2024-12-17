@@ -43,6 +43,16 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
         if (!subject || !date || !userIds) {
           return t("workout.messages.allrequired");
         }
+
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+
+        if (selectedDate < today) {
+          return (`You can't schedule workouts in the past`); 
+        }
+
+        
         return null;
       };
 
