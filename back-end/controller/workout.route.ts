@@ -76,7 +76,7 @@ const workoutRouter = express.Router();
  *      post:
  *          security:
  *              - bearerAuth: []
- *          summary: Add new workout to a user
+ *          summary: Add a new workout containing one or more users
  *          requestBody:
  *              required: true
  *              content:
@@ -108,7 +108,7 @@ workoutRouter.post('/', async (req: Request, res: Response) => {
  *      get:
  *          security:
  *              - bearerAuth: []
- *          summary: Get all workouts added by a user
+ *          summary: Get all workouts where a given user participates
  *          parameters:
  *            - in: path
  *              name: id

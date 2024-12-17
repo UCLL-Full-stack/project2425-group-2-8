@@ -4,6 +4,7 @@
     "nav": {
       "home": "Home",
       "stats": "Stats",
+      "schedule": "Scedule",
       "login": "Login",
       "register": "Register",
       "logout": "Logout",

@@ -1,4 +1,9 @@
-import { User as UserPrisma, Profile as ProfilePrisma, Stats as StatsPrisma, Workout as WorkoutPrisma } from '@prisma/client';
+import {
+    User as UserPrisma,
+    Profile as ProfilePrisma,
+    Stats as StatsPrisma,
+    Workout as WorkoutPrisma,
+} from '@prisma/client';
 import { User } from './User';
 
 export class Workout {
@@ -7,30 +12,26 @@ export class Workout {
     private date: Date;
     public users: Array<User>;
 
-    static from ({ 
-        id,
-        subject,
-        date,
-        users,
-    }: WorkoutPrisma & { users: UserPrisma[] }) {
+    static from({ id, subject, date, users }: WorkoutPrisma & { users: UserPrisma[] }) {
         return new Workout({
             id,
             subject,
             date,
-            users: users.map((user) => User.from({
-                id: user.id,
-                email: user.email,
-                password: user.password,
-                role: user.role,
-                profile: (user as any).profile,
-                stats: []
-            }))
+            users: users.map((user) =>
+                User.from({
+                    id: user.id,
+                    email: user.email,
+                    password: user.password,
+                    role: user.role,
+                    profile: (user as any).profile,
+                    stats: [],
+                })
+            ),
         });
-    } 
+    }
 
-    constructor(workout: { id?: number; subject: string; date: Date; users: Array<User>}) {
+    constructor(workout: { id?: number; subject: string; date: Date; users: Array<User> }) {
         this.validate(workout);
-
 
         this.id = workout.id;
         this.subject = workout.subject;
@@ -40,16 +41,15 @@ export class Workout {
 
     validate(workout: { subject: string; date: Date; users: Array<User> }) {
         if (!workout.subject) {
-            throw new Error('Subject is required')
+            throw new Error('Subject is required');
         }
 
         if (!workout.date) {
-            throw new Error('Date is required')
+            throw new Error('Date is required');
         }
 
-        
         if (workout.users === undefined || workout.users === null || workout.users.length == 0) {
-            throw new Error('User is required')
+            throw new Error('User is required');
         }
     }
 
