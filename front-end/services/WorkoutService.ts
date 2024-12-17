@@ -1,9 +1,13 @@
 const addWorkout = async (data: { subject: string; date: string; userIds: Array<number>}) => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
+    console.log("data", data);
+
     return fetch(process.env.NEXT_PUBLIC_API_URL + "/workout", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
     });

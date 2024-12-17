@@ -22,15 +22,21 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
     
       const { t } = useTranslation();
 
-      const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValidationError(null);
         setLocalSuccessMessage(null);
         const { name, value } = e.target;
+      
         setFormData((prevData) => ({
           ...prevData,
-          [name]: value,
+          [name]:
+            name === "userIds"
+              ? value.split(",").map((id) => Number(id.trim())) 
+              : name === "date"
+              ? value 
+              : value,
         }));
-      }
+      };
 
       const validateForm = () => {
         const { subject, date, userIds } = formData;
@@ -45,11 +51,16 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
         if (error) {
             setValidationError(error);
         } else {
+            const isoDate = `${formData.date}T00:00:00.000Z`; 
             onConfirm({
                 subject: formData.subject,
-                date: formData.date,
+                date: isoDate,
                 userIds: formData.userIds
             });
+
+            setTimeout(() => {
+              onCancel(); 
+            }, 3000);
         }
       };
       return (

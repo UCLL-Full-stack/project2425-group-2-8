@@ -57,6 +57,10 @@ const StatsForm: React.FC<StatsFormProps> = ({
         length: parseFloat(formData.length),
         pr: parseFloat(formData.pr),
       });
+
+      setTimeout(() => {
+        onCancel(); 
+      }, 3000);
     }
   };
 
