@@ -22,13 +22,13 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
   const [formData, setFormData] = useState<{
     subject: string;
     date: string;
-    userIds: number[]; // Gebruikers-ID's als een array van getallen
+    userIds: number[];
     userEmail: string;
     selectedEmail: string;
   }>({
     subject: "",
     date: "",
-    userIds: [],  // Lege array van getallen
+    userIds: [],
     userEmail: "",
     selectedEmail: "",
   });
@@ -46,35 +46,30 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
 
   const { t } = useTranslation();
 
-  // Haal ingelogde gebruiker op bij het laden van de component
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
     if (user) {
       const parsedUser = JSON.parse(user);
-
-      // Haal gebruiker op via de API door het e-mailadres
       const fetchUser = async () => {
         try {
           const response = await UserService.getUserByEmail(parsedUser.email);
           const userData = await response.json();
-          setLoggedInUser(userData); // Stel de ingelogde gebruiker in met de opgehaalde data
+          setLoggedInUser(userData); 
         } catch (error) {
           console.error("Error fetching user:", error);
         }
       };
 
-      fetchUser(); // Roep de asynchrone functie aan
+      fetchUser();
     }
   }, []);
 
-  // Haal alle gebruikers op bij het laden van de component
   useEffect(() => {
     fetchUsers();
   }, []);
 
   useEffect(() => {
     if (loggedInUser) {
-      // Voeg de ingelogde gebruiker toe aan de userIds en formData
       setFormData((prevData) => ({
         ...prevData,
         userIds: [...prevData.userIds, loggedInUser.id],
@@ -88,7 +83,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
       const users = await response.json();
       setAllUsers(users.length > 0 ? users : []);
     } catch (error) {
-      setErrorMessage("No users found");
+      setErrorMessage(t("workouts.noUsersFound"));
     }
   };
 
@@ -101,14 +96,13 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
       ...prevData,
       [name]:
         name === "userIds"
-          ? value.split(",").map((id) => Number(id.trim())) // Gebruikers-IDs uit het invoerveld halen
+          ? value.split(",").map((id) => Number(id.trim()))
           : name === "date"
           ? value
           : value,
     }));
   };
 
-  // Functie om gebruikers te filteren op basis van ingevoerde tekst
   const searchUsersContaining = async (e: { target: { value: any; }; }) => {
     const searchItem = e.target.value;
 
@@ -124,31 +118,28 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
     setFormData({ ...formData, userEmail: searchItem });
   };
 
-  // Functie om een gebruiker te selecteren (email en userId toevoegen)
   const handleEmailSelect = (user: User) => {
     if (user.id)
       setFormData({
         ...formData,
         selectedEmail: user.email,
         userEmail: '',
-        userIds: [...formData.userIds, user.id], // Voeg userId toe aan de lijst
+        userIds: [...formData.userIds, user.id],
       });
-    setUserSuggestions([]); // Verberg de suggesties na selectie
+    setUserSuggestions([]); 
   };
 
-  // Functie om een geselecteerde gebruiker te verwijderen (email en userId)
   const handleDelete = (userId: number) => {
     setFormData({
       ...formData,
-      userIds: formData.userIds.filter(id => id !== userId), // Verwijder de userId
+      userIds: formData.userIds.filter(id => id !== userId), 
     });
   };
 
-  // Valideer de form
   const validateForm = () => {
     const { subject, date, userIds } = formData;
     if (!subject || !date || !userIds.length) {
-      return t("workout.messages.allrequired");
+      return t("workout.allRequired");
     }
 
     const selectedDate = new Date(date);
@@ -156,13 +147,12 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
     today.setHours(0, 0, 0, 0);
 
     if (selectedDate < today) {
-      return `You can't schedule workouts in the past`;
+      return t("workouts.notPast");
     }
 
     return null;
   };
 
-  // Formulier indienen
   const handleSubmit = () => {
     const error = validateForm();
     if (error) {
@@ -227,7 +217,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
       </div>
 
       <div>
-        <p>Selected Users:</p>
+        <p>{t("workouts.selectedUsers")}</p>
         <ul>
           {formData.userIds.map((userId, index) => (
             <li key={index}>
@@ -241,17 +231,17 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
       <input
         type="text"
         name="userIds"
-        value={formData.userIds.join(", ")} // Weergeven als komma-gescheiden lijst
+        value={formData.userIds.join(", ")} 
         onChange={handleChange}
         placeholder="UserIds"
         className="form-control mb-2"
       />
 
       <button className="btn btn-secondary me-2" onClick={onCancel}>
-        {t("workout.exit")}
+        {t("workouts.exit")}
       </button>
       <button className="btn btn-primary" onClick={handleSubmit}>
-        {t("workout.confirm")}
+        {t("workouts.confirm")}
       </button>
     </div>
   );

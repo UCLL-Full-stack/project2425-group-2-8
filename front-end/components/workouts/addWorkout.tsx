@@ -7,7 +7,7 @@ type AddWorkoutsButtonProps = {
 
 const AddWorkoutsButton: React.FC<AddWorkoutsButtonProps> = ({ onClick }) => (
     <button className="btn btn-primary" onClick={onClick}>
-        {/* {t("stats.addstats") */}
+        {/* {t("stats.addstats")} */}
         Add workout
     </button>
 );

@@ -24,12 +24,31 @@
     "title": "Register",
     "email": "Email",
     "password": "Password",
-    "name": "Name", 
+    "name": "Name",
     "firstname": "Firstname",
     "dateofbirth": "Date of birth",
     "button": "Register",
     "successMessage": "Registration successful, redirecting to homepage...",
     "errorMessage": "Something went wrong. Please try again."
+  },
+  "workouts": {
+    "noFound": "Failed to load user workouts.",
+    "addedSuccess": "Workout added successfully",
+    "addedFailed": "Failed to add stats. Please try again.",
+    "deletedSuccess": "Workout deleted successfully!",
+    "deletedFailed": "Failed to delete the workout. Please try again.",
+    "overview": "Overview workouts of ",
+    "subject": "Subject",
+    "date": "Date",
+    "users": "Users",
+    "delete": "Delete",
+    "noToShow": "No workouts to show for you, add some workouts to show them here.",
+    "noUsersFound": "No users found",
+    "allRequired": "Please fill in subject, date and select at least one user!",
+    "notPast": "You can't schedule workouts in the past",
+    "selectedUsers": "Selected User:",
+    "exit": "Exit",
+    "confirm": "Confirm"
   },
   "stats": {
     "addstats": "Add stats",
@@ -121,8 +140,6 @@
       "daily_steps": "Stay active: Aim for at least 10,000 steps per day.",
       "recovery": "Recovery is key: Prioritize 7-8 hours of sleep per night to boost metabolism."
     }
-
-
   },
   "users": {
     "loaderror": "Failed to load user stats.",

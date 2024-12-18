@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import WorkoutService from "@/services/WorkoutService";
 import WorkoutForm from "../workouts/workoutForm";
 import AddWorkoutsButton from "../workouts/addWorkout";
+import { useTranslation } from "next-i18next";
 import DeleteButton from "../workouts/deleteButton";
 
 type Props = {
@@ -19,6 +20,9 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     email: string;
     fullname: string;
   } | null>(null);
+
+    const { t } = useTranslation();
+  
 
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
@@ -42,7 +46,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
         console.log(workouts);
         setUserWorkouts(workouts.length > 0 ? workouts : []);
       } catch (error) {
-        setErrorMessage("Failed to load user workouts.");
+        setErrorMessage(t("workouts.noFound"));
       }
     }
   };
@@ -62,18 +66,17 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
   }) => {
     try {
       await WorkoutService.addWorkout({ ...workoutData });
-      setSuccessMessage("Workout added successfully!");
+      setSuccessMessage(t("workouts.addedSuccess"));
       setErrorMessage(null);
       if (loggedInUser?.email) fetchUserWorkoutsByEmail(loggedInUser.email);
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (error) {
-      setErrorMessage("Failed to add stats. Please try again.");
+      setErrorMessage(t("workouts.addedFailed"));
       setSuccessMessage(null);
     }
   };
 
   const handleDeleteWorkout = async (workoutId: number | undefined) => {
-    console.log("e");
     if (workoutId === undefined) return;
     try {
       await WorkoutService.deleteWorkoutById(workoutId);
@@ -82,10 +85,10 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
           ? prevWorkouts.filter((workout) => workout.id !== workoutId)
           : []
       );
-      setSuccessMessage("Workout deleted successfully!");
+      setSuccessMessage(t("workouts.deletedSuccess"));
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (error) {
-      setErrorMessage("Failed to delete the workout. Please try again.");
+      setErrorMessage(t("workouts.deletedFailed"));
       setTimeout(() => setErrorMessage(null), 3000);
     }
   };
@@ -100,7 +103,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     <>
       {loggedInUser && (
         <div className="user-overview">
-          <h3>Overzicht van workouts voor {loggedInUser?.fullname}</h3>
+          <h3> {t("workouts.overview")} {loggedInUser?.fullname}</h3>
           {successMessage && (
             <div className="alert alert-success">{successMessage}</div>
           )}
@@ -108,15 +111,14 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
             <div className="alert alert-danger">{errorMessage}</div>
           )}
           <div className="stats-overview mt-4">
-            <h4>Workouts</h4>
             {userWorkouts && userWorkouts.length > 0 ? (
               <table className="table mt-3">
                 <thead>
                   <tr>
-                    <th>Subject</th>
-                    <th>Date</th>
-                    <th>Users</th>
-                    <th>Delete</th>
+                    <th>{t("workouts.subject")}</th>
+                    <th>{t("workouts.date")}</th>
+                    <th>{t("workouts.users")}</th>
+                    <th>{t("workouts.delete")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -147,7 +149,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
               </table>
             ) : (
               <p className="text-muted">
-                No workouts to show for you, add some stats to show them here.
+                {t("workouts.noToShow")}
               </p>
             )}
           </div>
