@@ -72,6 +72,24 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     }
   };
 
+  const handleDeleteWorkout = async (workoutId: number | undefined) => {
+    console.log("e");
+    if (workoutId === undefined) return;
+    try {
+      await WorkoutService.deleteWorkoutById(workoutId);
+      setUserWorkouts((prevWorkouts) =>
+        prevWorkouts
+          ? prevWorkouts.filter((workout) => workout.id !== workoutId)
+          : []
+      );
+      setSuccessMessage("Workout deleted successfully!");
+      setTimeout(() => setSuccessMessage(null), 3000);
+    } catch (error) {
+      setErrorMessage("Failed to delete the workout. Please try again.");
+      setTimeout(() => setErrorMessage(null), 3000);
+    }
+  };
+
   const handleExit = () => {
     setVisibleFormEmail(null);
     setErrorMessage(null);
@@ -83,6 +101,12 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
       {loggedInUser && (
         <div className="user-overview">
           <h3>Overzicht van workouts voor {loggedInUser?.fullname}</h3>
+          {successMessage && (
+            <div className="alert alert-success">{successMessage}</div>
+          )}
+          {errorMessage && (
+            <div className="alert alert-danger">{errorMessage}</div>
+          )}
           <div className="stats-overview mt-4">
             <h4>Workouts</h4>
             {userWorkouts && userWorkouts.length > 0 ? (
@@ -110,7 +134,12 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
                           .join(", ")}{" "}
                       </td>
                       <td>
-                        <DeleteButton></DeleteButton>
+                        {workout.id !== undefined && (
+                          <DeleteButton
+                            workoutId={workout.id}
+                            onDelete={() => handleDeleteWorkout(workout.id!)}
+                          />
+                        )}
                       </td>
                     </tr>
                   ))}
