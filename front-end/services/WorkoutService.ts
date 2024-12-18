@@ -1,3 +1,5 @@
+import { METHODS } from "http";
+
 const addWorkout = async (data: { subject: string; date: string; userIds: Array<number>}) => {
     const loggedInUser = localStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
@@ -26,9 +28,23 @@ const getWorkoutsByUserId = async (userId: number) => {
     });
 }
 
+const deleteWorkoutById = async (workoutId: number) => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
+
+    return fetch(process.env.NEXT_PUBLIC_API_URL + `/workout/${workoutId}`, {
+        method: "DELETE", 
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+    });
+}
+
 const WorkoutService = {
     addWorkout,
-    getWorkoutsByUserId
+    getWorkoutsByUserId,
+    deleteWorkoutById
 };
 
 export default WorkoutService;
