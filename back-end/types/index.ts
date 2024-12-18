@@ -1,4 +1,4 @@
-type Role = 'admin' | 'student' | 'lecturer' | 'guest';
+type Role = 'admin' | 'user' | 'guest';
 
 type ProfileInput = {
     id?: number; 
