@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Stats, User } from "@/types";
+import { Stats, User, Workout } from "@/types";
 import AddStatsButton from "../stats/addStats";
 import StatsForm from "../stats/statsForm";
 import StatsService from "@/services/StatsService";
-import { jwtDecode } from "jwt-decode";
+import WorkoutService from "@/services/WorkoutService";
 import { useTranslation } from "next-i18next";
+import ProgressOverviewTable from "@/components/stats/progressOverviewTable";
 
 type Props = {
   users: Array<User>;
@@ -15,6 +16,7 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [userStats, setUserStats] = useState<Stats[] | null>(null);
+  const [userWorkouts, setUserWorkouts] = useState<Workout[]>([]);
   const [loggedInUser, setLoggedInUser] = useState<{
     token: string;
     email: string;
@@ -33,6 +35,7 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
   useEffect(() => {
     if (loggedInUser?.email) {
       fetchUserStatsByEmail(loggedInUser.email);
+      fetchUserWorkoutsByEmail(loggedInUser.email);
     }
   }, [loggedInUser]);
 
@@ -45,6 +48,19 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
         setUserStats(stats.length > 0 ? stats : []);
       } catch (error) {
         setErrorMessage((t("users.loaderror")));
+      }
+    }
+  };
+
+  const fetchUserWorkoutsByEmail = async (email: string) => {
+    const user = users.find((user) => user.email === email);
+    if (user && user.id !== undefined) {
+      try {
+        const response = await WorkoutService.getWorkoutsByUserId(user.id);
+        const workouts = await response.json();
+        setUserWorkouts(workouts.length > 0 ? workouts : []);
+      } catch (error) {
+        console.error("users.loaderror");
       }
     }
   };
@@ -157,7 +173,6 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
                 )
               </p>
             )}
-            
           </div>
           <AddStatsButton onClick={handleAddStats} />
           {visibleFormEmail === loggedInUser.email && (
@@ -167,6 +182,7 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
               successMessage={successMessage}
             />
           )}
+          {userStats && userStats.length > 0 && <ProgressOverviewTable stats={userStats} completedWorkouts={userWorkouts}></ProgressOverviewTable>}
         </div>
       )}
     </>

@@ -46,12 +46,31 @@
       "allrequired": "Vul alle velden in",
       "allpositive": "Alle velden moeten positieve getallen bevatten"
     },
+    "progressOverview": "Overzicht vooruitgang",
+    "changePeriod": "Periode",
+    "workoutscompleted": "Totaal aantal trainingen(altijd)",
     "placeholder": {
       "weight": "Gewicht",
       "length": "Lengte",
       "pr": "PR",
-      "date": "Datum"
-
+      "bmi": "BMI",
+      "date": "Datum",
+      "metric": "Soort",
+      "change": "Verandering"
+    },
+    "months": {
+      "january": "Januari",
+      "february": "Februari",
+      "march": "Maart",
+      "april": "April",
+      "may": "Mei",
+      "june": "Juni",
+      "july": "Juli",
+      "august": "Augustus",
+      "september": "September",
+      "october": "Oktober",
+      "november": "November",
+      "december": "December"
     },
     "choosemealplantitle": "Kies een dieet om te volgen aan de hand van je gemiddelde BMI!",
     "gainweightbutton": "Aankomen",

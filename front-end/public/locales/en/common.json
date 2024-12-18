@@ -46,13 +46,31 @@
       "allrequired": "Please enter a value in all fields",
       "allpositive": "All fields must contain postive numbers"
     },
+    "progressOverview": "Progress Overview",
+    "changePeriod": "Period",
+    "workoutscompleted": "Total Workouts(all time)",
     "placeholder": {
       "weight": "Weight",
       "length": "Length",
       "pr": "PR",
-      "date": "Date"
-
-
+      "bmi": "BMI",
+      "date": "Date",
+      "metric": "Type",
+      "change": "Change"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
     },
     "choosemealplantitle": "According to the result of your BMI, choose a diet to follow!",
     "gainweightbutton": "Gain Weight",
