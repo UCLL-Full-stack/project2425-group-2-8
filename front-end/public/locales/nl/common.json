@@ -31,6 +31,25 @@
     "successMessage": "Registreren gelukt, navigeren naar de startpagina ...",
     "errorMessage": "Er is iets fout gegaan, probeer opnieuw"
   },
+  "workouts": {
+    "noFound": "De workouts van de gebruiker konden niet worden opgehaald.",
+    "addedSuccess": "Workout successvol toegevoegd",
+    "addedFailed": "Niet gelukt om de workout toe te voegen. Probeer nog eens",
+    "deletedSuccess": "Workout successvol verwijderd!",
+    "deletedFailed": "Niet gelukt om de workout te verwijderen. Probeer nog eens",
+    "overview": "Overzicht van uw workouts: ",
+    "subject": "Onderwerp",
+    "date": "Datum",
+    "users": "Gebruikers",
+    "delete": "Verwijder",
+    "noToShow": "Geen workouts gevonden voor jouw. Voeg workouts toe om ze te zien",
+    "noUsersFound": "Geen gebruikers gevonden",
+    "allRequired": "Vul aub onderwerp, datum en duid minstens 1 user aan!",
+    "notPast": "Je kan geen workouts in het verleden plannen",
+    "selectedUsers": "Geselecteerde gebruikers:",
+    "exit": "Verlaten",
+    "confirm": "Bevestigen"
+  },
   "stats": {
     "addstats": "Voeg statistieken toe",
     "overview": "Overzicht van de statistieken voor",
