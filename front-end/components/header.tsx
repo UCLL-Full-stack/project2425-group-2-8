@@ -75,7 +75,9 @@ const Header: React.FC = () => {
             {t("welcome")}, {loggedInUser.fullname}!
           </div>
         )}
-        <Language />
+        <a className="nav-link px-4 fs-6 text-white">
+          <Language></Language>
+        </a>
       </nav>
     </header>
   );
