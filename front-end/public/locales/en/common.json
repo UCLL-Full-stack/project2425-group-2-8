@@ -138,5 +138,17 @@
   },
   "welcome": "Welcome",
   "explanation": "Explanation about FitFait",
-  "error": "An error occured"
+  "error": "An error occured",
+
+  "feedback": {
+    "name": "Name",
+    "email": "Email",
+    "feedbackmess": "Your Feedback",
+    "button": "Submit Feedback",
+    "placeholder": {
+      "name": "Enter your name",
+      "email": "Enter your email",
+      "mess": "Enter your feedback"
+    }
+  }
 }

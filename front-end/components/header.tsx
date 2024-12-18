@@ -49,6 +49,9 @@ const Header: React.FC = () => {
         <Link href="/schedule" className="nav-link px-4 fs-5 text-white">
           {t("header.nav.schedule")}
         </Link>
+        <Link href="/feedback" className="nav-link px-4 fs-5 text-white">
+          Feedback
+        </Link>
 
         {!loggedInUser && (
           <>
