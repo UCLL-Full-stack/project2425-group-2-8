@@ -76,7 +76,7 @@ const StatsForm: React.FC<StatsFormProps> = ({
         name="weight"
         value={formData.weight}
         onChange={handleChange}
-        placeholder="Weight"
+        placeholder={t("stats.placeholder.weight")}
         className="form-control mb-2"
       />
       <input
@@ -84,7 +84,7 @@ const StatsForm: React.FC<StatsFormProps> = ({
         name="length"
         value={formData.length}
         onChange={handleChange}
-        placeholder="Length"
+        placeholder={t("stats.placeholder.length")}
         className="form-control mb-2"
       />
       <input
@@ -92,7 +92,7 @@ const StatsForm: React.FC<StatsFormProps> = ({
         name="pr"
         value={formData.pr}
         onChange={handleChange}
-        placeholder="PR"
+        placeholder={t("stats.placeholder.pr")}
         className="form-control mb-2"
       />
       <button className="btn btn-secondary me-2" onClick={onCancel}>

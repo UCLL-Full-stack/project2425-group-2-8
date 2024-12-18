@@ -33,15 +33,78 @@
   },
   "stats": {
     "addstats": "Add stats",
-    "overview": "Overview of the user's stats",
+    "overview": "Overview stats of",
     "exit": "Exit",
     "confirm": "Confirm",
-    "overviewMessage": "Overview stats of",
-    "overviewTitle": "Overview of your stats",
+    "error": "No stats to show for you, add some stats to show them here",
+    "bmi": "Average BMI:",
+    "obese": "Obese",
+    "overweight": "Overweight",
+    "healthy": "Healthy",
+    "underweight": "Underweight",
     "messages": {
       "allrequired": "Please enter a value in all fields",
       "allpositive": "All fields must contain postive numbers"
+    },
+    "placeholder": {
+      "weight": "Weight",
+      "length": "Length",
+      "pr": "PR",
+      "date": "Date"
+
+
+    },
+    "choosemealplantitle": "According to the result of your BMI, choose a diet to follow!",
+    "gainweightbutton": "Gain Weight",
+    "loseweightbutton": "Lose Weight",
+    "closeplan": "Close",
+    "weightgain": {
+      "title": "Weight Gain Meal Plan",
+      "calories_guidelines": "Calorie and Macronutrient Guidelines:",
+      "daily_calories": "Daily Calorie Range: 2,500 - 3,500 calories.",
+      "macronutrients_split": "Macronutrient Split:",
+      "protein": "Protein: 20-25% of total calories",
+      "carbs": "Carbohydrates: 50-55% of total calories",
+      "fats": "Fats: 20-25% of total calories",
+      "tip": " Eat calorie-dense, nutrient-rich foods like nuts, avocado, peanut butter, whole grains, and lean protein. Consume multiple meals and snacks throughout the day.",
+      "meal_recommendations": "Meal Recommendations:",
+      "breakfast": "Breakfast: Protein smoothie with banana, oats, peanut butter, and whole milk (700-800 calories)",
+      "mid_morning_snack": "Mid-Morning Snack: Greek yogurt with granola and honey (300-400 calories)",
+      "lunch": "Lunch: Grilled chicken breast with brown rice, avocado, and olive oil dressing (700-800 calories)",
+      "afternoon_snack": "Afternoon Snack: Handful of almonds, a protein bar, and a banana (400-500 calories)",
+      "dinner": "Dinner: Baked salmon, sweet potato, and steamed broccoli with butter (700-800 calories)",
+      "evening_snack": "Evening Snack: Whole-grain toast with peanut butter and a glass of whole milk (300-400 calories)",
+      "workout_advice": "Workout Advice:",
+      "compound_exercises": "Focus on compound exercises: Squats, Deadlifts, Bench Press, Overhead Press",
+      "progressive_overload": "Use progressive overload: Gradually increase weights weekly",
+      "reps_sets": "Perform 4-6 reps per set with heavy weights for muscle growth",
+      "rest_time": "Rest for 2-3 minutes between sets to maximize recovery",
+      "sessions_per_week": "Aim for 4-5 strength training sessions per week",
+      "limit_cardio": "Limit cardio to short sessions to avoid burning excess calories"
+    },
+    "weightloss": {
+      "title": "Weight Loss Meal Plan",
+      "calories_guidelines": "Calorie and Macronutrient Guidelines:",
+      "daily_calories": "Daily Calorie Range: 1,500 - 2,000 calories.",
+      "macronutrients_split": "Macronutrient Split:",
+      "protein": "Protein: 25-30% of total calories",
+      "carbs": "Carbohydrates: 40-50% of total calories",
+      "fats": "Fats: 20-30% of total calories",
+      "tip": "Tip: Focus on whole foods, avoid processed sugars, and drink plenty of water throughout the day.",
+      "meal_recommendations": "Meal Recommendations:",
+      "breakfast": "Breakfast: Scrambled eggs with spinach and a side of mixed berries",
+      "lunch": "Lunch: Grilled chicken salad with mixed greens, cucumbers, cherry tomatoes, and light vinaigrette",
+      "dinner": "Dinner: Baked cod with steamed broccoli and quinoa",
+      "snacks": "Snacks: Carrot sticks with hummus, a small handful of almonds, or an apple with a teaspoon of almond butter",
+      "workout_advice": "Workout Advice:",
+      "hiit_training": "Incorporate HIIT (High-Intensity Interval Training) workouts 2-3 times per week.",
+      "cardio": "Perform cardio exercises like jogging, cycling, or swimming for 30-45 minutes.",
+      "strength_training": "Include full-body strength training circuits using bodyweight or light weights.",
+      "daily_steps": "Stay active: Aim for at least 10,000 steps per day.",
+      "recovery": "Recovery is key: Prioritize 7-8 hours of sleep per night to boost metabolism."
     }
+
+
   },
   "users": {
     "loaderror": "Failed to load user stats.",
