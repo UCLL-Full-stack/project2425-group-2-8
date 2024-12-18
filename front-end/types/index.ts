@@ -29,6 +29,15 @@ export type Workout = {
     users: Array<User>
 }
 
+export type Feedback = {
+    id?: number;
+    name: string;
+    email: string;
+    message: string;
+    createdAt: Date
+
+}
+
 export type StatusMessage = {
     message: string;
     type: "error" | "success";

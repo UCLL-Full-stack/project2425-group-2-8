@@ -9,6 +9,7 @@ import { userRouter } from './controller/user.route';
 import { statsRouter } from './controller/stats.route';
 import { workoutRouter } from './controller/workout.route';
 import { expressjwt } from 'express-jwt';
+import { feedbackRouter } from './controller/feedback.route';
 
 const app = express();
 dotenv.config();
@@ -33,6 +34,7 @@ app.get('/status', (req, res) => {
 app.use('/user', userRouter);
 app.use('/stats', statsRouter);
 app.use('/workout', workoutRouter);
+app.use('/feedback', feedbackRouter)
 
 const swaggerOpts = {
     definition: {

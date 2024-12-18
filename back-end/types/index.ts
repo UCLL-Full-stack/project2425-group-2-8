@@ -30,6 +30,14 @@ type StatsInput = {
     userId?: number;
 }
 
+type FeedbackInput = {
+    id?: number;
+    name?: string;
+    email?: string;
+    message?: string;
+    createdAt?: Date;
+}
+
 type AuthenticationResponse = {
     token: string;
     email: string;
@@ -41,5 +49,6 @@ export {
     ProfileInput,
     WorkoutInput,
     StatsInput,
-    AuthenticationResponse, Role
+    AuthenticationResponse, Role,
+    FeedbackInput
 };
