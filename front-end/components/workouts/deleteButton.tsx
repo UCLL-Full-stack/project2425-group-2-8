@@ -8,7 +8,6 @@ interface DeleteButtonProps {
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ workoutId, onDelete }) => {
   const handleDelete = async () => {
-    console.log(`Deleting workout with ID: ${workoutId}`);
     onDelete();
   };
 

@@ -1,4 +1,3 @@
-
 /**
  * @swagger
  *   components:
@@ -29,7 +28,7 @@
  *              description: User password.
  *      Profile:
  *          type: object
- *          properties: 
+ *          properties:
  *            id:
  *              type: number
  *              format: int64
@@ -70,9 +69,9 @@
  *            password:
  *              type: string
  *            profile:
- *              $ref: '#/components/schemas/ProfileInput'          
+ *              $ref: '#/components/schemas/ProfileInput'
  */
-import express, {NextFunction, Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import userService from '../service/user.service';
 import { UserInput } from '../types';
 import { User } from '../model/User';
@@ -88,20 +87,20 @@ const userRouter = express.Router();
  *          security:
  *              - bearerAuth: []
  *          summary: Register a new user
- *          requestBody: 
+ *          requestBody:
  *              required: true
- *              content: 
- *                  application/json: 
- *                      schema: 
+ *              content:
+ *                  application/json:
+ *                      schema:
  *                          $ref: '#/components/schemas/UserInput'
- *          responses: 
- *              200: 
+ *          responses:
+ *              200:
  *                  description: The created user.
  *                  content:
  *                      application/json:
  *                          schema:
  *                              $ref: '#/components/schemas/User'
- *                            
+ *
  */
 
 userRouter.post('/', async (req: Request, res: Response) => {
@@ -110,7 +109,7 @@ userRouter.post('/', async (req: Request, res: Response) => {
         const result = await userService.registerUser(user);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+        res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
     }
 });
 
@@ -124,8 +123,8 @@ userRouter.post('/', async (req: Request, res: Response) => {
  *          responses:
  *              200:
  *                  description: A list of all users
- *                  content: 
- *                      application/json: 
+ *                  content:
+ *                      application/json:
  *                          schema:
  *                              type: array
  *                              items:
@@ -136,7 +135,7 @@ userRouter.get('/', async (req: Request, res: Response) => {
         const result = await userService.getAllUsers();
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+        res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
     }
 });
 
@@ -161,16 +160,17 @@ userRouter.get('/', async (req: Request, res: Response) => {
  *                      application/json:
  *                          schema:
  *                              $ref: '#/components/schemas/User'
- *             
+ *
  */
 
 userRouter.get('/:id', async (req: Request, res: Response) => {
+    console.log("test")
     try {
         const id = parseInt(req.params.id);
         const result = await userService.getUserById(id);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+        res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
     }
 });
 
@@ -185,7 +185,7 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
  *          application/json:
  *              schema:
  *                  $ref: '#/components/schemas/UserInput'
- *     
+ *
  *     responses:
  *       200:
  *         description: The created user object.
@@ -195,12 +195,12 @@ userRouter.get('/:id', async (req: Request, res: Response) => {
  *                $ref: '#/components/schemas/User'
  */
 
-userRouter.post('/signup', async (req: Request, res: Response, next: NextFunction ) => {
+userRouter.post('/signup', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const UserInput = <UserInput>req.body;
         const user = await userService.registerUser(UserInput);
         res.status(200).json(user);
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 });
@@ -216,7 +216,6 @@ userRouter.post('/signup', async (req: Request, res: Response, next: NextFunctio
  *          application/json:
  *              schema:
  *                  $ref: '#/components/schemas/AuthenticationRequest'
- *     
  *     responses:
  *       200:
  *         description: The created user object.
@@ -229,7 +228,38 @@ userRouter.post('/login', async (req: Request, res: Response, next: NextFunction
     try {
         const userInput = <UserInput>req.body;
         const response = await userService.authenticate(userInput);
-        res.status(200).json({ message: 'Authentication successful', ...response});
+        res.status(200).json({ message: 'Authentication successful', ...response });
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * @swagger
+ * /user/email/{email}:
+ *  get:
+ *      security:
+ *        - bearerAuth: []
+ *      summary: Get a user with the given email
+ *      parameters:
+ *        - name: email
+ *          in: path
+ *          required: true
+ *          schema:
+ *              type: string
+ *      responses:
+ *          200:
+ *              description: The user object.
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/User'
+ */
+userRouter.get('/email/:email', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const email = req.params.email;
+        const user = await userService.getUserByEmail(email);
+        res.status(200).json(user);
     } catch (error) {
         next(error);
     }
