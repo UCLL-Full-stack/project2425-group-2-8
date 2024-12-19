@@ -51,7 +51,7 @@ const rescheduleWorkout = async (workoutId: number, newDate: string) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ date: newDate}),
+        body: JSON.stringify({newDate}),
     });
 }
 
