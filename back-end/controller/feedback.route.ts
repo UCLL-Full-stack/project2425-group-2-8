@@ -3,9 +3,9 @@
  *   components:
  *    securitySchemes:
  *      bearerAuth:
- *      type: http
- *      scheme: bearer
- *      bearerFormat: JWT
+ *          type: http
+ *          scheme: bearer
+ *          bearerFormat: JWT
  *    schemas:
  *      Feedback:
  *          type: object
