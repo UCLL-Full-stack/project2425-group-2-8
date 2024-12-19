@@ -49,7 +49,9 @@
     "selectedUsers": "Geselecteerde gebruikers:",
     "exit": "Verlaten",
     "confirm": "Bevestigen",
-    "addWorkouts": "Voeg workout toe"
+    "addWorkouts": "Voeg workout toe",
+    "changeDate": "Wijzig datum",
+    "rescheduledSuccess": "Datum correct gewijzigd"
   },
   "stats": {
     "addstats": "Voeg statistieken toe",

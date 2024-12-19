@@ -21,6 +21,20 @@ const addWorkout = async (workout: Workout): Promise<Workout> => {
     }
 };
 
+const updateWorkout = async (workout: Workout, newDate: string): Promise<Workout> => {
+    try {
+        const updatedWorkout = await database.workout.update({
+            where: { id: workout.getId()},
+            data: { date: new Date(newDate)},
+            include: { users: { include: {profile: true}}},
+        });
+        return Workout.from(updatedWorkout);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details');
+    }
+}
+
 const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
     try {
         const workoutsPrisma = await database.workout.findMany({
@@ -41,6 +55,7 @@ const getWorkoutsByUserId = async (userId: number): Promise<Workout[]> => {
         throw new Error('Database error. See server log for details');
     }
 };
+
 
 const getWorkoutById = async (workoutId: number): Promise<Workout> => {
     try {
@@ -78,8 +93,10 @@ const deleteWorkout = async (workout: Workout): Promise<string> => {
     }
 }
 
+
 export default {
     addWorkout,
+    updateWorkout,
     getWorkoutsByUserId,
     getWorkoutById,
     deleteWorkout

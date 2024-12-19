@@ -49,7 +49,9 @@
     "selectedUsers": "Selected User:",
     "exit": "Exit",
     "confirm": "Confirm",
-    "addWorkouts": "Add workout"
+    "addWorkouts": "Add workout",
+    "changeDate": "Change date",
+    "rescheduledSuccess": "Date correctly modified"
   },
   "stats": {
     "addstats": "Add stats",

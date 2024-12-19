@@ -21,8 +21,10 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     fullname: string;
   } | null>(null);
 
-    const { t } = useTranslation();
-  
+  const [editWorkoutId, setEditWorkoutId] = useState<number | null>(null);
+  const [newDate, setNewDate] = useState<string>(""); 
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const user = localStorage.getItem("loggedInUser");
@@ -43,7 +45,6 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
       try {
         const response = await WorkoutService.getWorkoutsByUserId(user.id);
         const workouts = await response.json();
-        console.log(workouts);
         setUserWorkouts(workouts.length > 0 ? workouts : []);
       } catch (error) {
         setErrorMessage(t("workouts.noFound"));
@@ -93,6 +94,20 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     }
   };
 
+  const handleRescheduleWorkout = async (workoutId: number, newDate: string) => {
+    try {
+      newDate = `${newDate}T00:00:00.000Z`
+      await WorkoutService.rescheduleWorkout(workoutId, newDate);
+      setSuccessMessage(t("workouts.rescheduledSuccess"));
+      setErrorMessage(null);
+      if (loggedInUser?.email) fetchUserWorkoutsByEmail(loggedInUser.email);
+      setEditWorkoutId(null);
+      setTimeout(() => setSuccessMessage(null), 3000);
+    } catch (error) {
+      setErrorMessage(t("workouts.rescheduledFailed"));
+    }
+  };
+
   const handleExit = () => {
     setVisibleFormEmail(null);
     setErrorMessage(null);
@@ -103,7 +118,9 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     <>
       {loggedInUser && (
         <div className="user-overview">
-          <h3> {t("workouts.overview")} {loggedInUser?.fullname}</h3>
+          <h3>
+            {t("workouts.overview")} {loggedInUser?.fullname}
+          </h3>
           {successMessage && (
             <div className="alert alert-success">{successMessage}</div>
           )}
@@ -118,39 +135,66 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
                     <th>{t("workouts.subject")}</th>
                     <th>{t("workouts.date")}</th>
                     <th>{t("workouts.users")}</th>
+                    <th>{t("workouts.changeDate")}</th>
                     <th>{t("workouts.delete")}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {userWorkouts.map((workout, index) => (
-                    <tr key={index}>
+                  {userWorkouts.map((workout) => (
+                    <tr key={workout.id}>
                       <td>{workout.subject}</td>
                       <td>{new Date(workout.date).toLocaleDateString()}</td>
                       <td>
                         {workout.users
-                          .map((user) =>
-                            `${user.profile?.firstName || ""} ${
-                              user.profile?.name || ""
-                            }`.trim()
+                          .map(
+                            (user) =>
+                              `${user.profile?.firstName || ""} ${
+                                user.profile?.name || ""
+                              }`.trim()
                           )
-                          .join(", ")}{" "}
+                          .join(", ")}
                       </td>
                       <td>
-                        {workout.id !== undefined && (
-                          <DeleteButton
-                            workoutId={workout.id}
-                            onDelete={() => handleDeleteWorkout(workout.id!)}
-                          />
+                        {editWorkoutId === workout.id ? (
+                          <div>
+                            <input
+                              type="date"
+                              value={newDate}
+                              onChange={(e) => setNewDate(e.target.value)}
+                            />
+                            <button
+                              className="btn btn-primary btn-sm"
+                              onClick={() =>
+                                handleRescheduleWorkout(workout.id!, newDate)
+                              }
+                            >
+                              {t("workouts.confirm")}
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            className="btn btn-primary btn-sm"
+                            onClick={() => {
+                              setEditWorkoutId(workout.id!);
+                              setNewDate(workout.date.split("T")[0]);
+                            }}
+                          >
+                            {t("workouts.changeDate")}
+                          </button>
                         )}
+                      </td>
+                      <td>
+                        <DeleteButton
+                          workoutId={workout.id!}
+                          onDelete={() => handleDeleteWorkout(workout.id)}
+                        />
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             ) : (
-              <p className="text-muted">
-                {t("workouts.noToShow")}
-              </p>
+              <p className="text-muted">{t("workouts.noToShow")}</p>
             )}
           </div>
           <AddWorkoutsButton onClick={handleAddWorkout} />
@@ -158,7 +202,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
             <WorkoutForm
               onConfirm={(data) => handleConfirm(data)}
               onCancel={handleExit}
-              successMessage={successMessage}
+              successMessage={successMessage || ""}
             />
           )}
         </div>
@@ -166,4 +210,5 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     </>
   );
 };
+
 export default ScheduleOverviewtable;

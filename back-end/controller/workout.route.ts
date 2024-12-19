@@ -1,4 +1,3 @@
-
 /**
  * @swagger
  *   components:
@@ -10,7 +9,7 @@
  *    schemas:
  *      Profile:
  *          type: object
- *          properties: 
+ *          properties:
  *            id:
  *              type: number
  *              format: int64
@@ -44,9 +43,9 @@
  *              date:
  *                  type: string
  *                  format: date-time
- *              users: 
+ *              users:
  *                  type: array
- *                  items: 
+ *                  items:
  *                      $ref: '#/components/schemas/User'
  *      WorkoutInput:
  *          type: object
@@ -58,13 +57,12 @@
  *                  format: date-time
  *              userIds:
  *                  type: array
- *                  items: 
+ *                  items:
  *                      type: number
  *                      format: int64
  */
 
-
-import express, {Request, Response} from 'express';
+import express, { Request, Response } from 'express';
 import { WorkoutInput } from '../types';
 import workoutService from '../service/workout.service';
 
@@ -98,7 +96,7 @@ workoutRouter.post('/', async (req: Request, res: Response) => {
         const result = await workoutService.addWorkout(workout);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+        res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
     }
 });
 
@@ -132,10 +130,9 @@ workoutRouter.get('/:id', async (req: Request, res: Response) => {
         const workouts = await workoutService.getWorkoutsByUserId(userId);
         res.status(200).json(workouts);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: (error as Error).message });
+        res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
     }
 });
-
 
 /**
  * @swagger
@@ -155,7 +152,7 @@ workoutRouter.get('/:id', async (req: Request, res: Response) => {
  *              200:
  *                  description: A success message saying that the workout has been correctly deleted
  *                  content:
- *                      application/json: 
+ *                      application/json:
  *                          schema:
  *                              type: string
  */
@@ -165,9 +162,67 @@ workoutRouter.delete('/:id', async (req: Request, res: Response) => {
         const message = await workoutService.deleteWorkoutById(workoutId);
         res.status(200).json(message);
     } catch (error) {
-        res.status(400).json({ status: "error", errorMessage: (error as Error).message})
+        res.status(400).json({ status: 'error', errorMessage: (error as Error).message });
     }
-})
+});
+
+/**
+ * @swagger
+ * /workout/{id}:
+ *      put:
+ *          security:
+ *              - bearerAuth: []
+ *          summary: Reschedule a workout to a different date
+ *          description: Update the date of an existing workout identified by its ID.
+ *          parameters:
+ *            - in: path
+ *              name: id
+ *              required: true
+ *              schema:
+ *                type: number
+ *              description: The ID of the workout that needs to be rescheduled.
+ *          requestBody:
+ *              required: true
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              newDate:
+ *                                  type: string
+ *                                  format: date-time
+ *                                  description: The new date and time to reschedule the workout.
+ *                          required:
+ *                              - newDate
+ *          responses:
+ *              200:
+ *                  description: Successfully rescheduled the workout.
+ *                  content:
+ *                      application/json:
+ *                          schema:
+ *                              $ref: '#/components/schemas/Workout'
+ */
+
+workoutRouter.put('/:id', async (req: Request, res: Response) => {
+    try {
+        const workoutId = parseInt(req.params.id);
+        const { newDate } = req.body;
+
+        if (!newDate) {
+            return res.status(400).json({ status: 'error', errorMessage: 'newDate is required' });
+        }
+
+        const updatedWorkout = await workoutService.rescheduleWorkout(workoutId, newDate);
+
+        if (!updatedWorkout) {
+            return res.status(404).json({ status: 'error', errorMessage: 'Workout not found' });
+        }
+
+        res.status(200).json(updatedWorkout);
+    } catch (error) {
+        res.status(500).json({ status: 'error', errorMessage: (error as Error).message });
+    }
+});
+
 
 export { workoutRouter };
-

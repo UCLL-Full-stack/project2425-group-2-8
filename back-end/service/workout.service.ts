@@ -47,8 +47,15 @@ const deleteWorkoutById = async (workoutId: number): Promise<string> => {
     return await workoutDb.deleteWorkout(workout);
 }
 
+const rescheduleWorkout = async (workoutId: number, newDate: string): Promise<Workout> => {
+    const workout = await workoutDb.getWorkoutById(workoutId);
+
+    return await workoutDb.updateWorkout(workout, newDate);
+}
+
 export default {
     addWorkout,
     getWorkoutsByUserId,
-    deleteWorkoutById
+    deleteWorkoutById,
+    rescheduleWorkout
 }

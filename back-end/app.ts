@@ -34,7 +34,7 @@ app.get('/status', (req, res) => {
 app.use('/user', userRouter);
 app.use('/stats', statsRouter);
 app.use('/workout', workoutRouter);
-app.use('/feedback', feedbackRouter)
+app.use('/feedback', feedbackRouter);
 
 const swaggerOpts = {
     definition: {
