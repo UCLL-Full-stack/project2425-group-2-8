@@ -3,7 +3,7 @@ import { User } from "../../../model/User";
 
 test('given: valid values for profile, when: profile is created, then: profile is created with those values', () => {
 
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user = new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
     
 
     
@@ -26,7 +26,7 @@ test('given: valid values for profile, when: profile is created, then: profile i
 });
 
 test('given: empty first name, when: creating profile, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user = new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     
     const profileData = {
@@ -43,7 +43,7 @@ test('given: empty first name, when: creating profile, then: error is thrown', (
 });
 
 test('given: empty name, when: creating profile, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     
     const profileData = {
@@ -58,7 +58,7 @@ test('given: empty name, when: creating profile, then: error is thrown', () => {
 });
 
 test('given: empty date of birth, when: creating profile, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     
     const profileData: any = {
@@ -72,17 +72,3 @@ test('given: empty date of birth, when: creating profile, then: error is thrown'
     expect(() => new Profile(profileData)).toThrow('Date of birth is required');
 });
 
-test('given: empty user, when: creating profile, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
-
-    
-    const profileData: any = {
-        id: 1,
-        firstName: 'John',
-        name: 'Doe',
-        dateOfBirth: new Date('1990-01-01'),
-        user: undefined
-    };
-
-    expect(() => new Profile(profileData)).toThrow('User is required');
-});

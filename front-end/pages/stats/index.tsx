@@ -11,8 +11,23 @@ import WeightLosePlan from "@/components/stats/loseWeight";
 
 const Stats: React.FC = () => {
   const [users, setUsers] = useState<Array<User>>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser);
+      if (user.token) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const getUsers = async () => {
     const response = await UserService.getAllUsers();
@@ -22,22 +37,31 @@ const Stats: React.FC = () => {
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    if (isLoggedIn) {
+      getUsers();
+    }
+  }, [isLoggedIn]);
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <main className="d-flex flex-column justify-content-center align-items-center">
-        <section>
-          {users && <UserOverviewTable users={users} />}
-        </section>
-        <h4 className="mt-5">{t("stats.choosemealplantitle")}</h4>
-        <div className="d-flex justify-content-center mt-4">
-          <WeightGainPlan></WeightGainPlan>
-          <div className="mx-2"></div>
-          <WeightLosePlan></WeightLosePlan>
-        </div>
+       
+        {isLoggedIn ? (
+          <>
+            <section>
+              {users && <UserOverviewTable users={users} />}
+            </section>
+            <h4 className="mt-5">{t("stats.choosemealplantitle")}</h4>
+            <div className="d-flex justify-content-center mt-4">
+              <WeightGainPlan />
+              <div className="mx-2"></div>
+              <WeightLosePlan />
+            </div>
+          </>
+        ) : (
+          <p>{t("stats.loginRequired")}</p>
+        )}
       </main>
     </>
   );

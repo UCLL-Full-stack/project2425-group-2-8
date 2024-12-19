@@ -53,6 +53,7 @@
   },
   "stats": {
     "addstats": "Voeg statistieken toe",
+    "loginRequired": "Log in om deze pagina te kunnen gebruiken.",
     "overview": "Overzicht van de statistieken voor",
     "exit": "Verlaten",
     "confirm": "Bevestigen",
@@ -156,10 +157,17 @@
     "nostats": "Geen statistieken om weer te geven voor jou, voeg statiestieken toe"
   },
   "welcome": "Welkom",
-  "explanation": "Uitleg over FitFait",
+  "explanation": "Welkom bij FitFait – Jouw Ultieme Workout Companion! Of je nu solo traint of sessies met vrienden plant, FitFait helpt je om je fitnessdoelen te bereiken. Plan je workouts gemakkelijk, volg je voortgang en geef feedback om jezelf naar nieuwe hoogtes te pushen. Met onze eenvoudige en intuïtieve interface kun je: Je workouts plannen: Je statistieken opvolgen. Leg je voortgang vast en visualiseer je groei. Til je fitnessreis naar een hoger niveau. Met FitFait heb je de tools en ondersteuning die je nodig hebt om elke stap van de weg succesvol te zijn.       Call to Action: Begin vandaag nog je fitnessreis met FitFait!",
   "error": "Er deed zich een error voor.",
 
   "feedback": {
+    "listTitle": "Feedbacklijst",
+    "noFeedback": "Momenteel is er geen feedback beschikbaar.",
+    "success": "Feedback succesvol verstuurd",
+    "required": "Vul alle velden in!",
+    "title": "Feedback",
+    "loginRequired": "Log in om deze pagina te kunnen gebruiken.",
+    "unauthorized": "Je hebt niet de juiste rechten om deze content te kunnen zien.",
     "name": "Naam",
     "email": "Email",
     "feedbackmess": "Jou Feedback",
@@ -169,5 +177,15 @@
       "email": "Vul hier je email in",
       "mess": "Vul hier je feedback in"
     }
+  },
+
+  "schedule": {
+    "loginRequired": "Log in om deze pagina te kunnen gebruiken.",
+    "userinfo": "Klik op een gebruiker om hem te selecteren",
+    "email": "Zoek op email",
+    "subject": "Onderwerp",
+    "addworkout": "Voeg workout toe",
+    "deleteworkout": "Verwijder workout",
+    "delete": "Verwijder"
   }
 }

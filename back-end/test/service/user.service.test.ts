@@ -27,8 +27,8 @@ afterEach(() => {
 test('when getAllUsers is called, then it returns all users', () => {
     
     const mockUsers = [
-        new User({ email: 'oussie@email.com', password: 'oussie123456' }),
-        new User({ email: 'gertje@email.com', password: 'gertje123456' }),
+        new User({ email: 'oussie@email.com', password: 'oussie123456', role: "user" }),
+        new User({ email: 'gertje@email.com', password: 'gertje123456', role: "user" }),
     ];
     mockUserDbGetAllUsers.mockReturnValue(mockUsers);
 
@@ -45,10 +45,12 @@ test('given valid user input, when registerUser is called, then a new user is cr
     const userInput: UserInput = {
         email: 'oussie@email.com',
         password: 'oussie1234',
+        role: "user"
     };
     const newUser = new User({
         email: userInput.email,
         password: userInput.password,
+        role: userInput.role
         
     });
     mockUserDbGetUserByEmail.mockReturnValue(null); 
@@ -72,6 +74,7 @@ test('given existing user email, when registerUser is called, then it throws an 
     const userInput: UserInput = {
         email: 'bestaatal@email.com',
         password: 'oussie12345',
+        role: "user"
     };
     mockUserDbGetUserByEmail.mockReturnValue(new User(userInput)); 
 
@@ -84,6 +87,7 @@ test('given missing email or password, when registerUser is called, then it thro
     const invalidUserInput: UserInput = {
         email: '',
         password: 'gertje1234567',
+        role: "user"
     };
 
     
@@ -93,7 +97,7 @@ test('given missing email or password, when registerUser is called, then it thro
 test('given a valid user ID, when getUserById is called, then it returns the user', () => {
     
     const userId = 1;
-    const mockUser = new User({ email: 'gertje@email.com', password: 'gertje15623' });
+    const mockUser = new User({ email: 'gertje@email.com', password: 'gertje15623', role: "user" });
     mockUserDbGetUserById.mockReturnValue(mockUser);
 
     

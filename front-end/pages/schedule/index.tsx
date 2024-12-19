@@ -8,8 +8,24 @@ import { User } from "@/types";
 
 const Schedule: React.FC = () => {
   const [users, setUsers] = useState<Array<User>>();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const user = JSON.parse(loggedInUser);
+      
+      if (user.token) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const getUsers = async () => {
     const response = await UserService.getAllUsers();
@@ -18,16 +34,24 @@ const Schedule: React.FC = () => {
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    if (isLoggedIn) {
+      getUsers();
+    }
+  }, [isLoggedIn]);
 
   return (
     <>
-      <Header></Header>
+      <Header />
       <main className="d-flex flex-column justify-content-center align-items-center">
-        <section>
-          {users && <ScheduleOverviewTable users={users}/>}
-        </section>
+        {isLoggedIn ? (
+          <>
+            <section>
+              {users && <ScheduleOverviewTable users={users} />}
+            </section>
+          </>
+        ) : (
+          <p>{t("schedule.loginRequired")}</p>
+        )}
       </main>
     </>
   );

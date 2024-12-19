@@ -1,18 +1,21 @@
 
 import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
 const main = async () => {
     await prisma.stats.deleteMany();
     await prisma.workout.deleteMany();
-    await prisma.user.deleteMany();
+    // await prisma.user.deleteMany();
+
+    const hashedPassword = await bcrypt.hash("Gertje1234", 10);
 
     const gertje = await prisma.user.create({
         data: {
             email: "gertje@email.com",
-            password: "fietsgestolenLBozo1",
-            role: "guest",
+            password: hashedPassword,
+            role: "admin",
         },
     });
 
@@ -40,12 +43,12 @@ const main = async () => {
             {
                 subject: "chestday",
                 date: new Date("2024-10-31"),
-                users: gertje.id,  
+                
             },
             {
                 subject: "backday",
                 date: new Date("2025-10-10"),
-                users: gertje.id,  
+                
             },
         ],
     });

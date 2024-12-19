@@ -1,4 +1,4 @@
-type Role = 'admin' | 'student' | 'lecturer' | 'guest';
+type Role = 'admin' | 'user' | 'guest';
 
 type ProfileInput = {
     id?: number; 
@@ -30,10 +30,19 @@ type StatsInput = {
     userId?: number;
 }
 
+type FeedbackInput = {
+    id?: number;
+    name?: string;
+    email?: string;
+    message?: string;
+    createdAt?: Date;
+}
+
 type AuthenticationResponse = {
     token: string;
     email: string;
     fullname: string;
+    role: string
 };
 
 export {
@@ -41,5 +50,6 @@ export {
     ProfileInput,
     WorkoutInput,
     StatsInput,
-    AuthenticationResponse, Role
+    AuthenticationResponse, Role,
+    FeedbackInput
 };
