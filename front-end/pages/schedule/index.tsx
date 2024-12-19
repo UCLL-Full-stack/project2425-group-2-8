@@ -13,7 +13,7 @@ const Schedule: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     if (loggedInUser) {
       const user = JSON.parse(loggedInUser);
       

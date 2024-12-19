@@ -1,5 +1,5 @@
 const addStats = async (data: { weight: number; length: number; pr: number; userId: number }) => {  
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
     return fetch(process.env.NEXT_PUBLIC_API_URL + "/stats", {
         method: "POST",
@@ -12,7 +12,7 @@ const addStats = async (data: { weight: number; length: number; pr: number; user
 };
 
 const getStatsByUserId = async (userId: number) => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
 
     return fetch(process.env.NEXT_PUBLIC_API_URL + `/stats/${userId}`, {

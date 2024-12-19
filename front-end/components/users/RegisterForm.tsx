@@ -41,7 +41,7 @@ const RegisterForm: React.FC = () => {
         if (loginResponse.ok) {
           const user = await loginResponse.json();
 
-          localStorage.setItem(
+          sessionStorage.setItem(
             "loggedInUser",
             JSON.stringify({
               token: user.token,

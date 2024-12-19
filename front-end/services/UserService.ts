@@ -2,7 +2,7 @@ import { User } from "@/types";
 import { json } from "stream/consumers";
 
 const getAllUsers = async () => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
 
     return fetch(process.env.NEXT_PUBLIC_API_URL + "/user", {
@@ -35,7 +35,7 @@ const registerUser = (user: User) => {
 };
 
 const getUserByEmail = (email: string) => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
 
     return fetch(process.env.NEXT_PUBLIC_API_URL + `/user/email/${email}`, {

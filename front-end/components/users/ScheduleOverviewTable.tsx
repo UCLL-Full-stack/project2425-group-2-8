@@ -25,7 +25,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
   
 
   useEffect(() => {
-    const user = localStorage.getItem("loggedInUser");
+    const user = sessionStorage.getItem("loggedInUser");
     if (user) {
       setLoggedInUser(JSON.parse(user));
     }
@@ -43,7 +43,6 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
       try {
         const response = await WorkoutService.getWorkoutsByUserId(user.id);
         const workouts = await response.json();
-        console.log(workouts);
         setUserWorkouts(workouts.length > 0 ? workouts : []);
       } catch (error) {
         setErrorMessage(t("workouts.noFound"));

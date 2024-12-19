@@ -26,7 +26,7 @@ const UserOverviewTable: React.FC<Props> = ({ users }: Props) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const user = localStorage.getItem("loggedInUser");
+    const user = sessionStorage.getItem("loggedInUser");
     if (user) {
       setLoggedInUser(JSON.parse(user));
     }
