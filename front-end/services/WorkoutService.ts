@@ -42,7 +42,7 @@ const deleteWorkoutById = async (workoutId: number) => {
 }
 
 const rescheduleWorkout = async (workoutId: number, newDate: string) => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
 
     return fetch(process.env.NEXT_PUBLIC_API_URL + `/workout/${workoutId}`, {
