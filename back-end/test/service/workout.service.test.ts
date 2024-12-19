@@ -42,7 +42,7 @@ test('given valid workout input, when addWorkout is called, then a new workout i
     const expectedWorkout = new Workout({
         subject: workoutInput.subject,
         date: workoutInput.date,
-        users: mockUsers
+        userIds: mockUsers
     });
     
     mockWorkoutDbAddWorkout.mockReturnValue(expectedWorkout);

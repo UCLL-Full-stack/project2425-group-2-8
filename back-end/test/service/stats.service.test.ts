@@ -4,18 +4,21 @@ import userService from '../../service/user.service';
 import { StatsInput } from '../../types';
 import { Stats } from '../../model/Stats';
 
+jest.mock('../../repository/stats.db');
+jest.mock('../../service/user.service');
+
 let mockStatsDbAddStats: jest.Mock;
 let mockUserServiceGetUserById: jest.Mock;
 let mockStatsDbGetStatsByUserId: jest.Mock;
 
 beforeEach(() => {
     mockStatsDbAddStats = jest.fn();
-    mockUserServiceGetUserById = jest.fn();
     mockStatsDbGetStatsByUserId = jest.fn();
+    mockUserServiceGetUserById = jest.fn();
 
-    statsDb.addStats = mockStatsDbAddStats;
-    statsDb.getStatsByUserId = mockStatsDbGetStatsByUserId;
-    userService.getUserById = mockUserServiceGetUserById;
+    (statsDb.addStats as jest.Mock) = mockStatsDbAddStats;
+    (statsDb.getStatsByUserId as jest.Mock) = mockStatsDbGetStatsByUserId;
+    (userService.getUserById as jest.Mock) = mockUserServiceGetUserById;
 });
 
 afterEach(() => {
@@ -24,16 +27,10 @@ afterEach(() => {
 
 test('given valid stats input, when addStats is called, then stats are added and returned', async () => {
     const user = { id: 1, email: 'oussie@email.com', password: 'oussie123456' };
-    mockUserServiceGetUserById.mockResolvedValue(user);
-
-    const statsInput: StatsInput = {
-        weight: 70,
-        length: 175,
-        pr: 100,
-        userId: 1,
-    };
+    const statsInput: StatsInput = { weight: 70, length: 175, pr: 100, userId: 1 };
     const newStats = new Stats(statsInput);
 
+    mockUserServiceGetUserById.mockResolvedValue(user);
     mockStatsDbAddStats.mockResolvedValue(newStats);
 
     const result = await statsService.addStats(statsInput);

@@ -9,25 +9,25 @@ type ProfileInput = {
 
 type WorkoutInput = {
     id?: number;
-    subject?: string;
-    date?: Date;
-    userIds?: Array<number>;
+    subject: string;
+    date: Date;
+    userIds: Array<number>;
 }
 
 type UserInput = {
     id?: number; 
-    email?: string;
-    password?: string;
-    role?: Role;
+    email: string;
+    password: string;
+    role: Role;
     profile?: ProfileInput;
 }
 
 type StatsInput = {
     id?: number;
-    weight?: number;
-    length?: number;
-    pr?: number;
-    userId?: number;
+    weight: number;
+    length: number;
+    pr: number;
+    userId: number;
 }
 
 type FeedbackInput = {
