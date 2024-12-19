@@ -2,14 +2,12 @@ import { User } from "@/types";
 import { json } from "stream/consumers";
 
 const getAllUsers = async () => {
-    const loggedInUser = sessionStorage.getItem("loggedInUser");
-    const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
+    
 
     return fetch(process.env.NEXT_PUBLIC_API_URL + "/user", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
         },
     });
 };

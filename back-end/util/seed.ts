@@ -9,15 +9,59 @@ const main = async () => {
     await prisma.workout.deleteMany();
     // await prisma.user.deleteMany();
 
-    const hashedPassword = await bcrypt.hash("Gertje1234", 10);
+    const hashedPasswordGertje = await bcrypt.hash("Albert1234", 10);
+    const hashedPasswordSamson = await bcrypt.hash("Duvel1234", 10);
+    const hashedPasswordStella = await bcrypt.hash("Stella1234", 10);
 
-    const gertje = await prisma.user.create({
+    const albert = await prisma.user.create({
         data: {
-            email: "gertje@email.com",
-            password: hashedPassword,
+            email: "albert@admin.com",
+            password: hashedPasswordGertje,
             role: "admin",
         },
     });
+
+    const duvel = await prisma.user.create({
+        data: {
+            email: "duvel@trainer.com",
+            password: hashedPasswordSamson,
+            role: "trainer",
+        },
+    });
+
+    const stella = await prisma.user.create({
+        data: {
+            email: "stella@email.com",
+            password: hashedPasswordStella,
+            role: "user"
+        },
+    });
+
+    await prisma.profile.createMany({
+        data: {
+            firstName: "Albert",
+            name: "Admin",
+            dateOfBirth: new Date("2000-01-15"),
+            userId: albert.id
+        }
+    })
+    await prisma.profile.createMany({
+        data: {
+            firstName: "Duvel",
+            name: "Trainer",
+            dateOfBirth: new Date("2000-01-15"),
+            userId: duvel.id
+        }
+    })
+    await prisma.profile.createMany({
+        data: {
+            firstName: "Stella",
+            name: "Artois",
+            dateOfBirth: new Date("2000-01-15"),
+            userId: stella.id
+        }
+    })
+
 
     await prisma.stats.createMany({
         data: [
@@ -25,14 +69,14 @@ const main = async () => {
                 weight: 60,
                 length: 180,
                 pr: 60,
-                userId: gertje.id,  
+                userId: stella.id,  
                 date: new Date("2024-01-15"),
             },
             {
                 weight: 65,
                 length: 180,
                 pr: 65,
-                userId: gertje.id, 
+                userId: stella.id, 
                 date: new Date("2024-02-15"),  
             },
         ],

@@ -117,8 +117,6 @@ userRouter.post('/', async (req: Request, res: Response) => {
  * @swagger
  * /user:
  *      get:
- *          security:
- *              - bearerAuth: []
  *          summary: Get a list of all users
  *          responses:
  *              200:
