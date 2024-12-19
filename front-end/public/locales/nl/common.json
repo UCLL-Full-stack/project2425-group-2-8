@@ -156,7 +156,7 @@
     "nostats": "Geen statistieken om weer te geven voor jou, voeg statiestieken toe"
   },
   "welcome": "Welkom",
-  "explanation": "Uitleg over FitFait",
+  "explanation": "Welkom bij FitFait – Jouw Ultieme Workout Companion! Of je nu solo traint of sessies met vrienden plant, FitFait helpt je om je fitnessdoelen te bereiken. Plan je workouts gemakkelijk, volg je voortgang en geef feedback om jezelf naar nieuwe hoogtes te pushen. Met onze eenvoudige en intuïtieve interface kun je: Je workouts plannen: Je statistieken opvolgen. Leg je voortgang vast en visualiseer je groei. Til je fitnessreis naar een hoger niveau. Met FitFait heb je de tools en ondersteuning die je nodig hebt om elke stap van de weg succesvol te zijn.       Call to Action: Begin vandaag nog je fitnessreis met FitFait!",
   "error": "Er deed zich een error voor.",
 
   "feedback": {
@@ -179,6 +179,12 @@
   },
 
   "schedule": {
-    "loginRequired": "Log in om deze pagina te kunnen gebruiken."
+    "loginRequired": "Log in om deze pagina te kunnen gebruiken.",
+    "userinfo": "Klik op een gebruiker om hem te selecteren",
+    "email": "Zoek op email",
+    "subject": "Onderwerp",
+    "addworkout": "Voeg workout toe",
+    "deleteworkout": "Verwijder workout",
+    "delete": "Verwijder"
   }
 }

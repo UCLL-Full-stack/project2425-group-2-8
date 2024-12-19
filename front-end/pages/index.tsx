@@ -27,7 +27,6 @@ const Home: React.FC = () => {
             {t("explanation")}
           </p>
         </div>
-        {/* <UserOverviewTable /> */}
       </main>
     </>
   );

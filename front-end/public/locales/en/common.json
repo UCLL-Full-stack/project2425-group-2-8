@@ -155,7 +155,7 @@
     "nostats": "No stats to show for you, add some stats to show them here."
   },
   "welcome": "Welcome",
-  "explanation": "Explanation about FitFait",
+  "explanation": "Welcome to FitFait – Your Ultimate Workout Companion! Whether you're working out solo or planning sessions with friends, FitFait is here to help you stay on track with your fitness goals. Easily plan your workouts, track your progress, and give feedback to push yourself to new heights. With our simple and intuitive interface, you can: Plan Your Workouts: Track Your Stats: Log your progress and visualize your growth. Take your fitness journey to the next level. With FitFait, you’ll have the tools and support to succeed every step of the way.      Call to Action: Start your fitness journey today with FitFait!",
   "error": "An error occured",
 
   "feedback": {
@@ -178,6 +178,12 @@
   },
 
   "schedule": {
-    "loginRequired": "Log in first to use this page."
+    "loginRequired": "Log in first to use this page.",
+    "userinfo": "Click on a user to select him",
+    "email": "Search for email",
+    "subject": "Subject",
+    "addworkout": "Add workout",
+    "deleteworkout": "Delete workout",
+    "delete": "Delete"
   }
 }

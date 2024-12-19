@@ -25,7 +25,7 @@ const addStats = async (statsInput: StatsInput): Promise<Stats> => {
         userId
     });
 
-    const createdStats = await statsDb.addStats(newStats);  // Await the DB result here
+    const createdStats = await statsDb.addStats(newStats);  
     return createdStats;
 }
 

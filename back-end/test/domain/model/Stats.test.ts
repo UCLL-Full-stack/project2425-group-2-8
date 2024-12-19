@@ -3,7 +3,7 @@ import { User } from "../../../model/User";
 
 test('given: Valid values for Stats, when: stats are created, then: stats are created with those values', () => {
 
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     const statsData = {
         id: 1,
@@ -23,8 +23,7 @@ test('given: Valid values for Stats, when: stats are created, then: stats are cr
 });
 
 test('given: weigth is empty, when: creating stats, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
-
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
     const statsData = {
         id: 1,
         weight: NaN,
@@ -40,7 +39,7 @@ test('given: weigth is empty, when: creating stats, then: error is thrown', () =
 });
 
 test('given: length is empty, when: creating stats, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     const statsData = {
         id: 1,
@@ -57,7 +56,7 @@ test('given: length is empty, when: creating stats, then: error is thrown', () =
 });
 
 test('given: pr is empty, when: creating stats, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     const statsData = {
         id: 1,
@@ -76,7 +75,7 @@ test('given: pr is empty, when: creating stats, then: error is thrown', () => {
 
 
 test('given: user is empty, when: creating stats, then: error is thrown', () => {
-    const user = new User({ email: "gertje@email.com", password: "gertje1234" });
+    const user =  new User({ email: "gertje@email.com", password: "gertje1234", role: "user" });
 
     const statsData: any = {
         id: 1,

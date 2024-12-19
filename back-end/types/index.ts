@@ -42,6 +42,7 @@ type AuthenticationResponse = {
     token: string;
     email: string;
     fullname: string;
+    role: string
 };
 
 export {

@@ -12,6 +12,7 @@ const FeedbackPage: React.FC = () => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("loggedInUser");
@@ -20,11 +21,14 @@ const FeedbackPage: React.FC = () => {
       
       if (user.token) {
         setIsLoggedIn(true);
+        setIsAdmin(user.role === "admin");
       } else {
         setIsLoggedIn(false);
+        setIsAdmin(false);
       }
     } else {
       setIsLoggedIn(false);
+      setIsAdmin(false);
     }
   }, []);
 
@@ -79,15 +83,10 @@ const FeedbackPage: React.FC = () => {
     <>
       <Header />
       <div className="container mt-4">
-
-        
         {isLoggedIn ? (
           <>
-          <h2>{t("feedback.title")}</h2>
-            <FeedbackForm
-              onSubmit={handleFormSubmit}
-              successMessage={successMessage}
-            />
+            <h2>{t("feedback.title")}</h2>
+            <FeedbackForm onSubmit={handleFormSubmit} successMessage={successMessage} />
             <div className="feedback-list mt-4">
               <h3>{t("feedback.listTitle")}</h3>
               {feedbackList.length > 0 ? (
@@ -98,13 +97,16 @@ const FeedbackPage: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-              ) : (
+              ) : isAdmin ? ( 
                 <p>{t("feedback.noFeedback")}</p>
+              ) : ( 
+                <div className="error-box">
+                  {t("feedback.unauthorized")}
+                </div>
               )}
             </div>
           </>
         ) : (
-          
           <p>{t("feedback.loginRequired")}</p>
         )}
       </div>

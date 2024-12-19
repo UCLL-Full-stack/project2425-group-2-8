@@ -88,6 +88,7 @@ const authenticate = async ({ email, password }: UserInput): Promise<Authenticat
         throw new Error('Email is required.');
     }
     const user = await getUserByEmail(email);
+    const role = user.getRole();
 
     const isValidPassword = await bcrypt.compare(password, user.getPassword());
     if (!isValidPassword) {
@@ -104,6 +105,7 @@ const authenticate = async ({ email, password }: UserInput): Promise<Authenticat
         token: generateJwtToken({ email, role: user.getRole() }),
         email,
         fullname,
+        role
     };
 
 };

@@ -162,3 +162,35 @@ button {
 .text-green-800 {
   color: #2f855a; 
 }
+
+.error-box {
+  border: 1px solid #e53e3e; 
+  background-color: #ffe5e5; 
+  color: #9b2c2c; 
+  padding: 1rem; 
+  margin-top: 1rem; 
+  border-radius: 0.5rem; 
+  font-weight: bold; 
+  font-size: 1rem; 
+}
+
+.email-suggestion {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  margin-bottom: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.email-suggestion:hover {
+  background-color: #e0f7fa; 
+  border-color: #00796b; 
+}
+
+.email-suggestion-info {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 8px; 
+}
+

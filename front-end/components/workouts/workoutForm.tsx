@@ -184,7 +184,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
         name="subject"
         value={formData.subject}
         onChange={handleChange}
-        placeholder="Subject"
+        placeholder={t("schedule.subject")}
         className="form-control mb-2"
       />
       <input
@@ -201,14 +201,16 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
           name="userEmail"
           value={formData.userEmail}
           onChange={searchUsersContaining}
-          placeholder="Search for email"
+          placeholder={t("schedule.email")}
           className="form-control mb-2"
         />
 
         {userSuggestions && userSuggestions.length > 0 && (
+          
           <ul>
+            <p className="email-suggestion-info">{t("schedule.userinfo")}</p>
             {userSuggestions.map((user, index) => (
-              <li key={index} onClick={() => handleEmailSelect(user)}>
+              <li key={index} onClick={() => handleEmailSelect(user)} className="email-suggestion">
                 {user.email}
               </li>
             ))}
@@ -222,7 +224,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
           {formData.userIds.map((userId, index) => (
             <li key={index}>
               {users?.find(user => user.id === userId)?.email}
-              <button className="btn btn-primary" onClick={() => handleDelete(userId)}>Delete</button>
+              <button className="btn btn-primary" onClick={() => handleDelete(userId)}>{t("schedule.delete")}</button>
             </li>
           ))}
         </ul>
