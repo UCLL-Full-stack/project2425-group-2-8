@@ -48,7 +48,8 @@
     "notPast": "You can't schedule workouts in the past",
     "selectedUsers": "Selected User:",
     "exit": "Exit",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "addWorkouts": "Add workout"
   },
   "stats": {
     "addstats": "Add stats",

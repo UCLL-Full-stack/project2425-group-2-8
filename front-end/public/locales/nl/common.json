@@ -48,7 +48,8 @@
     "notPast": "Je kan geen workouts in het verleden plannen",
     "selectedUsers": "Geselecteerde gebruikers:",
     "exit": "Verlaten",
-    "confirm": "Bevestigen"
+    "confirm": "Bevestigen",
+    "addWorkouts": "Voeg workout toe"
   },
   "stats": {
     "addstats": "Voeg statistieken toe",

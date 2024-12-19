@@ -9,7 +9,7 @@ const AddWorkoutsButton: React.FC<AddWorkoutsButtonProps> = ({ onClick }) => {
 
     return (
         <button className="btn btn-primary" onClick={onClick}>
-            {t("schedule.addworkout")}
+            {t("workouts.addWorkouts")}
         </button>
     );
 };
