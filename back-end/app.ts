@@ -10,10 +10,20 @@ import { statsRouter } from './controller/stats.route';
 import { workoutRouter } from './controller/workout.route';
 import { expressjwt } from 'express-jwt';
 import { feedbackRouter } from './controller/feedback.route';
+import helmet from 'helmet';
+import { connect } from 'http2';
 
 const app = express();
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
+app.use(helmet());
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            connectSrc: ["'self'", 'https://api.ucll.be'],
+        },
+    })
+);
 
 app.use(cors());
 app.use(bodyParser.json());
