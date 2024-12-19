@@ -15,6 +15,7 @@
     "title": "login",
     "username": "Email",
     "password": "Password",
+    "invalidcredentials": "Wrong login credentials",
     "button": "Login",
     "succesmessage": "Login successful. Redirecting to homepage...",
     "namevalidation": "Email is required!",

@@ -41,37 +41,42 @@ const UserLoginForm: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     clearErrors();
-
+  
     if (!validate()) {
       return;
     }
-
+  
     const user = { email: email, password };
-    const response = await UserService.loginUser(user);
-
-    if (response.status === 200) {
-      setStatusMessages([{ message: t("login.succesmessage"), type: "success" }]);
-
-      const user = await response.json();
-
-      sessionStorage.setItem(
-        'loggedInUser', 
-        JSON.stringify({
-          token: user.token, 
-          fullname: user.fullname, 
-          email: user.email, 
-          role: user.role
-        })
-      )
-
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
-    
-
-    };
+  
+    try {
+      const response = await UserService.loginUser(user);
+  
+      if (response.status === 200) {
+        setStatusMessages([{ message: t("login.succesmessage"), type: "success" }]);
+  
+        const user = await response.json();
+  
+        sessionStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({
+            token: user.token,
+            fullname: user.fullname,
+            email: user.email,
+            role: user.role,
+          })
+        );
+  
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        setStatusMessages([{ message: t("login.invalidcredentials"), type: "error" }]);
+      }
+    } catch (error) {
+      setStatusMessages([{ message: t("login.invalidcredentials"), type: "error" }]);
+    }
   };
 
   return (

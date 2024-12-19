@@ -13,6 +13,7 @@
   },
   "login": {
     "title": "Inloggen",
+    "invalidcredentials": "Foutieve inloggegevens",
     "username": "Email",
     "password": "Wachtwoord",
     "button": "Inloggen",
