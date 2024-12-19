@@ -16,7 +16,7 @@ const Stats: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     if (loggedInUser) {
       const user = JSON.parse(loggedInUser);
       if (user.token) {
@@ -32,7 +32,6 @@ const Stats: React.FC = () => {
   const getUsers = async () => {
     const response = await UserService.getAllUsers();
     const userss = await response.json();
-    console.log(userss)
     setUsers(userss);
   };
 

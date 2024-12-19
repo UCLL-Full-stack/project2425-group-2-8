@@ -16,20 +16,20 @@ const Header: React.FC = () => {
   const [loggedInUser, setLoggedInUser] = useState<UserType | null>(null);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("loggedInUser");
+    const storedUser = sessionStorage.getItem("loggedInUser");
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
         setLoggedInUser(parsedUser);
       } catch (error) {
-        console.error("Failed to parse loggedInUser from localStorage:", error);
+        console.error("Failed to parse loggedInUser from sessionStorage:", error);
         setLoggedInUser(null);
       }
     }
   }, []);
 
   const handleClick = () => {
-    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("loggedInUser");
     setLoggedInUser(null);
   }
 

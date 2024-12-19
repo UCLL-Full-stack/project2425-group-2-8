@@ -47,7 +47,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
   const { t } = useTranslation();
 
   useEffect(() => {
-    const user = localStorage.getItem("loggedInUser");
+    const user = sessionStorage.getItem("loggedInUser");
     if (user) {
       const parsedUser = JSON.parse(user);
       const fetchUser = async () => {
@@ -139,7 +139,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
   const validateForm = () => {
     const { subject, date, userIds } = formData;
     if (!subject || !date || !userIds.length) {
-      return t("workout.allRequired");
+      return t("workouts.allRequired");
     }
 
     const selectedDate = new Date(date);

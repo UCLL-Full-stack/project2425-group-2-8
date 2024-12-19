@@ -1,5 +1,5 @@
 const addFeedback = async (data: { name: string; email: string; message: string }) => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
     return fetch(process.env.NEXT_PUBLIC_API_URL + "/feedback", {
         method: "POST",
@@ -12,7 +12,7 @@ const addFeedback = async (data: { name: string; email: string; message: string 
 }
 
 const getFeedback = async () => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+    const loggedInUser = sessionStorage.getItem("loggedInUser");
     const token = loggedInUser ? JSON.parse(loggedInUser)?.token : null;
 
     return fetch(process.env.NEXT_PUBLIC_API_URL + `/feedback`, {
