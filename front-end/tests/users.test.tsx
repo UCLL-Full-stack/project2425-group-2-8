@@ -9,6 +9,7 @@ const users = [
     {
         id: 1,
         email: "duvel@moortgat.be",
+        role: "admin",
         password: "666",
         profile: {
             id: 1,
@@ -20,13 +21,14 @@ const users = [
     {
         id: 2,
         email: "la@chouffe.be",
+        role: "admin",
         password: "999",
         profile: {
             id: 2,
             firstName: "La",
             name: "Chouffe",
             dateOfBirth: "2002-01-01T00:00:00.000Z"
-        }
+        },
     }
 ]
 

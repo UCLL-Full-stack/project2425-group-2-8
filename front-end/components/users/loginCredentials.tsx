@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import userService from "@/services/UserService";
 
 type User = {
-  id: number;
+  id?: number;
   email: string;
-  role: string;
+  role?: string;
   profile?: {
     firstName: string;
     name: string;
   };
 };
 
-const LoginCredentials: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
+type Props = {
+  users: Array<User>;
+};
+
+const LoginCredentials: React.FC<Props> = ({ users }: Props) => {
   const [error, setError] = useState<string | null>(null);
 
   const userPasswords: Record<string, string> = {
@@ -20,20 +23,6 @@ const LoginCredentials: React.FC = () => {
     "duvel@trainer.com": "Duvel1234",
     "stella@email.com": "Stella1234",
   };
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await userService.getAllUsers();
-        const data: User[] = await response.json();
-        setUsers(data);
-      } catch (error) {
-        setError((error as Error).message);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   return (
     <div className="login-credentials">
