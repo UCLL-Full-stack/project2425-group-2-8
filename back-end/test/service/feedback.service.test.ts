@@ -4,7 +4,7 @@ import { Feedback } from "../../model/Feedback";
 import { UnauthorizedError } from "express-jwt";
 import { FeedbackInput } from "../../types";
 
-jest.mock("../repository/feedback.db");
+// jest.mock("../repository/feedback.db");
 
 let mockFeedbackDbGetFeedback: jest.Mock;
 let mockFeedbackDbAddFeedback: jest.Mock;
