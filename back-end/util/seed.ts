@@ -7,7 +7,8 @@ const prisma = new PrismaClient();
 const main = async () => {
     await prisma.stats.deleteMany();
     await prisma.workout.deleteMany();
-    // await prisma.user.deleteMany();
+    await prisma.profile.deleteMany();
+    await prisma.user.deleteMany();
 
     const hashedPasswordGertje = await bcrypt.hash("Albert1234", 10);
     const hashedPasswordSamson = await bcrypt.hash("Duvel1234", 10);
