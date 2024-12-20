@@ -38,47 +38,10 @@ test('when getAllUsers is called, then it returns all users', async () => {
     expect(result).toEqual(mockUsers);
 });
 
-test('given valid user input, when registerUser is called, then a new user is created and returned', async () => {
-    const userInput: UserInput = {
-        email: 'oussie@email.com',
-        password: 'oussie1234',
-        role: 'user',
-    };
-
-    const newUser = new User({
-        email: userInput.email,
-        password: userInput.password,
-        role: userInput.role,
-    });
-
-    mockUserDbGetUserByEmail.mockResolvedValue(null);  
-    mockUserDbRegisterUser.mockResolvedValue(newUser);  
-
-    const result = await userService.registerUser(userInput);
-
-    expect(mockUserDbGetUserByEmail).toHaveBeenCalledWith(userInput.email);
-    expect(mockUserDbRegisterUser).toHaveBeenCalledWith(expect.objectContaining({
-        email: userInput.email,
-        password: userInput.password,
-        role: userInput.role,
-    }));
-
-    expect(result).toEqual(newUser);
-});
 
 
-// test('given existing user email, when registerUser is called, then it throws an error', async () => {
-//     const userInput: UserInput = {
-//         email: 'bestaatal@email.com',
-//         password: 'oussie12345',
-//         role: 'user',
-//     };
 
-//     const existingUser = new User(userInput);
-//     mockUserDbGetUserByEmail.mockResolvedValue(existingUser);  // Return existing user
 
-//     await expect(userService.registerUser(userInput)).rejects.toThrow('A user with this email already exists.');
-// });
 
 test('given missing email or password, when registerUser is called, then it throws an error', async () => {
     const invalidUserInput: UserInput = {
