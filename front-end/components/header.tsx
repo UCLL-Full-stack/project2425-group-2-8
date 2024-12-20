@@ -31,6 +31,7 @@ const Header: React.FC = () => {
   const handleClick = () => {
     sessionStorage.removeItem("loggedInUser");
     setLoggedInUser(null);
+    window.location.reload();
   }
 
   return (
