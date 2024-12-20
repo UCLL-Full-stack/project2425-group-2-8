@@ -94,7 +94,7 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
     }
   };
 
-  const validateNewDate = (newDate: string): string | null => {
+  const validateNewDate = () => {
     const selectedDate = new Date(newDate);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -106,11 +106,17 @@ const ScheduleOverviewtable: React.FC<Props> = ({ users }: Props) => {
   }
 
   const handleRescheduleWorkout = async (workoutId: number, newDate: string) => {
+    
+    const error = validateNewDate();
+    if (error) {
+      setErrorMessage(error);  
+      return;  
+    }
+  
+    
     try {
-      setErrorMessage(validateNewDate(newDate))
-
-      newDate = `${newDate}T00:00:00.000Z`
-      await WorkoutService.rescheduleWorkout(workoutId, newDate);
+      const isoDate = `${newDate}T00:00:00.000Z`;  
+      await WorkoutService.rescheduleWorkout(workoutId, isoDate);  
       setSuccessMessage(t("workouts.rescheduledSuccess"));
       setErrorMessage(null);
       if (loggedInUser?.email) fetchUserWorkoutsByEmail(loggedInUser.email);
