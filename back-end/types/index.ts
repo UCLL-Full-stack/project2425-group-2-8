@@ -32,9 +32,9 @@ type StatsInput = {
 
 type FeedbackInput = {
     id?: number;
-    name?: string;
-    email?: string;
-    message?: string;
+    name: string;
+    email: string;
+    message: string;
     createdAt?: Date;
 }
 

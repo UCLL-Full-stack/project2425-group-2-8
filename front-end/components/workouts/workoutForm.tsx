@@ -164,6 +164,7 @@ const WorkoutForm: React.FC<WorkoutFormPropsm> = ({
         date: isoDate,
         userIds: formData.userIds,
       });
+      setFormData({ subject: "", date: "", userIds: [], userEmail: "", selectedEmail: "" });
 
       setTimeout(() => {
         onCancel();
