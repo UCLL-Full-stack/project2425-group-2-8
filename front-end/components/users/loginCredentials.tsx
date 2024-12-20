@@ -59,7 +59,7 @@ const LoginCredentials: React.FC<Props> = ({ users }: Props) => {
           </tbody>
         </table>
       ) : (
-        <p className="text-muted">No users found.</p>
+        <p className="text-muted">Geen gebruikers gevonden.</p>
       )}
     </div>
   );
