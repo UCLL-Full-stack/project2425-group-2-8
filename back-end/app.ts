@@ -31,11 +31,19 @@ app.use(bodyParser.json());
 app.use(
     expressjwt({
         secret: process.env.JWT_SECRET || 'default_secret',
-        algorithms: ['HS256']
+        algorithms: ['HS256'],
     }).unless({
-        path: ['/api-docs', /^\/api-docs\/.*/, '/user/login', '/user/signup', '/user', '/status'],
+        path: [
+            '/api-docs',
+            /^\/api-docs\/.*/,
+            '/user/login',
+            '/user/signup',
+            /^\/user\/\d+$/,
+            '/user',
+            '/status',
+        ],
     })
-)
+);
 
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });

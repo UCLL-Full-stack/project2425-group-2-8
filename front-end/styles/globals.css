@@ -194,3 +194,7 @@ button {
   margin-bottom: 8px; 
 }
 
+.profile-content {
+  padding: 3rem;
+  text-align: center;
+}

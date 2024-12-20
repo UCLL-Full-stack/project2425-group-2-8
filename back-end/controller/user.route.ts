@@ -141,8 +141,6 @@ userRouter.get('/', async (req: Request, res: Response) => {
  * @swagger
  * /user/{id}:
  *      get:
- *          security:
- *              - bearerAuth: []
  *          summary: Get a user by ID
  *          parameters:
  *              - in: path
@@ -162,7 +160,6 @@ userRouter.get('/', async (req: Request, res: Response) => {
  */
 
 userRouter.get('/:id', async (req: Request, res: Response) => {
-    console.log("test")
     try {
         const id = parseInt(req.params.id);
         const result = await userService.getUserById(id);

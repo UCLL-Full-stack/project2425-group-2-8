@@ -2,8 +2,6 @@ import { User } from "@/types";
 import { json } from "stream/consumers";
 
 const getAllUsers = async () => {
-    
-
     return fetch(process.env.NEXT_PUBLIC_API_URL + "/user", {
         method: "GET",
         headers: {
@@ -43,13 +41,23 @@ const getUserByEmail = (email: string) => {
             Authorization: `Bearer ${token}`,
         },
     });
+};
+
+const getUserById = (id: number) => {
+    return fetch(process.env.NEXT_PUBLIC_API_URL + `/user/${id}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
 }
 
 const UserService = {
     getAllUsers,
     loginUser,
     registerUser,
-    getUserByEmail
+    getUserByEmail,
+    getUserById
 };
 
 export default UserService;

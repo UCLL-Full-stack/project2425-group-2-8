@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import userService from "@/services/UserService";
 
 type User = {
@@ -17,11 +18,18 @@ type Props = {
 
 const LoginCredentials: React.FC<Props> = ({ users }: Props) => {
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const userPasswords: Record<string, string> = {
     "albert@admin.com": "Albert1234",
     "duvel@trainer.com": "Duvel1234",
     "stella@email.com": "Stella1234",
+  };
+
+  const handleUserClick = (userId: number | undefined) => {
+    if (userId) {
+      router.push(`/user/${userId}`);
+    }
   };
 
   return (
@@ -40,7 +48,10 @@ const LoginCredentials: React.FC<Props> = ({ users }: Props) => {
           <tbody>
             {users.map((user) => (
               <React.Fragment key={user.id}>
-                <tr>
+                <tr
+                  onClick={() => handleUserClick(user.id)}
+                  style={{ cursor: "pointer" }} 
+                >
                   <td>
                     {user.profile
                       ? `${user.profile.firstName} ${user.profile.name}`
